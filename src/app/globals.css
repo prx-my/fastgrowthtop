@@ -373,14 +373,108 @@
   animation: screenExit 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Reduced motion support (Section 29) */
+/* Fullscreen project clean crossfade */
+@keyframes fullScreenEnter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fullScreenExit {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fullscreen-enter {
+  animation: fullScreenEnter 0.4s ease-out forwards;
+}
+
+.animate-fullscreen-exit {
+  animation: fullScreenExit 0.4s ease-out forwards;
+}
+
+/* Cinematic Project Showcase System (docs/project.md Sections 09, 10, 16, 17) */
+@keyframes cinematicImageSettle {
+  0% {
+    opacity: 0.72;
+    transform: scale(1.045);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes cinematicImageExit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes textClipRise {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes numberRollIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-cinematic-settle {
+  animation: cinematicImageSettle 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-cinematic-exit {
+  animation: cinematicImageExit 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-text-clip {
+  animation: textClipRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-number-roll {
+  animation: numberRollIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Reduced motion support (docs/project.md Section 32) */
 @media (prefers-reduced-motion: reduce) {
   .animate-laptop-float,
   .animate-phone-float,
   .animate-screen-enter,
   .animate-screen-exit,
   .animate-device-fade,
-  .animate-content-slide {
+  .animate-content-slide,
+  .animate-cinematic-settle,
+  .animate-cinematic-exit,
+  .animate-text-clip,
+  .animate-number-roll {
     animation: none !important;
     transform: none !important;
     transition: opacity 0.2s ease !important;

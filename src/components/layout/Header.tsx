@@ -29,12 +29,7 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled
-          ? "bg-[#E0FBFC]/90 backdrop-blur-[16px] shadow-sm border-b border-[#98C1D9]/60"
-          : "bg-[#E0FBFC]"
-        }`}
-    >
+    <header className="absolute top-0 left-0 w-full z-[50] bg-transparent">
       <div className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-14">
         <div className="flex items-center justify-between h-[72px] lg:h-[80px]">
           {/* Logo */}

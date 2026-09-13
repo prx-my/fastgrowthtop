@@ -13,3 +13,4 @@ playwright/.cache/
 # Environment variables
 .env*.local
 .env
+docs/

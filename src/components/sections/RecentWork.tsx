@@ -1,241 +1,366 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, Fragment } from "react";
 import Image from "next/image";
-import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  Monitor,
-  Code2,
-  Server,
-  Headphones,
-  ShieldCheck,
-  Sparkles,
-  ExternalLink,
-  Plus,
-} from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { DeviceMockup } from "@/components/ui/DeviceMockup";
 import { projectsData, ProjectItem } from "@/data/projects";
+import { ProjectExperienceModal } from "@/components/sections/ProjectExperienceModal";
+
+const DESKTOP_BREAKPOINT = "(min-width: 1024px)";
+
+const clamp01 = (v: number) => Math.min(Math.max(v, 0), 1);
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
+const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
+
+interface Scene {
+  slide: HTMLElement;
+  imgWrap: HTMLElement;
+  veil: HTMLElement;
+  content: HTMLElement;
+  baseLeft: number;
+  slideW: number;
+  panMax: number;
+}
 
 export function RecentWork() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProjectForModal, setSelectedProjectForModal] = useState<ProjectItem | null>(null);
+
   const totalProjects = projectsData.length;
-  const activeProject: ProjectItem = projectsData[activeIndex];
+  const activeProject = projectsData[activeIndex];
 
-  // DOM Refs
   const sectionRef = useRef<HTMLElement>(null);
-  const headingLine1Ref = useRef<HTMLSpanElement>(null);
-  const headingLine2Ref = useRef<HTMLSpanElement>(null);
-  const headingItalicRef = useRef<HTMLSpanElement>(null);
-  const introParagraphRef = useRef<HTMLParagraphElement>(null);
-  const counterNumberRef = useRef<HTMLDivElement>(null);
-  const projectTitleRef = useRef<HTMLHeadingElement>(null);
-  const projectCategoryRef = useRef<HTMLDivElement>(null);
-  const projectDescRef = useRef<HTMLParagraphElement>(null);
-  const servicePillsRef = useRef<HTMLDivElement>(null);
-  const ctaContainerRef = useRef<HTMLDivElement>(null);
-  const deviceContainerRef = useRef<HTMLDivElement>(null);
-  const thumbnailsContainerRef = useRef<HTMLDivElement>(null);
-  const thumbnailRailRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const stRef = useRef<ScrollTrigger | null>(null);
+  const scenesRef = useRef<Scene[]>([]);
+  const distRef = useRef(1);
+  const progressRef = useRef(0);
+  const isDesktopRef = useRef(false);
+  const mouseRef = useRef({ x: 0, y: 0 });
 
-  // Transition and Gesture Refs
-  const isTransitioningRef = useRef(false);
-  const touchStartX = useRef(0);
-  const touchStartY = useRef(0);
+  const hintRef = useRef<HTMLDivElement>(null);
+  const hintTitleRef = useRef<HTMLSpanElement>(null);
+  const hintIdxRef = useRef(-1);
+  const markerRef = useRef<HTMLDivElement>(null);
 
-  // ==========================================================
-  // 1. Centralized Project Transition Engine (Section 33)
-  // ==========================================================
-  const changeProject = useCallback(
-    (targetIndex: number, direction: "next" | "prev" = "next") => {
-      // Prevent duplicate transition triggers / rapid click spamming
-      if (isTransitioningRef.current || targetIndex === activeIndex) return;
-
-      isTransitioningRef.current = true;
-
-      // Check reduced motion preference
-      const prefersReducedMotion =
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      if (prefersReducedMotion) {
-        setActiveIndex(targetIndex);
-        isTransitioningRef.current = false;
-        return;
+  const updateActive = useCallback(
+    (progress: number) => {
+      const track = trackRef.current;
+      const viewport = viewportRef.current;
+      let idx = 0;
+      if (track && viewport) {
+        const d = Math.max(1, track.scrollWidth - viewport.clientWidth);
+        let best = Infinity;
+        for (let i = 0; i < totalProjects; i++) {
+          const slide = track.children[i * 2] as HTMLElement | undefined;
+          if (!slide) continue;
+          const center = (slide.offsetLeft + slide.offsetWidth / 2 - viewport.clientWidth / 2) / d;
+          const diff = Math.abs(center - progress);
+          if (diff < best) {
+            best = diff;
+            idx = i;
+          }
+        }
       }
-
-      // Collect strictly what is changing:
-      // Category tag, project title, narrative description, service pills, and counter number
-      const changingElements = [
-        projectCategoryRef.current,
-        projectTitleRef.current,
-        projectDescRef.current,
-        servicePillsRef.current,
-        counterNumberRef.current,
-      ].filter(Boolean);
-
-      // Phase 1: Clean fade out IN PLACE (no up/down movement, elements stay in place)
-      gsap.to(changingElements, {
-        opacity: 0,
-        duration: 0.18,
-        ease: "power2.inOut",
-        onComplete: () => {
-          // Switch state while elements are invisible
-          setActiveIndex(targetIndex);
-
-          // Phase 2: Fade in from left to right smoothly
-          gsap.fromTo(
-            changingElements,
-            {
-              opacity: 0,
-              x: -16,
-            },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.32,
-              stagger: 0.035,
-              ease: "power2.out",
-              clearProps: "transform",
-              onComplete: () => {
-                isTransitioningRef.current = false;
-              },
-            }
-          );
-        },
-      });
+      setActiveIndex((prev) => (prev === idx ? prev : idx));
     },
-    [activeIndex]
+    [totalProjects]
   );
 
-  const handlePrev = useCallback(() => {
-    const nextIdx = activeIndex === 0 ? totalProjects - 1 : activeIndex - 1;
-    changeProject(nextIdx, "prev");
-  }, [activeIndex, totalProjects, changeProject]);
-
-  const handleNext = useCallback(() => {
-    const nextIdx = activeIndex === totalProjects - 1 ? 0 : activeIndex + 1;
-    changeProject(nextIdx, "next");
-  }, [activeIndex, totalProjects, changeProject]);
-
-  // ==========================================================
-  // 2. Scroll Active Thumbnail into View
-  // ==========================================================
-  useEffect(() => {
-    if (thumbnailsContainerRef.current) {
-      const activeEl = thumbnailsContainerRef.current.children[activeIndex] as HTMLElement;
-      if (activeEl) {
-        activeEl.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-    }
-  }, [activeIndex]);
-
-  // ==========================================================
-  // 3. Page Load / Section Entrance Sequence (GSAP ScrollTrigger)
-  // ==========================================================
   useEffect(() => {
     if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
-    const sectionEl = sectionRef.current;
-    if (!sectionEl) return;
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    const viewport = viewportRef.current;
+    if (!section || !track || !viewport) return;
 
-    // Check reduced motion preference
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
+    const mq = window.matchMedia(DESKTOP_BREAKPOINT);
 
-    const ctx = gsap.context(() => {
-      const entranceTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionEl,
-          start: "top 78%",
-          once: true,
-        },
-        defaults: { ease: "power3.out" },
+    const buildScenes = () => {
+      const d = Math.max(1, track.scrollWidth - viewport.clientWidth);
+      distRef.current = d;
+      scenesRef.current = projectsData.map((_, i) => {
+        const slide = track.children[i * 2] as HTMLElement;
+        return {
+          slide,
+          imgWrap: slide.querySelector<HTMLElement>("[data-scene-img-wrap]")!,
+          veil: slide.querySelector<HTMLElement>("[data-scene-veil]")!,
+          content: slide.querySelector<HTMLElement>("[data-scene-content]")!,
+          baseLeft: slide.offsetLeft,
+          slideW: slide.offsetWidth,
+          panMax: slide.offsetWidth * 0.15,
+        };
       });
+    };
 
-      // Line 1 heading reveal: "Websites"
-      if (headingLine1Ref.current) {
-        entranceTl.fromTo(
-          headingLine1Ref.current,
-          { yPercent: 110, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.8 },
-          0
-        );
+    const hideSceneCopy = (slide: HTMLElement) => {
+      const words = slide.querySelectorAll("[data-title-word]");
+      gsap.set(words, { yPercent: 115 });
+      const extras = slide.querySelectorAll("[data-scene-reveal]");
+      gsap.set(extras, { opacity: 0, y: 14 });
+    };
+
+    const playSceneReveal = (idx: number) => {
+      const slide = track.children[idx * 2] as HTMLElement | undefined;
+      if (!slide) return;
+      const words = slide.querySelectorAll("[data-title-word]");
+      gsap.set(words, { yPercent: 115 });
+      gsap.to(words, {
+        yPercent: 0,
+        duration: 1.0,
+        stagger: 0.07,
+        ease: "power4.out",
+      });
+      const extras = slide.querySelectorAll("[data-scene-reveal]");
+      gsap.set(extras, { opacity: 0, y: 14 });
+      gsap.to(extras, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.08,
+        delay: 0.3,
+        ease: "power3.out",
+      });
+    };
+
+    const resetScenes = () => {
+      for (const s of scenesRef.current) {
+        gsap.set(s.slide.querySelectorAll("[data-title-word]"), { clearProps: "all" });
+        gsap.set(s.slide.querySelectorAll("[data-scene-reveal]"), { clearProps: "all" });
+        s.imgWrap.style.transform = "";
+        s.veil.style.opacity = "";
+        s.content.style.opacity = "";
+        s.content.style.transform = "";
+      }
+      scenesRef.current = [];
+      if (hintRef.current) hintRef.current.style.opacity = "";
+      if (markerRef.current) markerRef.current.style.top = "";
+    };
+
+    const applyFrame = (p: number) => {
+      const vw = viewport.clientWidth;
+      const trackX = -p * distRef.current;
+
+      for (const s of scenesRef.current) {
+        const left = s.baseLeft + trackX;
+        if (left > vw || left < -s.slideW) continue; // fully off-screen
+
+        const lp = clamp01((vw - left) / (vw + s.slideW));
+
+        const scrollPan = -s.panMax * lp;
+        const my = mouseRef.current.y * 9;
+        s.imgWrap.style.transform = `translate3d(${scrollPan.toFixed(2)}px, ${my.toFixed(2)}px, 0) scale(${scaleAt(lp).toFixed(4)})`;
+
+        const entryVeil = 1 - easeOutCubic(clamp01(lp / 0.38));
+        const exitVeil = easeOutCubic(clamp01((lp - 0.62) / 0.3));
+        s.veil.style.opacity = Math.max(entryVeil, exitVeil).toFixed(3);
+
+        const fadeIn = easeOutQuint(clamp01((lp - 0.2) / 0.3));
+        const fadeOut = 1 - easeOutCubic(clamp01((lp - 0.58) / 0.28));
+        const op = Math.min(fadeIn, fadeOut);
+        s.content.style.opacity = op.toFixed(3);
+
+        const rise = (1 - fadeIn) * 34 - (1 - fadeOut) * 26;
+        const drift = -scrollPan * 0.3;
+        s.content.style.transform = `translate3d(${drift.toFixed(2)}px, ${rise.toFixed(2)}px, 0)`;
       }
 
-      // Line 2 heading reveal: "Built for"
-      if (headingLine2Ref.current) {
-        entranceTl.fromTo(
-          headingLine2Ref.current,
-          { yPercent: 110, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.8 },
-          0.12
-        );
+      // NEXT PROJECT hint during the void
+      if (hintRef.current && hintTitleRef.current) {
+        const step = scenesRef.current.length > 1 ? scenesRef.current[1].baseLeft : 1;
+        const sceneShare = scenesRef.current[0] ? scenesRef.current[0].slideW / step : 0.5;
+        const px = -trackX;
+        const chapter = Math.floor(px / step);
+        const frac = px / step - chapter;
+        const voidZone = 1 - sceneShare;
+        const hintOp = Math.sin(Math.PI * clamp01((frac - sceneShare) / voidZone));
+        hintRef.current.style.opacity = hintOp.toFixed(3);
+        const idx = (chapter + 1) % totalProjects;
+        if (idx !== hintIdxRef.current) {
+          hintIdxRef.current = idx;
+          hintTitleRef.current.textContent = projectsData[idx].name;
+        }
       }
 
-      // Italic accent delay reveal: "What's Next."
-      if (headingItalicRef.current) {
-        entranceTl.fromTo(
-          headingItalicRef.current,
-          { yPercent: 90, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.85 },
-          0.24
-        );
+      // continuous rail marker
+      if (markerRef.current) {
+        markerRef.current.style.top = `${(p * 100).toFixed(2)}%`;
+      }
+    };
+
+    const buildST = () => {
+      scenesRef.current.forEach((s) => hideSceneCopy(s.slide));
+      playSceneReveal(0);
+      progressRef.current = 0;
+      applyFrame(0);
+
+      const tween = gsap.to(track, {
+        x: () => -distRef.current,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => "+=" + distRef.current,
+          pin: true,
+          scrub: 1.5,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onRefresh: (self) => {
+            buildScenes();
+            applyFrame(self.progress);
+          },
+          onUpdate: (self) => {
+            progressRef.current = self.progress;
+          },
+        },
+      });
+      stRef.current = tween.scrollTrigger ?? null;
+
+      gsap.ticker.add(tick);
+    };
+
+    const tick = () => {
+      const p = progressRef.current;
+      applyFrame(p);
+      updateActive(p);
+    };
+
+    const destroyST = () => {
+      gsap.ticker.remove(tick);
+      if (stRef.current) {
+        stRef.current.kill();
+        stRef.current = null;
+      }
+      gsap.set(track, { x: 0 });
+      resetScenes();
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseRef.current = {
+        x: (e.clientX / vwWidth()) * 2 - 1,
+        y: (e.clientY / window.innerHeight) * 2 - 1,
+      };
+    };
+    const vwWidth = () => window.innerWidth;
+
+    if (mq.matches) {
+      isDesktopRef.current = true;
+      buildScenes();
+      buildST();
+      window.addEventListener("mousemove", onMouseMove, { passive: true });
+    }
+
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        isDesktopRef.current = true;
+        buildScenes();
+        buildST();
+        window.addEventListener("mousemove", onMouseMove, { passive: true });
+      } else {
+        isDesktopRef.current = false;
+        window.removeEventListener("mousemove", onMouseMove);
+        destroyST();
+        setActiveIndex(0);
+      }
+    };
+
+    mq.addEventListener("change", onChange);
+    return () => {
+      mq.removeEventListener("change", onChange);
+      window.removeEventListener("mousemove", onMouseMove);
+      destroyST();
+    };
+  }, [updateActive]);
+
+  // Play the per-scene "elements" reveal whenever the active scene changes (desktop)
+  useEffect(() => {
+    if (!isDesktopRef.current) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const slide = track.children[activeIndex * 2] as HTMLElement | undefined;
+    if (!slide) return;
+    const words = slide.querySelectorAll("[data-title-word]");
+    gsap.set(words, { yPercent: 115 });
+    gsap.to(words, {
+      yPercent: 0,
+      duration: 1.0,
+      stagger: 0.07,
+      ease: "power4.out",
+    });
+    const extras = slide.querySelectorAll("[data-scene-reveal]");
+    gsap.set(extras, { opacity: 0, y: 14 });
+    gsap.to(extras, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.08,
+      delay: 0.25,
+      ease: "power3.out",
+    });
+  }, [activeIndex]);
+
+  const goToProject = useCallback(
+    (targetIndex: number) => {
+      const track = trackRef.current;
+      const viewport = viewportRef.current;
+      if (!track || !viewport) return;
+
+      const i = Math.min(Math.max(targetIndex, 0), totalProjects - 1);
+
+      if (!window.matchMedia(DESKTOP_BREAKPOINT).matches) {
+        const slide = track.children[i * 2] as HTMLElement | undefined;
+        if (!slide) return;
+        const targetLeft = slide.offsetLeft - (viewport.clientWidth - slide.offsetWidth) / 2;
+        track.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+        return;
       }
 
-      // Intro body paragraph
-      if (introParagraphRef.current) {
-        entranceTl.fromTo(
-          introParagraphRef.current,
-          { y: 22, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.65 },
-          0.3
-        );
+      const st = stRef.current;
+      if (!st) return;
+      const slide = track.children[i * 2] as HTMLElement | undefined;
+      if (!slide) return;
+      const distance = Math.max(1, track.scrollWidth - viewport.clientWidth);
+      const progress =
+        (slide.offsetLeft + slide.offsetWidth / 2 - viewport.clientWidth / 2) / distance;
+      const targetY = st.start + progress * (st.end - st.start);
+
+      const lenis = (
+        window as unknown as {
+          __lenis?: { scrollTo: (target: number, options?: object) => void };
+        }
+      ).__lenis;
+
+      if (lenis) {
+        lenis.scrollTo(targetY, { duration: 1.4 });
+      } else {
+        window.scrollTo({ top: targetY, behavior: "smooth" });
       }
+    },
+    [totalProjects]
+  );
 
-      // Devices entrance from right / depth
-      if (deviceContainerRef.current) {
-        entranceTl.fromTo(
-          deviceContainerRef.current,
-          { x: 36, opacity: 0, scale: 0.97 },
-          { x: 0, opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
-          0.35
-        );
-      }
+  const handlePrev = useCallback(() => {
+    goToProject(activeIndex === 0 ? totalProjects - 1 : activeIndex - 1);
+  }, [activeIndex, totalProjects, goToProject]);
 
-      // Bottom thumbnail carousel rail entrance
-      if (thumbnailRailRef.current) {
-        entranceTl.fromTo(
-          thumbnailRailRef.current,
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7 },
-          0.5
-        );
-      }
-    }, sectionEl);
+  const handleNext = useCallback(() => {
+    goToProject(activeIndex === totalProjects - 1 ? 0 : activeIndex + 1);
+  }, [activeIndex, totalProjects, goToProject]);
 
-    return () => ctx.revert();
-  }, []);
-
-  // ==========================================================
-  // 4. Keyboard Navigation (Section 28)
-  // ==========================================================
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const section = sectionRef.current;
       if (!section) return;
 
       const rect = section.getBoundingClientRect();
-      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-      if (!isInViewport) return;
+      const inView = rect.top <= window.innerHeight && rect.bottom >= 0;
+      if (!inView) return;
 
       if (e.key === "ArrowLeft") {
         e.preventDefault();
@@ -250,278 +375,262 @@ export function RecentWork() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handlePrev, handleNext]);
 
-  // ==========================================================
-  // 5. Mobile Touch / Swipe Handling (Section 27)
-  // ==========================================================
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
-
-    // Threshold ~48px and verify horizontal swipe intent to preserve vertical scroll
-    if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.4) {
-      if (deltaX < 0) {
-        handleNext();
-      } else {
-        handlePrev();
-      }
-    }
-  };
-
-  const getServiceIcon = (service: string) => {
-    const s = service.toLowerCase();
-    if (s.includes("design") || s.includes("layout")) return Monitor;
-    if (s.includes("dev") || s.includes("gallery") || s.includes("funnel")) return Code2;
-    if (s.includes("host")) return Server;
-    if (s.includes("support")) return Headphones;
-    if (s.includes("lead") || s.includes("seo") || s.includes("catalog")) return Sparkles;
-    return ShieldCheck;
-  };
-
   return (
     <section
       id="work"
       ref={sectionRef}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      className="relative flex flex-col justify-between py-12 sm:py-16 lg:py-24 bg-[#293241] text-[#E0FBFC] overflow-hidden"
+      className="relative w-full overflow-x-clip"
+      aria-label="Selected Projects Showcase"
     >
-      {/* Atmospheric depth glows */}
-      <div className="absolute top-[-10%] left-1/4 w-[600px] h-[600px] bg-[#3D5A80]/25 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-1/4 w-[500px] h-[500px] bg-[#F7931E]/10 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-8 md:px-12 lg:px-14 flex flex-col flex-grow justify-between">
-        {/* ========================================================
-            HEADER ROW: Section Title + Intro
-           ======================================================== */}
-        <div className="relative mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto text-center flex flex-col items-center">
-          {/* Masked Line-by-Line Headline Reveal (Section 5) */}
-          <h2 className="font-serif text-[34px] sm:text-[46px] lg:text-[54px] xl:text-[60px] leading-[1.04] text-white mb-4 tracking-tight text-center">
-            <span className="block overflow-hidden pb-1">
-              <span ref={headingLine1Ref} className="inline-block will-change-transform">
-                Websites
-              </span>
-            </span>
-            <span className="block overflow-hidden">
-              <span ref={headingLine2Ref} className="inline-block will-change-transform">
-                Built for{" "}
-                <span
-                  ref={headingItalicRef}
-                  className="italic text-[#98C1D9] inline-block will-change-transform"
+      <div
+        ref={viewportRef}
+        className="relative h-[100svh] w-full overflow-hidden bg-[#0B1118] text-[#F2EEE6] select-none"
+      >
+        {/* ===================== HORIZONTAL SCENE TRACK ===================== */}
+        <div
+          ref={trackRef}
+          className="flex h-full items-stretch will-change-transform overflow-x-auto no-scrollbar snap-x snap-mandatory touch-pan-x lg:snap-none lg:overflow-visible lg:touch-auto"
+        >
+          {projectsData.map((project, idx) => {
+            const isActive = idx === activeIndex;
+            return (
+              <Fragment key={project.id}>
+                {/* PROJECT SCENE — full-screen on desktop */}
+                <div
+                  className="relative w-[82vw] lg:w-screen shrink-0 snap-center h-full overflow-hidden"
+                  aria-hidden={!isActive}
                 >
-                  What's Next.
-                </span>
-              </span>
-            </span>
-          </h2>
-
-          <p
-            ref={introParagraphRef}
-            className="text-sm sm:text-base text-[#98C1D9]/90 leading-[1.65] max-w-xl mx-auto text-center"
-          >
-            Every business has a different story. We design, develop, and host
-            websites that bring those stories to life — and turn visitors into
-            customers.
-          </p>
-        </div>
-
-        {/* ========================================================
-            MAIN SHOWCASE GRID:
-            Left: Active Project Narrative & Controls (42%)
-            Right: Large Dominant Device Showcase (58%)
-           ======================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center mb-8 sm:mb-12">
-          {/* LEFT COLUMN: Project Details & Navigation */}
-          <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1">
-            {/* Sliding Project Counter & Circular Arrow Controls (Section 13 & 21) */}
-            <div className="flex items-center gap-4 mb-5">
-              <div className="flex items-center gap-1 font-mono text-xs sm:text-sm font-semibold tracking-widest text-[#98C1D9]">
-                <div className="relative h-5 w-6 overflow-hidden flex items-center justify-center">
+                  {/* Image wrapper: pans right-to-left, floats with the mouse */}
                   <div
-                    ref={counterNumberRef}
-                    className="absolute inset-0 flex items-center justify-center text-[#F7931E] font-bold will-change-transform"
+                    data-scene-img-wrap
+                    className="absolute left-0 -top-[4%] -bottom-[4%] w-[115%] will-change-transform"
                   >
-                    {activeProject.number}
+                    <Image
+                      src={project.heroImage}
+                      alt={`${project.name} Hero Photography`}
+                      fill
+                      priority={idx < 2}
+                      className="object-cover object-center"
+                      sizes="100vw"
+                    />
+                  </div>
+
+                  {/* Readability gradients */}
+                  <div
+                    className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-[#0B1118]/92 via-[#0B1118]/55 to-transparent"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-[#0B1118]/60 via-transparent to-transparent"
+                    aria-hidden="true"
+                  />
+
+                  {/* Cinematic dark veil — scene fades into/out of the void */}
+                  <div data-scene-veil className="absolute inset-0 z-10 bg-[#0B1118]" aria-hidden="true" />
+
+                  <div
+                    data-scene-content
+                    className="relative z-20 h-full flex flex-col justify-between p-6 sm:p-10 lg:p-16 will-change-transform"
+                  >
+                    {/* Top row: counter + services */}
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex items-baseline gap-2 font-mono text-xs sm:text-sm tracking-wider">
+                        <span className="text-[#E99A22] font-semibold">{project.number}</span>
+                        <span className="text-white/45">/ 0{totalProjects}</span>
+                      </div>
+                      <span
+                        data-scene-reveal
+                        className="hidden sm:block font-mono text-[10px] tracking-[0.25em] text-white/50 uppercase"
+                      >
+                        {project.servicesTag}
+                      </span>
+                    </div>
+
+                    {/* Middle: editorial title, vertically centered */}
+                    <div className="max-w-3xl lg:max-w-4xl my-auto py-6">
+                      <span
+                        data-scene-reveal
+                        className="inline-block font-mono text-[11px] tracking-[0.3em] text-[#E99A22] uppercase mb-4 sm:mb-6"
+                      >
+                        {project.locationFormatted || project.location}
+                      </span>
+                      <h3 className="font-serif text-5xl sm:text-7xl lg:text-[110px] lg:leading-[0.98] font-normal text-white tracking-tight">
+                        {project.name.split(" ").map((word, wi) => (
+                          <span
+                            key={`${word}-${wi}`}
+                            className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]"
+                          >
+                            <span data-title-word className="inline-block will-change-transform">
+                              {word}
+                              {"\u00A0"}
+                            </span>
+                          </span>
+                        ))}
+                      </h3>
+                      <button
+                        type="button"
+                        data-scene-reveal
+                        onClick={() => {
+                          setSelectedProjectForModal(project);
+                          setIsModalOpen(true);
+                        }}
+                        className="group inline-flex items-center gap-2.5 text-[#E99A22] hover:text-[#FFA94D] tracking-[0.2em] text-xs sm:text-sm font-semibold uppercase transition-colors cursor-pointer bg-transparent border-0 p-0 mt-8"
+                        aria-label={`Experience full website view for ${project.name}`}
+                      >
+                        <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                          VIEW PROJECT
+                        </span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-2"
+                          aria-hidden="true"
+                        >
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Bottom: film-credit description */}
+                    <p
+                      data-scene-reveal
+                      className="font-sans text-sm sm:text-base text-white/70 leading-relaxed max-w-md font-light"
+                    >
+                      {project.description}
+                    </p>
                   </div>
                 </div>
-                <span className="text-white/40">/ 0{totalProjects}</span>
-              </div>
 
-              {/* Prev / Next Circular Buttons */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={handlePrev}
-                  className="group w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
-                  aria-label="Previous project"
-                >
-                  <ChevronLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="group w-9 h-9 rounded-full bg-[#F7931E] text-white flex items-center justify-center hover:bg-[#E07E0B] hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer shadow-[0_2px_10px_rgba(247,147,30,0.35)]"
-                  aria-label="Next project"
-                >
-                  <ChevronRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Dynamic Project Text Container */}
-            <div className="flex flex-col">
-              {/* Category & Location Tag */}
-              <div
-                ref={projectCategoryRef}
-                className="text-[11px] sm:text-xs font-semibold tracking-[0.14em] text-[#98C1D9] uppercase mb-2 will-change-transform font-mono"
-              >
-                {activeProject.categoryTag}
-              </div>
-
-              {/* Project Title (Section 22) */}
-              <div className="min-h-[38px] sm:min-h-[48px] xl:min-h-[52px] flex items-center mb-3">
-                <h3
-                  ref={projectTitleRef}
-                  className="font-serif text-[30px] sm:text-[38px] xl:text-[44px] text-white font-normal leading-[1.08] tracking-tight will-change-transform"
-                >
-                  {activeProject.name}
-                </h3>
-              </div>
-
-              {/* Narrative Description */}
-              <div className="min-h-[70px] sm:min-h-[76px] mb-5 max-w-md">
-                <p
-                  ref={projectDescRef}
-                  className="text-[14px] sm:text-[15px] text-[#E0FBFC]/80 leading-[1.65] will-change-transform"
-                >
-                  {activeProject.description}
-                </p>
-              </div>
-
-              {/* Staggered Service Feature Pills (Section 20) */}
-              <div ref={servicePillsRef} className="flex flex-wrap gap-2 mb-6 sm:mb-8 min-h-[38px] will-change-transform">
-                {activeProject.services.map((service) => {
-                  const IconComponent = getServiceIcon(service);
-                  return (
-                    <div
-                      key={service}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#98C1D9]/25 bg-[#3D5A80]/40 text-[#E0FBFC] text-[11px] sm:text-[12px] font-medium backdrop-blur-xs hover:border-[#F7931E] transition-colors"
-                    >
-                      <IconComponent className="w-3.5 h-3.5 text-[#F7931E]" />
-                      <span>{service}</span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Action CTAs (Section 14 & 15) */}
-              <div ref={ctaContainerRef} className="flex items-center gap-4 sm:gap-6">
-                {activeProject.liveUrl && activeProject.liveUrl.startsWith("http") ? (
-                  <a
-                    href={activeProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#F7931E] hover:bg-[#E07E0B] text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(247,147,30,0.35)] hover:shadow-[0_6px_20px_rgba(247,147,30,0.5)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
-                  >
-                    <span>View Live Site</span>
-                    <ExternalLink className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
-                  </a>
-                ) : (
-                  <a
-                    href="#contact"
-                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#F7931E] hover:bg-[#E07E0B] text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(247,147,30,0.35)] hover:shadow-[0_6px_20px_rgba(247,147,30,0.5)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
-                  >
-                    <span>View Project</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
-                  </a>
+                {/* EMPTY VOID — the wait between projects (no trailing gap) */}
+                {idx < totalProjects - 1 && (
+                  <div className="w-[8vw] lg:w-[140vw] shrink-0" aria-hidden="true" />
                 )}
-
-                <button
-                  onClick={handleNext}
-                  className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#98C1D9] hover:text-[#F7931E] transition-colors cursor-pointer py-2"
-                >
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                    Next Project
-                  </span>
-                  <ChevronRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN: Dominant Device Mockup Showcase (Section 7, 8, 9, 37) */}
-          <div
-            ref={deviceContainerRef}
-            className="lg:col-span-7 order-1 lg:order-2 flex items-center justify-center w-full will-change-transform"
-          >
-            <DeviceMockup project={activeProject} />
-          </div>
+              </Fragment>
+            );
+          })}
         </div>
 
-        {/* ========================================================
-            BOTTOM: HORIZONTAL PROJECT THUMBNAIL CAROUSEL (Section 11 & 36)
-           ======================================================== */}
+        {/* ===================== NEXT PROJECT HINT (appears in the void) ===================== */}
         <div
-          ref={thumbnailRailRef}
-          className="pt-6 pb-2 border-t border-white/10"
+          ref={hintRef}
+          className="hidden lg:flex absolute left-10 lg:left-16 top-1/2 -translate-y-1/2 z-30 flex-col gap-2 pointer-events-none select-none"
+          style={{ opacity: 0 }}
+          aria-hidden="true"
         >
-          <div
-            ref={thumbnailsContainerRef}
-            data-lenis-prevent
-            className="flex items-center gap-3 sm:gap-4 overflow-x-auto py-2 px-1 no-scrollbar"
-          >
+          <span className="font-mono text-[10px] tracking-[0.32em] text-white/40 uppercase">
+            NEXT PROJECT
+          </span>
+          <span ref={hintTitleRef} className="font-serif text-2xl lg:text-3xl italic text-white/90">
+            —
+          </span>
+        </div>
+
+
+
+        {/* ===================== RIGHT-SIDE PROGRESS RAIL (desktop) ===================== */}
+        <div
+          className="hidden lg:flex absolute right-5 lg:right-12 top-1/2 -translate-y-1/2 z-30 flex-col items-center pointer-events-auto select-none"
+          aria-label="Project slider navigation"
+        >
+          <span className="font-sans text-[9px] sm:text-[10px] font-semibold tracking-[0.25em] text-white/55 uppercase mb-3 sm:mb-4">
+            SCROLL
+          </span>
+          <div className="relative w-px h-48 sm:h-56 bg-white/20 flex flex-col justify-between items-center">
+            <div
+              ref={markerRef}
+              className="absolute left-1/2 w-[3px] h-7 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-t from-[#E99A22] to-[#FFD08A] shadow-[0_0_10px_rgba(233,154,34,0.8)]"
+              style={{ top: "0%" }}
+            />
             {projectsData.map((project, idx) => {
               const isActive = idx === activeIndex;
               return (
                 <button
                   key={project.id}
-                  onClick={() => changeProject(idx, idx > activeIndex ? "next" : "prev")}
-                  className={`group relative flex-shrink-0 w-[110px] sm:w-[135px] md:w-[150px] aspect-[16/10] rounded-lg overflow-hidden cursor-pointer transition-all duration-300 text-left ${
-                    isActive
-                      ? "ring-2 ring-[#F7931E] ring-offset-2 ring-offset-[#293241] shadow-[0_4px_16px_rgba(247,147,30,0.3)] scale-105 opacity-100 z-10"
-                      : "opacity-50 hover:opacity-90 hover:scale-103 border border-white/15"
+                  onClick={() => goToProject(idx)}
+                  className={`group relative flex items-center justify-center cursor-pointer transition-transform duration-300 ${
+                    isActive ? "scale-125" : "scale-100 hover:scale-125"
                   }`}
-                  aria-label={`Select ${project.name}`}
-                  aria-current={isActive ? "true" : undefined}
+                  aria-label={`Jump to project 0${idx + 1}: ${project.name}`}
+                  aria-current={isActive ? "step" : undefined}
                 >
-                  <div className="absolute inset-0">
-                    <Image
-                      src={project.thumbnailImage}
-                      alt={project.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="160px"
-                    />
-                  </div>
-                  {/* Subtle Dark Vignette with Project Name */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-2 flex items-end">
-                    <span className="text-[10px] sm:text-[11px] font-medium text-white line-clamp-1 group-hover:text-[#F7931E] transition-colors">
-                      {project.name}
-                    </span>
-                  </div>
+                  {isActive ? (
+                    <span className="w-2 h-2 rounded-full bg-[#E99A22] shadow-[0_0_10px_rgba(233,154,34,0.7)] transition-all duration-300" />
+                  ) : (
+                    <span className="w-1.5 h-1.5 rounded-full border border-white/45 bg-[#0B1118]/80 group-hover:border-white group-hover:bg-white/40 transition-all duration-200" />
+                  )}
+                  <span className="absolute right-6 px-2 py-1 rounded bg-[#0B1118]/90 text-white font-mono text-[10px] tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 hidden sm:block">
+                    {project.number} · {project.name}
+                  </span>
                 </button>
               );
             })}
-
-            {/* Special Final CTA Card: "Your Business Could Be Next" (Section 36) */}
-            <a
-              href="#contact"
-              className="group flex-shrink-0 w-[110px] sm:w-[135px] md:w-[150px] aspect-[16/10] rounded-lg border-2 border-dashed border-[#F7931E]/60 hover:border-[#F7931E] bg-[#3D5A80]/25 hover:bg-[#3D5A80]/45 p-2 flex flex-col items-center justify-center text-center transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:scale-103"
-            >
-              <div className="w-6 h-6 rounded-full bg-[#F7931E]/20 group-hover:bg-[#F7931E]/30 flex items-center justify-center text-[#F7931E] mb-1 transition-all duration-300">
-                <Plus className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-90" />
-              </div>
-              <span className="text-[10px] sm:text-[11px] font-serif text-white font-medium leading-tight transition-colors">
-                Your Business
-                <br />
-                Could Be Next
-              </span>
-            </a>
           </div>
         </div>
+
+        {/* ===================== BOTTOM-RIGHT ARROWS (desktop) ===================== */}
+        <div className="hidden lg:flex absolute right-6 lg:right-14 bottom-6 lg:bottom-10 z-30 items-center gap-5 lg:gap-6 pointer-events-auto select-none">
+          <button
+            onClick={handlePrev}
+            className="text-white/60 hover:text-white transition-colors cursor-pointer p-1.5 rounded-full hover:bg-white/10"
+            aria-label="Previous Project"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-5 h-5 sm:w-6 sm:h-6"
+            >
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className="text-white/60 hover:text-white transition-colors cursor-pointer p-1.5 rounded-full hover:bg-white/10"
+            aria-label="Next Project"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-5 h-5 sm:w-6 sm:h-6"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Bottom-left ethos (desktop) */}
+        <div className="hidden lg:block absolute left-10 lg:left-16 bottom-6 lg:bottom-10 z-30 pointer-events-none select-none">
+          <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.22em] text-white/45 uppercase">
+            REAL BUSINESSES. REMARKABLE RESULTS.
+          </span>
+        </div>
       </div>
+
+      <ProjectExperienceModal
+        project={selectedProjectForModal}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
+}
+
+function scaleAt(lp: number) {
+  const entry = easeOutCubic(clamp01(lp / 0.55));
+  const exitP = easeInOutSine(clamp01((lp - 0.55) / 0.45));
+  return 1.07 - 0.07 * entry + 0.04 * exitP;
 }
