@@ -15,7 +15,7 @@ export function Hero() {
       <div className="max-w-[1360px] mx-auto px-6 md:px-10 lg:px-14">
 
         {/* Headline Area */}
-        <div className="max-w-4xl flex flex-col items-start">
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
           <h1 className="reveal text-hero mb-6 lg:mb-8">
             Your website<br />
             should be bringing<br />
@@ -27,7 +27,7 @@ export function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="reveal reveal-delay-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+          <div className="reveal reveal-delay-2 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
             <a href="#contact" className="btn-primary">
               <span>Tell Me About Your Business</span>
               <ArrowRight className="w-4 h-4 arrow-icon" />
