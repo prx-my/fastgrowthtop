@@ -103,15 +103,15 @@ export function RecentWork() {
   return (
     <section
       id="work"
-      className="relative w-full bg-[#E0FBFC] text-[#293241] pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-32 select-none overflow-hidden"
+      className="relative w-full bg-[#E0FBFC] text-[#293241] pt-6 pb-8 sm:pt-8 sm:pb-12 lg:pt-10 lg:pb-14 select-none overflow-hidden"
       aria-label="Work portfolio showcase"
     >
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* ========================================================
             1. SECTION HEADER: "Work"
            ======================================================== */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-14">
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-[56px] text-[#1e2633] font-normal tracking-tight">
+        <div className="text-center mb-5 sm:mb-7 lg:mb-8">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[52px] text-[#1e2633] font-normal tracking-tight">
             Work
           </h2>
         </div>
@@ -119,7 +119,7 @@ export function RecentWork() {
         {/* ========================================================
             2. MAIN PROJECT SHOWCASE + OUTSIDE CAROUSEL ARROWS
            ======================================================== */}
-        <div className="relative w-full max-w-[1140px] mx-auto">
+        <div className="relative w-full max-w-[1180px] mx-auto">
           {/* Previous Arrow — Vertically Centered OUTSIDE Left */}
           <button
             type="button"
@@ -142,7 +142,7 @@ export function RecentWork() {
 
           {/* Centered Rounded Image Preview Container */}
           <div
-            className="relative w-full max-w-[1020px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)]"
+            className="relative w-full max-w-[1060px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -160,7 +160,7 @@ export function RecentWork() {
                 alt={`${currentProject.name} — ${currentPage.title}`}
                 fill
                 priority
-                sizes="(max-width: 768px) 94vw, (max-width: 1200px) 85vw, 1020px"
+                sizes="(max-width: 768px) 94vw, (max-width: 1200px) 88vw, 1060px"
                 className="object-cover object-top transition-opacity duration-300 motion-reduce:transition-none"
               />
             </div>
@@ -172,7 +172,7 @@ export function RecentWork() {
             Desktop: Three-Column Layout (Visit site | Title & Meta | 01/03 Pages)
             Mobile: Centered Stacked Layout
            ======================================================== */}
-        <div className="w-full max-w-[1020px] mx-auto mt-7 sm:mt-9">
+        <div className="w-full max-w-[1060px] mx-auto mt-5 sm:mt-6 lg:mt-7">
           {/* Desktop & Tablet Layout (md and up) */}
           <div className="hidden md:grid md:grid-cols-3 items-center">
             {/* Left: Yellow Visit Site Button */}
@@ -309,7 +309,7 @@ export function RecentWork() {
         {/* ========================================================
             4. PROJECT NAVIGATION / PROGRESS LINE (01 ------- 06)
            ======================================================== */}
-        <div className="w-full max-w-[1020px] mx-auto mt-10 sm:mt-14">
+        <div className="w-full max-w-[1060px] mx-auto mt-6 sm:mt-8 lg:mt-9">
           <div className="w-full overflow-x-auto no-scrollbar py-2">
             <div className="min-w-[340px] sm:min-w-0">
               {/* Project Numbers Row */}
@@ -324,7 +324,7 @@ export function RecentWork() {
                         setActiveProjectIndex(idx);
                         setActivePageIndex(0);
                       }}
-                      className={`font-mono text-xs sm:text-sm tracking-wider cursor-pointer transition-colors duration-200 py-1 px-1 focus:outline-none ${
+                      className={`font-mono text-xs sm:text-sm tracking-wider cursor-pointer transition-colors duration-200 min-w-[36px] sm:min-w-[44px] min-h-[36px] sm:min-h-[44px] flex items-center justify-center focus:outline-none ${
                         isActive
                           ? "text-[#1e2633] font-bold"
                           : "text-[#53789E]/70 hover:text-[#1e2633] font-medium"
