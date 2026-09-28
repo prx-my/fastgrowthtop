@@ -5,10 +5,7 @@ import Image from "next/image";
 import {
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
-  Lock,
   ArrowUpRight,
-  Sparkles,
 } from "lucide-react";
 import { projectsData, ProjectItem } from "@/data/projects";
 import { ProjectExperienceModal } from "@/components/sections/ProjectExperienceModal";
@@ -54,9 +51,11 @@ export function RecentWork() {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't intercept if an input or textarea is active or modal is open
       if (isModalOpen) return;
-      if (document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA") {
+      if (
+        document.activeElement?.tagName === "INPUT" ||
+        document.activeElement?.tagName === "TEXTAREA"
+      ) {
         return;
       }
 
@@ -82,8 +81,7 @@ export function RecentWork() {
     const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
     const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
 
-    // Only swipe if horizontal movement is dominant and > 45px
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 45) {
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
       if (deltaX > 0) {
         handlePrevProject();
       } else {
@@ -99,31 +97,25 @@ export function RecentWork() {
   return (
     <section
       id="work"
-      className="relative w-full bg-[#0B1118] text-[#F2EEE6] py-16 sm:py-24 lg:py-32 select-none overflow-hidden"
+      className="relative w-full bg-[#E0FBFC] text-[#293241] py-8 sm:py-12 lg:py-16 select-none"
       aria-label="Works showcase"
     >
-      {/* Background Ambience (subtle and non-intrusive) */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#3D5A80]/15 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-[#F7931E]/8 rounded-full blur-[160px] pointer-events-none -z-10" />
-
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* ========================================================
             1. SECTION TITLE: "Works"
            ======================================================== */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-14">
-          <span className="font-mono text-xs sm:text-sm tracking-[0.25em] text-[#F7931E] uppercase font-semibold block mb-2 sm:mb-3">
-            Selected Portfolio
-          </span>
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white font-normal tracking-tight">
+        <div className="text-center mb-5 sm:mb-7">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#293241] font-normal tracking-tight">
             Works
           </h2>
         </div>
 
         {/* ========================================================
-            2. MAIN SHOWCASE: Realistic Browser Screen + Arrows (< >)
+            2. MAIN SHOWCASE: Clean, Crisp Image Cover + Edge Arrows (< >)
+               (No dark backgrounds, perfectly integrated into site)
            ======================================================== */}
         <div
-          className="relative max-w-[1140px] mx-auto"
+          className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-[#98C1D9]/70 bg-white shadow-[0_16px_40px_rgba(41,50,65,0.08)]"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -131,7 +123,7 @@ export function RecentWork() {
           <button
             type="button"
             onClick={handlePrevProject}
-            className="absolute -left-3 sm:-left-6 lg:-left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-[#121924]/90 hover:bg-[#1C2738] text-white/80 hover:text-white border border-white/20 hover:border-[#F7931E]/60 shadow-[0_8px_24px_rgba(0,0,0,0.5)] backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group"
+            className="absolute left-2.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/90 hover:bg-white text-[#293241] hover:text-[#F7931E] border border-[#98C1D9]/80 hover:border-[#F7931E] shadow-[0_4px_16px_rgba(41,50,65,0.12)] backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group"
             aria-label="Previous project"
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:-translate-x-0.5" />
@@ -141,64 +133,30 @@ export function RecentWork() {
           <button
             type="button"
             onClick={handleNextProject}
-            className="absolute -right-3 sm:-right-6 lg:-right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-[#121924]/90 hover:bg-[#1C2738] text-white/80 hover:text-white border border-white/20 hover:border-[#F7931E]/60 shadow-[0_8px_24px_rgba(0,0,0,0.5)] backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group"
+            className="absolute right-2.5 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/90 hover:bg-white text-[#293241] hover:text-[#F7931E] border border-[#98C1D9]/80 hover:border-[#F7931E] shadow-[0_4px_16px_rgba(41,50,65,0.12)] backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group"
             aria-label="Next project"
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-0.5" />
           </button>
 
-          {/* Browser Display Frame */}
-          <div className="relative rounded-2xl sm:rounded-[24px] lg:rounded-[28px] overflow-hidden bg-[#121924] border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.7)]">
-            {/* Sleek Browser Top Bar */}
-            <div className="w-full bg-[#17202E] border-b border-white/10 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-4">
-              {/* Traffic Light Dots */}
-              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#FF5F56]/85" />
-                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#FFBD2E]/85" />
-                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#27C93F]/85" />
-              </div>
-
-              {/* Simulated Address Bar */}
-              <div className="flex items-center gap-2 px-3 sm:px-5 py-1 sm:py-1.5 rounded-full bg-[#0B1118]/85 border border-white/10 text-xs sm:text-[13px] font-mono text-white/70 max-w-[420px] w-full justify-center truncate">
-                <Lock className="w-3 h-3 text-[#F7931E] shrink-0" />
-                <span className="truncate">
-                  https://{currentProject.websiteDomain || `${currentProject.id}.com`}
-                </span>
-              </div>
-
-              {/* Quick Tag */}
-              <div className="hidden sm:flex items-center gap-2 text-[11px] font-mono text-white/50 uppercase tracking-wider shrink-0">
-                <span>{currentProject.categoryTag}</span>
-              </div>
-            </div>
-
-            {/* Viewport Area — Zero Overlay, 100% Crisp Website Content */}
-            <div
-              className="relative w-full aspect-[16/10] sm:aspect-[16/9.5] overflow-hidden bg-[#0D131C] cursor-pointer group"
-              onClick={() => {
-                setSelectedProjectForModal(currentProject);
-                setIsModalOpen(true);
-              }}
-              title="Click to view full case study & interactive experience"
-            >
-              <Image
-                key={`${currentProject.id}-${currentPage.image}`}
-                src={currentPage.image}
-                alt={`${currentProject.name} — ${currentPage.title}`}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1140px"
-                className="object-cover object-top transition-opacity duration-300"
-              />
-
-              {/* Subtle hover prompt to view details without obscuring the site */}
-              <div className="absolute bottom-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/75 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] tracking-wide shadow-lg">
-                  <Sparkles className="w-3 h-3 text-[#F7931E]" />
-                  Click to Expand
-                </span>
-              </div>
-            </div>
+          {/* Display Viewport: Clean, Large, Edge-to-Edge Image */}
+          <div
+            className="relative w-full aspect-[16/9.2] sm:aspect-[16/9] lg:aspect-[16/8.8] overflow-hidden bg-[#F0FAFA] cursor-pointer"
+            onClick={() => {
+              setSelectedProjectForModal(currentProject);
+              setIsModalOpen(true);
+            }}
+            title="Click to view full case study & interactive experience"
+          >
+            <Image
+              key={`${currentProject.id}-${currentPage.image}`}
+              src={currentPage.image}
+              alt={`${currentProject.name} — ${currentPage.title}`}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1400px) 95vw, 1400px"
+              className="object-cover object-top transition-opacity duration-300"
+            />
           </div>
         </div>
 
@@ -208,76 +166,46 @@ export function RecentWork() {
             Center: 1/3 (Pages)
             Right: Visit site
            ======================================================== */}
-        <div className="max-w-[1140px] mx-auto mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-4 px-2 sm:px-4">
+        <div className="w-full mt-3.5 sm:mt-5 flex items-center justify-between gap-3 text-[#293241] px-1 sm:px-2">
           {/* LEFT: business name (1/6) */}
-          <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-            <div className="flex items-baseline gap-2.5">
-              <h3 className="font-serif text-xl sm:text-2xl text-white font-normal tracking-tight">
-                {currentProject.name}
-              </h3>
-              <span className="font-mono text-xs sm:text-sm text-white/50 tracking-wider">
-                ({activeProjectIndex + 1}/{totalProjects})
-              </span>
-            </div>
-            <span className="sm:hidden font-mono text-[11px] text-[#F7931E] uppercase tracking-wider">
-              {currentProject.location}
+          <div className="flex items-baseline gap-2 shrink-0">
+            <h3 className="font-serif text-base sm:text-xl lg:text-2xl text-[#293241] font-normal tracking-tight truncate max-w-[200px] sm:max-w-none">
+              {currentProject.name}
+            </h3>
+            <span className="font-mono text-xs sm:text-sm text-[#3D5A80]/70 tracking-wider">
+              ({activeProjectIndex + 1}/{totalProjects})
             </span>
           </div>
 
           {/* CENTER: 1/3 (Pages) with Interactive Page Switcher */}
-          <div className="flex items-center gap-2 sm:gap-3 bg-[#121924] border border-white/10 rounded-full px-3 sm:px-4 py-1.5 shadow-sm">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 bg-white border border-[#98C1D9]/70 rounded-full px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm font-mono shadow-sm">
             <button
               type="button"
               onClick={handlePrevPage}
-              className="text-white/60 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10 cursor-pointer"
+              className="text-[#3D5A80] hover:text-[#293241] hover:bg-[#E0FBFC] transition-colors p-0.5 rounded-full cursor-pointer"
               aria-label="Previous page of this website"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
 
-            {/* Page Counter & Label */}
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs sm:text-sm text-white tracking-wide">
-                <span className="text-[#F7931E] font-semibold">{activePageIndex + 1}</span>/
-                {totalPages}{" "}
-                <span className="text-white/60 font-sans text-xs">(Pages)</span>
-              </span>
-
-              {/* Clickable Page Dots / Pills */}
-              <div className="hidden md:flex items-center gap-1.5 pl-2 border-l border-white/15">
-                {pages.map((p, pIdx) => {
-                  const isCurrent = pIdx === activePageIndex;
-                  return (
-                    <button
-                      key={`${p.title}-${pIdx}`}
-                      type="button"
-                      onClick={() => setActivePageIndex(pIdx)}
-                      className={`text-[11px] font-mono px-2 py-0.5 rounded transition-all cursor-pointer ${
-                        isCurrent
-                          ? "bg-[#F7931E] text-[#0B1118] font-semibold"
-                          : "text-white/60 hover:text-white hover:bg-white/10"
-                      }`}
-                      title={p.label || p.title}
-                    >
-                      {p.title}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            <span className="tracking-wide text-[#293241]">
+              <span className="text-[#F7931E] font-semibold">{activePageIndex + 1}</span>/
+              {totalPages}{" "}
+              <span className="text-[#3D5A80] font-sans text-xs">(Pages)</span>
+            </span>
 
             <button
               type="button"
               onClick={handleNextPage}
-              className="text-white/60 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10 cursor-pointer"
+              className="text-[#3D5A80] hover:text-[#293241] hover:bg-[#E0FBFC] transition-colors p-0.5 rounded-full cursor-pointer"
               aria-label="Next page of this website"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
 
           {/* RIGHT: Visit site */}
-          <div className="w-full sm:w-auto flex justify-end">
+          <div className="shrink-0 flex justify-end">
             <a
               href={currentProject.liveUrl || "#contact"}
               target={isExternalLive ? "_blank" : undefined}
@@ -289,38 +217,13 @@ export function RecentWork() {
                   setIsModalOpen(true);
                 }
               }}
-              className="group inline-flex items-center gap-2 text-sm sm:text-base font-semibold text-[#F7931E] hover:text-[#FFA94D] tracking-wide transition-colors cursor-pointer py-1"
+              className="group inline-flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base font-semibold text-[#F7931E] hover:text-[#D97706] tracking-wide transition-colors cursor-pointer py-1"
               aria-label={`Visit site for ${currentProject.name}`}
             >
               <span>Visit site</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[#F7931E] group-hover:text-[#FFA94D]" />
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
-        </div>
-
-        {/* Project Quick Selector Pills (Direct jumping between 1 to 6) */}
-        <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-2">
-          {projectsData.map((project, idx) => {
-            const isCurrent = idx === activeProjectIndex;
-            return (
-              <button
-                key={project.id}
-                type="button"
-                onClick={() => {
-                  setActiveProjectIndex(idx);
-                  setActivePageIndex(0);
-                }}
-                className={`text-xs font-mono px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer border ${
-                  isCurrent
-                    ? "bg-[#F7931E]/20 text-[#F7931E] border-[#F7931E]/60 shadow-[0_0_12px_rgba(247,147,30,0.25)]"
-                    : "bg-white/5 text-white/50 border-white/10 hover:text-white hover:bg-white/10"
-                }`}
-                aria-label={`Jump to ${project.name}`}
-              >
-                0{idx + 1} · {project.name}
-              </button>
-            );
-          })}
         </div>
       </div>
 
