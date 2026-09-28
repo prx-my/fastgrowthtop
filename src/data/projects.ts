@@ -1,3 +1,9 @@
+export interface ProjectPage {
+  title: string;
+  image: string;
+  label?: string;
+}
+
 export interface ProjectItem {
   id: string;
   number: string;
@@ -5,7 +11,7 @@ export interface ProjectItem {
   industry: string;
   location: string;
   locationFormatted: string;
-  categoryTag: string; // e.g. "REAL ESTATE / MICHIGAN" or "WATERFRONT DINING / TRAVERSE CITY, MI"
+  categoryTag: string;
   description: string;
   services: string[];
   servicesTag: string;
@@ -22,12 +28,58 @@ export interface ProjectItem {
   keyFeatures?: string[];
   resultsHighlight?: string;
   screenshots?: string[];
+  pages: ProjectPage[];
 }
 
 export const projectsData: ProjectItem[] = [
   {
-    id: "tj-waterfront",
+    id: "grace-electric",
     number: "01",
+    name: "Grace Electric",
+    industry: "Residential & Commercial Electrical",
+    location: "Traverse City, MI",
+    locationFormatted: "TRAVERSE CITY, MICHIGAN",
+    categoryTag: "ELECTRICAL / NORTHERN MI",
+    description:
+      "Michigan's trusted electrical experts. A modern digital platform engineered to capture residential and commercial service calls, emergency requests, and quote estimates across Grand Traverse and surrounding counties.",
+    services: ["Website Design", "Lead Capture", "Fast Hosting", "Local SEO"],
+    servicesTag: "WEB DESIGN · DEVELOPMENT · DEPLOYMENT",
+    heroImage: "/images/projects/desktop/grace-desktop.png",
+    desktopImage: "/images/projects/desktop/grace-desktop.png",
+    mobileImage: "/images/projects/grace-hero.webp",
+    thumbnailImage: "/images/projects/desktop/grace-desktop.png",
+    websiteDomain: "graceelectricmi.com",
+    liveUrl: "#contact",
+    previewHeading: "Northern Michigan's Trusted Electricians",
+    previewSubheading: "Residential & Commercial Electrical Service.",
+    keyFeatures: [
+      "Frictionless online estimate request funnel",
+      "Instant phone & emergency dispatch integration",
+      "Local service area SEO targeting Northern Michigan",
+      "Mobile-optimized technician booking flow",
+    ],
+    resultsHighlight: "+280% increase in inbound estimate requests within 45 days.",
+    pages: [
+      {
+        title: "Home",
+        image: "/images/projects/desktop/grace-desktop.png",
+        label: "Estimate & Overview",
+      },
+      {
+        title: "Services",
+        image: "/images/projects/desktop/grace-residential.webp",
+        label: "Residential Services",
+      },
+      {
+        title: "Contact",
+        image: "/images/projects/desktop/grace-contact.webp",
+        label: "Request Estimate",
+      },
+    ],
+  },
+  {
+    id: "tj-waterfront",
+    number: "02",
     name: "TJ Waterfront",
     industry: "Waterfront Dining & Hospitality",
     location: "Traverse City, MI",
@@ -53,11 +105,27 @@ export const projectsData: ProjectItem[] = [
       "Fast page loads with modern image optimization",
     ],
     resultsHighlight: "+320% increase in online reservations within the first 60 days.",
-    screenshots: [],
+    pages: [
+      {
+        title: "Home",
+        image: "/images/projects/desktop/tj-waterfront-desktop.jpg",
+        label: "Overview & Booking",
+      },
+      {
+        title: "Lakeside",
+        image: "/images/hero_waterfront.jpg",
+        label: "Waterfront Dining",
+      },
+      {
+        title: "Experience",
+        image: "/images/tj-front.png",
+        label: "Full Menu Experience",
+      },
+    ],
   },
   {
     id: "aces-marine",
-    number: "02",
+    number: "03",
     name: "Aces Marine & Salvage",
     industry: "Marine / Boat & Dock Services",
     location: "Traverse City, MI",
@@ -82,11 +150,27 @@ export const projectsData: ProjectItem[] = [
       "Ultra-fast mobile calling integration",
     ],
     resultsHighlight: "Ranked #1 on Google for boat lift installation in Grand Traverse County.",
-    screenshots: [],
+    pages: [
+      {
+        title: "Home",
+        image: "/images/projects/desktop/aces-desktop.jpg",
+        label: "Dock & Marine Platform",
+      },
+      {
+        title: "Boat Lifts",
+        image: "/images/projects/aces-dock.jpg",
+        label: "Lift Installation",
+      },
+      {
+        title: "Salvage",
+        image: "/images/projects/aces-hero.png",
+        label: "Commercial Contracts",
+      },
+    ],
   },
   {
     id: "beartooth-construction",
-    number: "03",
+    number: "04",
     name: "Beartooth Construction",
     industry: "Custom Home Building",
     location: "Traverse City, MI",
@@ -111,18 +195,34 @@ export const projectsData: ProjectItem[] = [
       "Custom typography and luxury architectural aesthetic",
     ],
     resultsHighlight: "Captured $4.2M in verified project inquiries within 6 months.",
-    screenshots: [],
+    pages: [
+      {
+        title: "Portfolio",
+        image: "/images/projects/desktop/beartooth-desktop.jpg",
+        label: "Luxury Residences",
+      },
+      {
+        title: "Craft",
+        image: "/images/projects/beartooth-fireplace.jpg",
+        label: "Architectural Details",
+      },
+      {
+        title: "Residences",
+        image: "/images/projects/beartooth-hero.jpg",
+        label: "Timeless Custom Homes",
+      },
+    ],
   },
   {
     id: "moving-co",
-    number: "04",
+    number: "05",
     name: "Ascension Moving Co.",
     industry: "Residential & Commercial Moving",
     location: "Traverse City, MI",
     locationFormatted: "TRAVERSE CITY, MICHIGAN",
     categoryTag: "LOGISTICS / MOVING SERVICES",
     description:
-      "A complete digital presence for a growing moving company, built to inspire trust and drive real growth.",
+      "A frictionless, mobile-first booking experience for residential and commercial relocation, featuring instant quote estimation and automated lead dispatch.",
     services: ["Website Design", "Conversion Funnel", "Mobile First", "Hosting"],
     servicesTag: "WEB DESIGN · DEVELOPMENT",
     heroImage: "/images/projects/moving-hero.png",
@@ -140,11 +240,27 @@ export const projectsData: ProjectItem[] = [
       "Clean, modern layout replacing outdated local contractor tropes",
     ],
     resultsHighlight: "Tripled monthly inbound moving quote volume in the first quarter.",
-    screenshots: [],
+    pages: [
+      {
+        title: "Home",
+        image: "/images/projects/desktop/moving-desktop.jpg",
+        label: "Instant Quote Estimator",
+      },
+      {
+        title: "Booking",
+        image: "/images/projects/moving-hero.png",
+        label: "Relocation Funnel",
+      },
+      {
+        title: "Fleet",
+        image: "/images/projects/desktop/moving-about.png",
+        label: "Northern Michigan Crew",
+      },
+    ],
   },
   {
     id: "hottub-solutions",
-    number: "05",
+    number: "06",
     name: "Hot Tub Solutions",
     industry: "Spa Sales, Service & Repair",
     location: "Traverse City, MI",
@@ -169,35 +285,22 @@ export const projectsData: ProjectItem[] = [
       "Traverse City regional SEO footprint",
     ],
     resultsHighlight: "Generated over 45 qualified spa buyer leads in the first 90 days.",
-    screenshots: [],
-  },
-  {
-    id: "ivans-stump-grinding",
-    number: "06",
-    name: "Ivan's Stump Grinding",
-    industry: "Tree & Stump Removal",
-    location: "Traverse City, MI",
-    locationFormatted: "TRAVERSE CITY, MICHIGAN",
-    categoryTag: "TREE SERVICES / NORTHERN MI",
-    description:
-      "A fast, high-converting local service site optimized for mobile visitors, tap-to-call inquiries, and same-day quote turnaround in the Grand Traverse area.",
-    services: ["Website Design", "Mobile Layout", "Local Lead Gen", "Ongoing Support"],
-    servicesTag: "WEB DESIGN · DEVELOPMENT",
-    heroImage: "/images/projects/ivan-hero.webp",
-    desktopImage: "/images/projects/desktop/ivan-desktop.jpg",
-    mobileImage: "/images/projects/mobile/ivan-mobile.jpg",
-    thumbnailImage: "/images/projects/thumbnails/ivan-thumb.jpg",
-    websiteDomain: "ivansstumpgrinding.com",
-    liveUrl: "https://www.ivansstumpgrinding.com/",
-    previewHeading: "Fast, Clean Stump Removal",
-    previewSubheading: "Professional Northern Michigan Tree Care.",
-    keyFeatures: [
-      "One-tap photo upload for instant estimates",
-      "Direct SMS dispatch to operator",
-      "Automated Google Review collection flow",
-      "Lightning-fast mobile performance (<0.8s load time)",
+    pages: [
+      {
+        title: "Catalog",
+        image: "/images/projects/desktop/hottub-desktop.jpg",
+        label: "Spa Models & Specs",
+      },
+      {
+        title: "Gold Series",
+        image: "/images/projects/desktop/hottub-gold.jpg",
+        label: "Luxury Spa Collection",
+      },
+      {
+        title: "Service",
+        image: "/images/projects/desktop/hottub-about.webp",
+        label: "Maintenance & Care",
+      },
     ],
-    resultsHighlight: "Converted 64% of mobile visitors into booked estimates.",
-    screenshots: [],
   },
 ];
