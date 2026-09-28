@@ -43,7 +43,7 @@ export const projectsData: ProjectItem[] = [
     description:
       "Michigan's trusted electrical experts. A modern digital platform engineered to capture residential and commercial service calls, emergency requests, and quote estimates across Grand Traverse and surrounding counties.",
     services: ["Website Design", "Lead Capture", "Fast Hosting", "Local SEO"],
-    servicesTag: "WEB DESIGN · DEVELOPMENT",
+    servicesTag: "WEB DESIGN · DEVELOPMENT · DEPLOYMENT",
     heroImage: "/images/projects/desktop/grace-desktop.png",
     desktopImage: "/images/projects/desktop/grace-desktop.png",
     mobileImage: "/images/projects/grace-hero.webp",
