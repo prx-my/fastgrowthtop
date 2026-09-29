@@ -36,13 +36,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Barlow+Condensed:wght@700;800&display=swap" />
     </noscript>
 
-    <!-- Preload Critical CSS -->
-    <link rel="preload" href="/roofer/css/bootstrap.min.css" as="style" />
-    <link rel="preload" href="/roofer/css/style.css" as="style" />
-
     <!-- Local Core CSS -->
     <link rel="stylesheet" href="/roofer/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/roofer/css/style.css" />
 
     <!-- Non-blocking Bootstrap Icons CSS -->
     <link rel="preload" href="/roofer/css/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
@@ -142,20 +137,28 @@
         text-transform: uppercase;
       }
 
-      /* Sharp Corporate Badges */
-      .badge-sharp {
+      /* Modern Glassmorphic Hero Badge */
+      .hero-badge-pill {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 50px;
+        padding: 6px 16px;
         font-size: 0.8rem;
         font-weight: 700;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        padding: 6px 14px;
-        border-radius: 4px;
-        background-color: rgba(166, 31, 31, 0.12);
-        color: #d32f2f;
-        border-left: 3px solid var(--color-crimson);
+        color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      }
+
+      .hero-badge-pill i {
+        color: #ff4d4d;
+        font-size: 0.95rem;
       }
 
       .badge-gold {
@@ -253,12 +256,23 @@
       .hero-section {
         position: relative;
         background-color: #0f0d1b;
-        background-image: linear-gradient(180deg, rgba(23, 21, 40, 0.85) 0%, rgba(23, 21, 40, 0.75) 60%, rgba(23, 21, 40, 0.92) 100%), url('/demo/joinusroofing/images/hero-bg.webp');
+        background-image: linear-gradient(to right, rgba(23, 21, 40, 0.88) 0%, rgba(23, 21, 40, 0.68) 50%, rgba(23, 21, 40, 0.35) 100%), url('/demo/joinusroofing/images/hero-bg.webp');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         padding: 60px 0 75px;
         color: #ffffff;
+      }
+
+      .hero-section::before,
+      .hero-section::after {
+        display: none !important;
+        content: none !important;
+      }
+
+      .hero-section .container {
+        position: relative;
+        z-index: 5;
       }
 
       .hero-title {
@@ -295,12 +309,19 @@
 
       /* HERO INTERACTIVE FORM CARD */
       .hero-form-card {
-        background-color: #ffffff;
+        position: relative;
+        z-index: 20;
+        background-color: #ffffff !important;
         border: 2px solid #e2e8f0;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
         border-radius: 8px;
         padding: 30px 26px;
         color: #0f172a;
+        pointer-events: auto !important;
+      }
+
+      .hero-form-card * {
+        pointer-events: auto !important;
       }
 
       .hero-form-card h3 {
@@ -593,9 +614,9 @@
 
       /* FOOTER */
       .site-footer {
-        background-color: #0d0b17;
-        color: #94a3b8;
-        padding: 60px 0 30px;
+        background-color: #0e0c1a;
+        color: #cbd5e1;
+        padding: 65px 0 35px;
         border-top: 3px solid var(--color-crimson);
       }
 
@@ -603,7 +624,18 @@
         color: #ffffff;
         font-size: 1.15rem;
         font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         margin-bottom: 20px;
+      }
+
+      .site-footer p {
+        color: #cbd5e1;
+        line-height: 1.65;
+      }
+
+      .site-footer .footer-text {
+        color: #cbd5e1;
       }
 
       .footer-links {
@@ -613,17 +645,48 @@
       }
 
       .footer-links li {
-        margin-bottom: 10px;
+        margin-bottom: 11px;
       }
 
       .footer-links a {
-        color: #94a3b8;
+        color: #cbd5e1;
         text-decoration: none;
-        transition: color 0.2s ease;
+        font-size: 0.92rem;
+        transition: color 0.2s ease, transform 0.2s ease;
+        display: inline-block;
       }
 
       .footer-links a:hover {
         color: #ffffff;
+        transform: translateX(4px);
+      }
+
+      .site-footer .footer-contact-link {
+        color: #cbd5e1;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .site-footer .footer-contact-link:hover {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+
+      .site-footer .social-icon-btn {
+        color: #e2e8f0;
+        font-size: 1.25rem;
+        transition: color 0.2s ease, transform 0.2s ease;
+        display: inline-flex;
+      }
+
+      .site-footer .social-icon-btn:hover {
+        color: #ff4d4d;
+        transform: translateY(-2px);
+      }
+
+      .site-footer .copyright-text {
+        color: #94a3b8;
+        font-size: 0.86rem;
       }
 
       /* MOBILE BOTTOM STICKY ACTION BAR */
@@ -703,12 +766,15 @@
 
     <!-- HERO SECTION -->
     <section class="hero-section" id="hero">
-      <div class="container">
+      <div class="container position-relative" style="z-index: 5;">
         <div class="row align-items-center gy-5">
           <!-- Left Hero Pitch -->
           <div class="col-lg-7">
             <div class="mb-3">
-              <span class="badge-sharp"><i class="bi bi-award-fill me-1"></i>Florida Certified Roofing Contractor Lic# CCC1332399</span>
+              <span class="hero-badge-pill">
+                <i class="bi bi-shield-check"></i>
+                <span>Florida Certified Contractor &bull; Lic# CCC1332399</span>
+              </span>
             </div>
             <h1 class="hero-title">
               Protecting What Matters Most — Roofing You Can Trust
@@ -1586,20 +1652,17 @@
             <a href="#" class="d-inline-block mb-3">
               <img src="/demo/joinusroofing/images/usroofing-logo-white.webp" alt="US Roofing" width="160" height="35" loading="lazy" />
             </a>
-            <p class="small text-muted mb-3">
+            <p class="small footer-text mb-3">
               We put our customers first, always. We’re focused on making this the best experience you’ve ever had with a roofing company.
             </p>
-            <div class="small text-white-50 mb-2">
+            <div class="small footer-text">
               <strong class="text-white">State License:</strong> Florida CCC1332399
-            </div>
-            <div class="small text-white-50">
-              <strong class="text-white">Office Hours:</strong> Mon - Fri | 9am - 6pm (24/7 Storm Dispatch)
             </div>
           </div>
 
           <div class="col-6 col-lg-2">
             <h4>Quick Links</h4>
-            <ul class="footer-links small">
+            <ul class="footer-links">
               <li><a href="#services">Our Services</a></li>
               <li><a href="#materials">Roofing Materials</a></li>
               <li><a href="#about">About US Roofing</a></li>
@@ -1611,7 +1674,7 @@
 
           <div class="col-6 col-lg-3">
             <h4>Services</h4>
-            <ul class="footer-links small">
+            <ul class="footer-links">
               <li><a href="#services">Roof Installation &amp; Replacement</a></li>
               <li><a href="#services">Free 21-Point Roof Inspection</a></li>
               <li><a href="#services">Brava Composite Roof Tiles</a></li>
@@ -1623,7 +1686,7 @@
 
           <div class="col-lg-3">
             <h4>Contact Headquarters</h4>
-            <p class="small text-muted mb-2">
+            <p class="small footer-text mb-2">
               <i class="bi bi-geo-alt-fill text-danger me-2"></i>410 S Ware Blvd Suite 510<br />
               Tampa, FL 33619
             </p>
@@ -1631,18 +1694,18 @@
               <i class="bi bi-telephone-fill text-danger me-2"></i><a href="tel:8889650305" class="text-white fw-bold text-decoration-none">(888) 965-0305</a>
             </p>
             <p class="small mb-3">
-              <i class="bi bi-envelope-fill text-danger me-2"></i><a href="mailto:csr@joinusroofing.com" class="text-muted text-decoration-none">csr@joinusroofing.com</a>
+              <i class="bi bi-envelope-fill text-danger me-2"></i><a href="mailto:csr@joinusroofing.com" class="footer-contact-link">csr@joinusroofing.com</a>
             </p>
             <div class="d-flex gap-3 fs-5">
-              <a href="https://www.facebook.com/share/186Aykzncz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="text-white-50 hover-text-white" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-              <a href="https://www.instagram.com/usroofingflorida?igsh=bGt6and6bTVnZndi" target="_blank" rel="noopener noreferrer" class="text-white-50 hover-text-white" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-              <a href="https://www.tiktok.com/@us.roofingfl?_r=1&_t=ZS-97vA6dYnlXL" target="_blank" rel="noopener noreferrer" class="text-white-50 hover-text-white" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+              <a href="https://www.facebook.com/share/186Aykzncz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="https://www.instagram.com/usroofingflorida?igsh=bGt6and6bTVnZndi" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="https://www.tiktok.com/@us.roofingfl?_r=1&_t=ZS-97vA6dYnlXL" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
             </div>
           </div>
         </div>
 
-        <div class="pt-4 border-top border-secondary text-center small text-muted">
-          <p class="m-0">&copy; 2026 US Roofing LLC. All Rights Reserved. Licensed Florida Roofing Contractor CCC1332399.</p>
+        <div class="pt-4 border-top border-secondary border-opacity-25 text-center">
+          <p class="m-0 copyright-text">&copy; 2026 US Roofing LLC. All Rights Reserved. Licensed Florida Roofing Contractor CCC1332399.</p>
         </div>
       </div>
     </footer>

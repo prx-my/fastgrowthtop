@@ -26,8 +26,8 @@
 
     <!-- High-Performance Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="/demo/texasroofers/images/hero-bg.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/demo/texasroofers/images/hero-bg-mobile.webp" type="image/webp" media="(max-width: 991px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/demo/texasroofers/images/hero-bg.webp" type="image/webp" media="(min-width: 992px)" fetchpriority="high" />
 
     <!-- Non-blocking Google Fonts with font-display: swap -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Barlow+Condensed:wght@700;800&display=swap" />
@@ -38,11 +38,9 @@
 
     <!-- Preload Critical CSS -->
     <link rel="preload" href="/roofer/css/bootstrap.min.css" as="style" />
-    <link rel="preload" href="/roofer/css/style.css" as="style" />
 
     <!-- Local Core CSS -->
     <link rel="stylesheet" href="/roofer/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/roofer/css/style.css" />
 
     <!-- Non-blocking Bootstrap Icons CSS -->
     <link rel="preload" href="/roofer/css/bootstrap-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
@@ -139,31 +137,7 @@
         text-transform: uppercase;
       }
 
-      /* NO AI SLOP PILLS - Standard Clean Rectangular/Soft Radii */
-      .badge-sharp {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.78rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        padding: 5px 12px;
-        border-radius: 4px;
-        background-color: rgba(193, 31, 50, 0.15);
-        color: #ff4757;
-        border-left: 3px solid var(--color-crimson);
-      }
-
-      .badge-gold {
-        background-color: rgba(255, 210, 0, 0.15);
-        color: #b45309;
-        border-left: 3px solid #f59e0b;
-        border-radius: 4px;
-        padding: 4px 10px;
-        font-weight: 700;
-        font-size: 0.8rem;
-      }
+      /* Clean typographic hierarchy without badge pills */
 
       /* STICKY NAVBAR - FIXED FLOW WITH ZERO HIDING OR OVERLAP */
       .top-notice-bar {
@@ -264,6 +238,12 @@
         color: #0c1123;
       }
 
+      .hero-section::before,
+      .hero-section::after {
+        display: none !important;
+        content: none !important;
+      }
+
       /* HERO TEXT PANEL (CLEAN WHITE, NO BLACK OVERLAY) */
       .hero-text-card {
         background-color: #ffffff !important;
@@ -340,12 +320,21 @@
 
       @media (max-width: 991px) {
         .hero-section {
-          padding: 50px 0 60px;
-          background-image: linear-gradient(180deg, rgba(12, 17, 35, 0.92) 0%, rgba(12, 17, 35, 0.85) 60%, rgba(12, 17, 35, 0.65) 100%), url('/demo/texasroofers/images/hero-bg.webp');
+          padding: 30px 0 40px;
+          background-image: url('/demo/texasroofers/images/hero-bg-mobile.webp') !important;
+        }
+        .hero-text-card {
+          padding: 20px 16px !important;
         }
         .hero-title {
-          font-size: 2.15rem;
-          line-height: 1.15;
+          font-size: 1.45rem !important;
+          line-height: 1.15 !important;
+        }
+        .hero-lead {
+          font-size: 0.90rem !important;
+        }
+        .hero-form-card {
+          padding: 20px 16px !important;
         }
       }
 
@@ -657,14 +646,28 @@
         position: relative;
       }
 
+      .text-secondary {
+        color: #334155 !important;
+      }
+
       .process-number {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
         font-weight: 800;
-        color: rgba(193, 31, 50, 0.25);
+        color: var(--color-crimson) !important;
         position: absolute;
         top: 15px;
         right: 20px;
         line-height: 1;
+      }
+
+      .footer-legal-link {
+        color: #cbd5e1;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-legal-link:hover {
+        color: #ffffff;
       }
 
       /* FOOTER */
@@ -830,81 +833,77 @@
         </nav>
       </div>
     </header>
+ 
+    <main id="main-content">
+      <!-- HERO SECTION -->
+      <section class="hero-section" id="hero">
+        <div class="container">
+          <div class="row align-items-center g-4 g-lg-5">
+            <!-- Left Headline Column -->
+            <div class="col-lg-7">
+              <div class="hero-text-card">
+                <h1 class="hero-title">
+                  Top-Rated Roofing Services Across the Lone Star State
+                </h1>
+                <p class="hero-lead">
+                  Trust <strong>Texas Roofers USA</strong> for dependable roof replacement, emergency leak repairs, and storm damage hail restoration. Built tough to withstand intense Texas heat, heavy wind, and seasonal hurricanes.
+                </p>
 
-    <!-- HERO SECTION -->
-    <section class="hero-section" id="hero">
-      <div class="container">
-        <div class="row align-items-center g-4 g-lg-5">
-          <!-- Left Headline Column -->
-          <div class="col-lg-7">
-            <div class="hero-text-card">
-              <div class="mb-3">
-                <span class="badge-sharp" style="background-color: rgba(193, 31, 50, 0.08); border-color: rgba(193, 31, 50, 0.25); color: var(--color-crimson);">
-                  <i class="bi bi-patch-check-fill text-danger"></i> TEXAS LICENSED &amp; CERTIFIED ROOFING CONTRACTOR
-                </span>
-              </div>
-              <h1 class="hero-title">
-                Top-Rated Roofing Services Across the Lone Star State
-              </h1>
-              <p class="hero-lead">
-                Trust <strong>Texas Roofers USA</strong> for dependable roof replacement, emergency leak repairs, and storm damage hail restoration. Built tough to withstand intense Texas heat, heavy wind, and seasonal hurricanes.
-              </p>
-
-              <div class="mb-4">
-                <div class="hero-check-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>100% Free, Zero-Obligation 21-Point Roof &amp; Attic Inspection</span>
-                </div>
-                <div class="hero-check-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Direct Insurance Claim Assistance — We Deal with Your Adjuster</span>
-                </div>
-                <div class="hero-check-item">
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span>Up to 25-Year Workmanship Warranty &amp; Lifetime Material Guarantees</span>
-                </div>
-              </div>
-
-              <div class="d-flex flex-wrap gap-3 align-items-center pt-1">
-                <a href="#heroQuoteForm" class="btn btn-texas-red">
-                  <span>Free Roof Inspection</span>
-                  <i class="bi bi-arrow-right ms-2"></i>
-                </a>
-                <a href="tel:12147178818" class="btn btn-outline-dark fw-bold px-3 py-2" style="border-radius: 4px; border-width: 2px;">
-                  <i class="bi bi-telephone-fill text-danger me-2"></i>
-                  <span>(214) 717-8818</span>
-                </a>
-              </div>
-
-              <!-- Social Proof Highlights -->
-              <div class="mt-4 pt-3 border-top border-slate-200 d-flex flex-wrap align-items-center gap-4">
-                <div class="d-flex align-items-center gap-2">
-                  <div class="text-warning fs-6">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
+                <div class="mb-4">
+                  <div class="hero-check-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>100% Free, Zero-Obligation 21-Point Roof &amp; Attic Inspection</span>
                   </div>
-                  <span class="fw-bold small" style="color: var(--color-primary-navy);">4.8 / 5.0 Google Rating</span>
+                  <div class="hero-check-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Direct Insurance Claim Assistance — We Deal with Your Adjuster</span>
+                  </div>
+                  <div class="hero-check-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Up to 25-Year Workmanship Warranty &amp; Lifetime Material Guarantees</span>
+                  </div>
                 </div>
-                <div class="text-secondary small">
-                  <i class="bi bi-shield-shaded text-danger me-1"></i> A+ Rated BBB Accredited
+
+                <div class="d-flex flex-wrap gap-3 align-items-center pt-1">
+                  <a href="#heroQuoteForm" class="btn btn-texas-red">
+                    <span>Free Roof Inspection</span>
+                    <i class="bi bi-arrow-right ms-2"></i>
+                  </a>
+                  <a href="tel:12147178818" class="btn btn-outline-dark fw-bold px-3 py-2" style="border-radius: 4px; border-width: 2px;">
+                    <i class="bi bi-telephone-fill text-danger me-2"></i>
+                    <span>(214) 717-8818</span>
+                  </a>
                 </div>
-                <div class="text-secondary small">
-                  <i class="bi bi-houses-fill text-danger me-1"></i> 1,000+ Roofs Completed
+
+                <!-- Social Proof Highlights -->
+                <div class="mt-4 pt-3 border-top border-slate-200 d-flex flex-wrap align-items-center gap-4">
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="text-warning fs-6">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                    </div>
+                    <span class="fw-bold small" style="color: var(--color-primary-navy);">4.8 / 5.0 Google Rating</span>
+                  </div>
+                  <div class="text-secondary small">
+                    <i class="bi bi-shield-shaded text-danger me-1"></i> A+ Rated BBB Accredited
+                  </div>
+                  <div class="text-secondary small">
+                    <i class="bi bi-houses-fill text-danger me-1"></i> 1,000+ Roofs Completed
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Right Column: High-Converting Inspection Form Card (IN HERO) -->
-          <div class="col-lg-5" id="hero-inspection-form">
-            <div class="hero-form-card">
-              <div class="text-center mb-3">
-                <h3 class="h4 text-uppercase fw-bold mb-1">Schedule Free Inspection</h3>
-                <p class="small text-muted mb-0">No pressure, no obligation. We respond within 15 minutes.</p>
-              </div>
+            <!-- Right Column: High-Converting Inspection Form Card (IN HERO) -->
+            <div class="col-lg-5" id="hero-inspection-form">
+              <div class="hero-form-card">
+                <div class="text-center mb-3">
+                  <h2 class="h4 text-uppercase fw-bold mb-1">Schedule Free Inspection</h2>
+                  <p class="small text-secondary mb-0">No pressure, no obligation. We respond within 15 minutes.</p>
+                </div>
 
               <form id="heroQuoteForm" onsubmit="handleFormSubmit(event)">
                 <div class="mb-3">
@@ -985,7 +984,7 @@
     <!-- ABOUT SECTION: SKILLED ROOFING CONTRACTORS -->
     <section class="py-5 my-lg-4" id="about">
       <div class="container">
-        <div class="row align-items-center g-5">
+        <div class="row align-items-center g-4 g-lg-5">
           <!-- Left Column Image with Experience Badge -->
           <div class="col-lg-5 position-relative">
             <img 
@@ -1004,11 +1003,6 @@
 
           <!-- Right Column Content -->
           <div class="col-lg-7">
-            <div class="mb-2">
-              <span class="badge-sharp">
-                <i class="bi bi-tools text-danger"></i> ABOUT TEXAS ROOFERS
-              </span>
-            </div>
             <h2 class="display-6 fw-bold text-uppercase mb-3" style="color: var(--color-primary-navy);">
               Skilled Roofing Contractors From Texas Roofers
             </h2>
@@ -1025,8 +1019,8 @@
                   <img src="/demo/texasroofers/images/icon-quality.webp" alt="High Quality Workmanship" width="36" height="36" />
                 </div>
                 <div>
-                  <h4 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">High-Quality Workmanship</h4>
-                  <p class="small text-muted mb-0">From minor shingle repairs to full-scale commercial roofs, we never cut corners on materials or craftsmanship.</p>
+                  <h3 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">High-Quality Workmanship</h3>
+                  <p class="small text-secondary mb-0">From minor shingle repairs to full-scale commercial roofs, we never cut corners on materials or craftsmanship.</p>
                 </div>
               </div>
 
@@ -1035,8 +1029,8 @@
                   <img src="/demo/texasroofers/images/icon-transparent.webp" alt="Fair & Transparent Pricing" width="36" height="36" />
                 </div>
                 <div>
-                  <h4 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">Transparent Pricing</h4>
-                  <p class="small text-muted mb-0">Upfront itemized estimates. We work with your budget and provide realistic solutions you can afford.</p>
+                  <h3 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">Transparent Pricing</h3>
+                  <p class="small text-secondary mb-0">Upfront itemized estimates. We work with your budget and provide realistic solutions you can afford.</p>
                 </div>
               </div>
 
@@ -1045,8 +1039,8 @@
                   <img src="/demo/texasroofers/images/icon-communication.webp" alt="Exceptional Communication" width="36" height="36" />
                 </div>
                 <div>
-                  <h4 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">Dedicated Communication</h4>
-                  <p class="small text-muted mb-0">We answer calls promptly, show up on time, and walk you through every step of the restoration process.</p>
+                  <h3 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">Dedicated Communication</h3>
+                  <p class="small text-secondary mb-0">We answer calls promptly, show up on time, and walk you through every step of the restoration process.</p>
                 </div>
               </div>
 
@@ -1055,8 +1049,8 @@
                   <i class="bi bi-shield-fill-check fs-3 text-danger"></i>
                 </div>
                 <div>
-                  <h4 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">Texas Weather Specialists</h4>
-                  <p class="small text-muted mb-0">Engineered specifically for Texas hailstorms, gale winds, and sweltering summer ultraviolet heat.</p>
+                  <h3 class="h6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">Texas Weather Specialists</h3>
+                  <p class="small text-secondary mb-0">Engineered specifically for Texas hailstorms, gale winds, and sweltering summer ultraviolet heat.</p>
                 </div>
               </div>
             </div>
@@ -1080,9 +1074,6 @@
     <section class="py-5 bg-light" id="services">
       <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-          <span class="badge-sharp mb-2">
-            <i class="bi bi-gear-wide-connected text-danger"></i> WHAT WE DO
-          </span>
           <h2 class="display-6 fw-bold text-uppercase" style="color: var(--color-primary-navy);">
             Our Residential &amp; Commercial Roofing Services
           </h2>
@@ -1249,9 +1240,6 @@
     <section class="py-5" id="locations">
       <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-          <span class="badge-sharp mb-2">
-            <i class="bi bi-pin-map-fill text-danger"></i> STATEWIDE COVERAGE
-          </span>
           <h2 class="display-6 fw-bold text-uppercase" style="color: var(--color-primary-navy);">
             Locations We Proudly Serve Across Texas
           </h2>
@@ -1346,9 +1334,6 @@
     <section class="py-5 bg-light">
       <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-          <span class="badge-sharp mb-2">
-            <i class="bi bi-diagram-3-fill text-danger"></i> SIMPLE &amp; TRANSPARENT
-          </span>
           <h2 class="display-6 fw-bold text-uppercase" style="color: var(--color-primary-navy);">
             Our Hassle-Free 4-Step Process
           </h2>
@@ -1360,33 +1345,33 @@
         <div class="row g-4">
           <div class="col-sm-6 col-lg-3">
             <div class="process-card">
-              <div class="process-number">01</div>
-              <h4 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Free Roof Inspection</h4>
-              <p class="text-muted small mb-0">Our expert project managers perform a full 21-point check of shingles, vents, flashing, and decking with zero cost or pressure.</p>
+              <div class="process-number" aria-hidden="true">01</div>
+              <h3 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Free Roof Inspection</h3>
+              <p class="text-secondary small mb-0">Our expert project managers perform a full 21-point check of shingles, vents, flashing, and decking with zero cost or pressure.</p>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-3">
             <div class="process-card">
-              <div class="process-number">02</div>
-              <h4 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Transparent Estimate</h4>
-              <p class="text-muted small mb-0">You receive a clear, itemized proposal detailing material choices, timeline, and complete insurance claim assistance.</p>
+              <div class="process-number" aria-hidden="true">02</div>
+              <h3 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Transparent Estimate</h3>
+              <p class="text-secondary small mb-0">You receive a clear, itemized proposal detailing material choices, timeline, and complete insurance claim assistance.</p>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-3">
             <div class="process-card">
-              <div class="process-number">03</div>
-              <h4 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Fast 1-Day Install</h4>
-              <p class="text-muted small mb-0">Most residential roofs are fully installed in a single day by certified master roofers adhering strictly to building codes.</p>
+              <div class="process-number" aria-hidden="true">03</div>
+              <h3 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Fast 1-Day Install</h3>
+              <p class="text-secondary small mb-0">Most residential roofs are fully installed in a single day by certified master roofers adhering strictly to building codes.</p>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-3">
             <div class="process-card">
-              <div class="process-number">04</div>
-              <h4 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Clean Sweep &amp; Warranty</h4>
-              <p class="text-muted small mb-0">We perform multiple magnetic sweeps so no nails remain, followed by delivering your signed workmanship and material warranties.</p>
+              <div class="process-number" aria-hidden="true">04</div>
+              <h3 class="h5 fw-bold text-uppercase mb-2" style="color: var(--color-primary-navy);">Clean Sweep &amp; Warranty</h3>
+              <p class="text-secondary small mb-0">We perform multiple magnetic sweeps so no nails remain, followed by delivering your signed workmanship and material warranties.</p>
             </div>
           </div>
         </div>
@@ -1398,9 +1383,6 @@
       <div class="container">
         <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
           <div>
-            <span class="badge-sharp mb-2">
-              <i class="bi bi-chat-quote-fill text-danger"></i> REAL CLIENT EXPERIENCES
-            </span>
             <h2 class="display-6 fw-bold text-uppercase mb-1" style="color: var(--color-primary-navy);">
               Google Verified Customer Reviews
             </h2>
@@ -1446,7 +1428,7 @@
                   CF
                 </div>
                 <div>
-                  <h4 class="reviewer-name">Cory Fleitas</h4>
+                  <h3 class="reviewer-name">Cory Fleitas</h3>
                   <p class="reviewer-meta"><i class="bi bi-google text-danger me-1"></i>Google Verified Review • Austin, TX</p>
                 </div>
               </div>
@@ -1469,7 +1451,7 @@
                   KP
                 </div>
                 <div>
-                  <h4 class="reviewer-name">Kristina Plaster</h4>
+                  <h3 class="reviewer-name">Kristina Plaster</h3>
                   <p class="reviewer-meta"><i class="bi bi-google text-danger me-1"></i>Google Verified Review • Dallas, TX</p>
                 </div>
               </div>
@@ -1492,7 +1474,7 @@
                   JG
                 </div>
                 <div>
-                  <h4 class="reviewer-name">Jason Guthrie</h4>
+                  <h3 class="reviewer-name">Jason Guthrie</h3>
                   <p class="reviewer-meta"><i class="bi bi-google text-danger me-1"></i>Google Verified Review • Fort Worth, TX</p>
                 </div>
               </div>
@@ -1506,9 +1488,6 @@
     <section class="py-5" id="faq">
       <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-          <span class="badge-sharp mb-2">
-            <i class="bi bi-question-circle-fill text-danger"></i> FREQUENT QUESTIONS
-          </span>
           <h2 class="display-6 fw-bold text-uppercase" style="color: var(--color-primary-navy);">
             Frequently Asked Questions
           </h2>
@@ -1584,12 +1563,9 @@
     <!-- DEDICATED FREE ROOF INSPECTION SECTION -->
     <section class="py-5" id="inspection-form" style="background: linear-gradient(135deg, #0c1123 0%, #151d38 100%); color: #ffffff;">
       <div class="container py-4">
-        <div class="row align-items-center g-5">
+        <div class="row align-items-center g-4 g-lg-5">
           <!-- Left info column -->
           <div class="col-lg-6">
-            <span class="badge-sharp mb-3">
-              <i class="bi bi-shield-fill-check text-danger"></i> ZERO OBLIGATION • 100% FREE
-            </span>
             <h2 class="display-5 fw-bold text-uppercase text-white mb-3">
               Schedule Your Free 21-Point Roof &amp; Attic Inspection
             </h2>
@@ -1684,6 +1660,7 @@
         </div>
       </div>
     </section>
+  </main>
 
     <!-- INTERACTIVE INSPECTION MODAL -->
     <div class="modal fade" id="inspectionModal" tabindex="-1" aria-labelledby="inspectionModalLabel" aria-hidden="true">
@@ -1781,7 +1758,7 @@
 
           <!-- Col 2: Austin Hub -->
           <div class="col-lg-2 col-md-6 col-sm-6">
-            <h4 class="footer-title">Austin</h4>
+            <h3 class="footer-title">Austin</h3>
             <div class="footer-contact-item">
               <i class="bi bi-geo-alt-fill"></i>
               <span class="small">13307 Effingham St,<br />Austin, TX 78729</span>
@@ -1792,13 +1769,13 @@
             </div>
             <div class="footer-contact-item">
               <i class="bi bi-clock-fill"></i>
-              <span class="small text-white-50">Open 24/7 Storm Care</span>
+              <span class="small" style="color: #cbd5e1;">Open 24/7 Storm Care</span>
             </div>
           </div>
 
           <!-- Col 3: Dallas Hub -->
           <div class="col-lg-2 col-md-6 col-sm-6">
-            <h4 class="footer-title">Dallas</h4>
+            <h3 class="footer-title">Dallas</h3>
             <div class="footer-contact-item">
               <i class="bi bi-geo-alt-fill"></i>
               <span class="small">5413 Live Oak St,<br />Dallas, TX 75204</span>
@@ -1809,13 +1786,13 @@
             </div>
             <div class="footer-contact-item">
               <i class="bi bi-clock-fill"></i>
-              <span class="small text-white-50">Open 24/7 Storm Care</span>
+              <span class="small" style="color: #cbd5e1;">Open 24/7 Storm Care</span>
             </div>
           </div>
 
           <!-- Col 4: Celina & Lago Vista -->
           <div class="col-lg-2 col-md-6 col-sm-6">
-            <h4 class="footer-title">North &amp; Hill Country</h4>
+            <h3 class="footer-title">North &amp; Hill Country</h3>
             <div class="footer-contact-item">
               <i class="bi bi-geo-alt-fill"></i>
               <span class="small">Celina &amp; Collin County<br />Lago Vista &amp; Travis County</span>
@@ -1828,7 +1805,7 @@
 
           <!-- Col 5: Quick Links -->
           <div class="col-lg-2 col-md-6 col-sm-6">
-            <h4 class="footer-title">Quick Links</h4>
+            <h3 class="footer-title">Quick Links</h3>
             <a href="#hero" class="footer-link">Home</a>
             <a href="#services" class="footer-link">Roofing Services</a>
             <a href="#locations" class="footer-link">Texas Locations</a>
@@ -1843,9 +1820,9 @@
             Copyright &copy; 2026 <strong>Texas Roofers USA</strong>. All Rights Reserved.
           </div>
           <div class="d-flex gap-3">
-            <a href="#" class="text-secondary text-decoration-none">Terms of Service</a>
-            <span class="text-secondary">•</span>
-            <a href="#" class="text-secondary text-decoration-none">Privacy Policy</a>
+            <a href="#" class="footer-legal-link">Terms of Service</a>
+            <span style="color: #64748b;">•</span>
+            <a href="#" class="footer-legal-link">Privacy Policy</a>
           </div>
         </div>
       </div>
@@ -1962,7 +1939,7 @@
                     ${rev.initials}
                   </div>
                   <div>
-                    <h4 class="reviewer-name">${rev.name}</h4>
+                    <h3 class="reviewer-name">${rev.name}</h3>
                     <p class="reviewer-meta"><i class="bi bi-google text-danger me-1"></i>Google Verified Review • ${rev.loc}</p>
                   </div>
                 </div>
