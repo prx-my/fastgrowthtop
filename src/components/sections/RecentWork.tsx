@@ -103,15 +103,15 @@ export function RecentWork() {
   return (
     <section
       id="work"
-      className="relative w-full bg-[#E0FBFC] text-[#293241] pt-6 pb-8 sm:pt-8 sm:pb-12 lg:pt-10 lg:pb-14 select-none overflow-hidden"
+      className="relative w-full bg-[#E0FBFC] text-[#293241] pt-4 pb-6 sm:pt-6 sm:pb-8 lg:pt-8 lg:pb-10 select-none overflow-hidden"
       aria-label="Work portfolio showcase"
     >
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* ========================================================
             1. SECTION HEADER: "Work"
            ======================================================== */}
-        <div className="text-center mb-5 sm:mb-7 lg:mb-8">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[52px] text-[#1e2633] font-normal tracking-tight">
+        <div className="text-center mb-4 sm:mb-5 lg:mb-6">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] text-[#1e2633] font-normal tracking-tight">
             Work
           </h2>
         </div>
@@ -119,7 +119,7 @@ export function RecentWork() {
         {/* ========================================================
             2. MAIN PROJECT SHOWCASE + OUTSIDE CAROUSEL ARROWS
            ======================================================== */}
-        <div className="relative w-full max-w-[1180px] mx-auto">
+        <div className="relative w-full max-w-[1360px] mx-auto">
           {/* Previous Arrow — Vertically Centered OUTSIDE Left */}
           <button
             type="button"
@@ -142,12 +142,12 @@ export function RecentWork() {
 
           {/* Centered Rounded Image Preview Container */}
           <div
-            className="relative w-full max-w-[1060px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)]"
+            className="relative w-full max-w-[1220px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             <div
-              className="relative w-full aspect-[16/9.6] sm:aspect-[16/9.7] lg:aspect-[16/9.6] overflow-hidden cursor-pointer bg-neutral-100"
+              className="relative w-full aspect-[16/7.4] sm:aspect-[16/7.1] lg:aspect-[16/6.8] max-h-[58vh] min-h-[260px] overflow-hidden cursor-pointer bg-neutral-100"
               onClick={() => {
                 setSelectedProjectForModal(currentProject);
                 setIsModalOpen(true);
@@ -160,7 +160,7 @@ export function RecentWork() {
                 alt={`${currentProject.name} — ${currentPage.title}`}
                 fill
                 priority
-                sizes="(max-width: 768px) 94vw, (max-width: 1200px) 88vw, 1060px"
+                sizes="(max-width: 768px) 94vw, (max-width: 1200px) 90vw, 1220px"
                 className="object-cover object-top transition-opacity duration-300 motion-reduce:transition-none"
               />
             </div>
@@ -172,7 +172,7 @@ export function RecentWork() {
             Desktop: Three-Column Layout (Visit site | Title & Meta | 01/03 Pages)
             Mobile: Centered Stacked Layout
            ======================================================== */}
-        <div className="w-full max-w-[1060px] mx-auto mt-5 sm:mt-6 lg:mt-7">
+        <div className="w-full max-w-[1220px] mx-auto mt-4 sm:mt-5 lg:mt-5">
           {/* Desktop & Tablet Layout (md and up) */}
           <div className="hidden md:grid md:grid-cols-3 items-center">
             {/* Left: Yellow Visit Site Button */}
@@ -188,7 +188,7 @@ export function RecentWork() {
                     setIsModalOpen(true);
                   }
                 }}
-                className="inline-flex items-center gap-2 bg-[#FBB01B] hover:bg-[#F5A30A] active:scale-95 text-[#1e2633] px-7 py-3 rounded-full text-sm font-semibold tracking-wide transition-all shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]/70"
+                className="inline-flex items-center gap-2 bg-[#FBB01B] hover:bg-[#F5A30A] active:scale-95 text-[#1e2633] px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]/70"
                 aria-label={`Visit site for ${currentProject.name}`}
               >
                 <span>Visit site</span>
@@ -198,20 +198,20 @@ export function RecentWork() {
 
             {/* Center: Index, Title, Metadata */}
             <div className="flex flex-col items-center text-center">
-              <span className="font-mono text-xs text-[#53789E] tracking-[0.2em] font-medium mb-1">
+              <span className="font-mono text-xs text-[#53789E] tracking-[0.2em] font-medium mb-0.5">
                 {currentProject.number} / 0{totalProjects}
               </span>
-              <h3 className="font-serif text-3xl lg:text-[34px] text-[#1e2633] font-normal tracking-tight my-0.5">
+              <h3 className="font-serif text-2xl lg:text-[30px] text-[#1e2633] font-normal tracking-tight my-0.5">
                 {currentProject.name}
               </h3>
-              <span className="font-mono text-[11px] text-[#53789E] tracking-[0.22em] uppercase font-medium mt-1">
+              <span className="font-mono text-[11px] text-[#53789E] tracking-[0.22em] uppercase font-medium mt-0.5">
                 {currentProject.servicesTag}
               </span>
             </div>
 
             {/* Right: Page Navigation Pill (‹ 01 / 03 Pages ›) */}
             <div className="flex justify-end">
-              <div className="inline-flex items-center gap-2.5 bg-white border border-[#98C1D9]/60 rounded-full px-4 py-2 shadow-sm font-mono text-xs sm:text-[13px]">
+              <div className="inline-flex items-center gap-2 bg-white border border-[#98C1D9]/60 rounded-full px-3.5 py-1.5 shadow-sm font-mono text-xs sm:text-[13px]">
                 <button
                   type="button"
                   onClick={handlePrevPage}
@@ -309,11 +309,11 @@ export function RecentWork() {
         {/* ========================================================
             4. PROJECT NAVIGATION / PROGRESS LINE (01 ------- 06)
            ======================================================== */}
-        <div className="w-full max-w-[1060px] mx-auto mt-6 sm:mt-8 lg:mt-9">
-          <div className="w-full overflow-x-auto no-scrollbar py-2">
+        <div className="w-full max-w-[1220px] mx-auto mt-3.5 sm:mt-4 lg:mt-5">
+          <div className="w-full overflow-x-auto no-scrollbar py-1">
             <div className="min-w-[340px] sm:min-w-0">
               {/* Project Numbers Row */}
-              <div className="flex items-center justify-between w-full mb-2">
+              <div className="flex items-center justify-between w-full mb-1.5">
                 {projectsData.map((project, idx) => {
                   const isActive = idx === activeProjectIndex;
                   return (
