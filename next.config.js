@@ -13,6 +13,10 @@ const nextConfig = {
         source: "/demo",
         destination: "/demo/index.html",
       },
+      {
+        source: "/demo/:slug",
+        destination: "/demo/:slug/index.html",
+      },
     ];
   },
 };
