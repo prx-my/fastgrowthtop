@@ -103,14 +103,14 @@ export function RecentWork() {
   return (
     <section
       id="work"
-      className="relative w-full bg-[#E0FBFC] text-[#293241] pt-6 pb-10 sm:pt-8 sm:pb-12 lg:pt-10 lg:pb-14 select-none overflow-hidden"
+      className="relative w-full bg-[#E0FBFC] text-[#293241] min-h-screen flex flex-col justify-between py-4 sm:py-5 lg:py-6 select-none overflow-hidden"
       aria-label="Work portfolio showcase"
     >
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-between min-h-0">
         {/* ========================================================
             1. HEADER ROW: [Project Pill] — Work — [Visit site]
            ======================================================== */}
-        <div className="w-full max-w-[1220px] mx-auto mb-4 sm:mb-5">
+        <div className="w-full max-w-[1360px] mx-auto mb-2 sm:mb-3 shrink-0">
           {/* Desktop: 3-column grid */}
           <div className="hidden md:grid md:grid-cols-3 items-center">
             {/* Left: Project Name Pill */}
@@ -127,7 +127,7 @@ export function RecentWork() {
 
             {/* Center: "Work" heading */}
             <div className="text-center">
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[48px] text-[#1e2633] font-normal tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] text-[#1e2633] font-normal tracking-tight">
                 Work
               </h2>
             </div>
@@ -190,12 +190,12 @@ export function RecentWork() {
         {/* ========================================================
             2. MAIN PROJECT SHOWCASE + OUTSIDE CAROUSEL ARROWS
            ======================================================== */}
-        <div className="relative w-full max-w-[1360px] mx-auto">
+        <div className="relative w-full max-w-[1460px] mx-auto flex-1 min-h-0 flex items-center justify-center my-auto">
           {/* Previous Arrow */}
           <button
             type="button"
             onClick={handlePrevProject}
-            className="absolute -left-2 sm:-left-6 lg:-left-9 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
+            className="absolute -left-2 sm:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
             aria-label="Previous project"
           >
             <ChevronLeft className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:-translate-x-0.5" />
@@ -205,7 +205,7 @@ export function RecentWork() {
           <button
             type="button"
             onClick={handleNextProject}
-            className="absolute -right-2 sm:-right-6 lg:-right-9 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
+            className="absolute -right-2 sm:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
             aria-label="Next project"
           >
             <ChevronRight className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -213,12 +213,12 @@ export function RecentWork() {
 
           {/* Image Preview Container */}
           <div
-            className="relative w-full max-w-[1220px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)]"
+            className="relative w-full max-w-[1360px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)] flex flex-col"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             <div
-              className="relative w-full aspect-[16/7.5] sm:aspect-[16/7.2] lg:aspect-[16/6.9] max-h-[56vh] min-h-[260px] overflow-hidden cursor-pointer bg-neutral-100"
+              className="relative w-full aspect-[16/9.5] sm:aspect-[16/9] lg:aspect-[16/8.6] max-h-[66vh] sm:max-h-[70vh] lg:max-h-[72vh] min-h-[280px] overflow-hidden cursor-pointer bg-neutral-100"
               onClick={() => {
                 setSelectedProjectForModal(currentProject);
                 setIsModalOpen(true);
@@ -231,7 +231,7 @@ export function RecentWork() {
                 alt={`${currentProject.name} — ${currentPage.title}`}
                 fill
                 priority
-                sizes="(max-width: 768px) 94vw, (max-width: 1200px) 90vw, 1220px"
+                sizes="(max-width: 768px) 96vw, (max-width: 1400px) 92vw, 1360px"
                 className="object-cover object-top transition-opacity duration-300 motion-reduce:transition-none"
               />
             </div>
@@ -273,7 +273,7 @@ export function RecentWork() {
         {/* ========================================================
             4. PROJECT NAVIGATION / PROGRESS LINE (01 ------- 06)
            ======================================================== */}
-        <div className="w-full max-w-[1220px] mx-auto mt-4 sm:mt-5">
+        <div className="w-full max-w-[1360px] mx-auto mt-auto pt-2 pb-1 sm:pb-2 shrink-0">
           <div className="w-full overflow-x-auto no-scrollbar py-1">
             <div className="min-w-[340px] sm:min-w-0">
               {/* Project Numbers Row */}
