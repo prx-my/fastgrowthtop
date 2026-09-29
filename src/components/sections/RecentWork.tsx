@@ -108,19 +108,90 @@ export function RecentWork() {
     >
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* ========================================================
-            1. SECTION HEADER: "Work"
+            1. HEADER ROW: [Project Pill] — Work — [Visit site]
            ======================================================== */}
-        <div className="text-center mb-5 sm:mb-6">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[48px] text-[#1e2633] font-normal tracking-tight">
-            Work
-          </h2>
+        <div className="w-full max-w-[1220px] mx-auto mb-4 sm:mb-5">
+          {/* Desktop: 3-column grid */}
+          <div className="hidden md:grid md:grid-cols-3 items-center">
+            {/* Left: Project Name Pill */}
+            <div className="flex justify-start">
+              <span className="inline-flex items-center gap-1.5 font-mono text-xs sm:text-[13px] text-[#3D5A80] tracking-wide">
+                <span className="font-semibold text-[#1e2633]">{currentProject.name}</span>
+                <span className="text-[#98C1D9]">(</span>
+                <span className="text-[#FBB01B] font-bold">{currentProject.number}</span>
+                <span className="text-[#98C1D9]">/</span>
+                <span>0{totalProjects}</span>
+                <span className="text-[#98C1D9]">)</span>
+              </span>
+            </div>
+
+            {/* Center: "Work" heading */}
+            <div className="text-center">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[48px] text-[#1e2633] font-normal tracking-tight">
+                Work
+              </h2>
+            </div>
+
+            {/* Right: Visit site button */}
+            <div className="flex justify-end">
+              <a
+                href={currentProject.liveUrl || "#contact"}
+                target={isExternalLive ? "_blank" : undefined}
+                rel={isExternalLive ? "noopener noreferrer" : undefined}
+                onClick={(e) => {
+                  if (!isExternalLive) {
+                    e.preventDefault();
+                    setSelectedProjectForModal(currentProject);
+                    setIsModalOpen(true);
+                  }
+                }}
+                className="inline-flex items-center gap-2 bg-[#FBB01B] hover:bg-[#F5A30A] active:scale-95 text-[#1e2633] px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all shadow-[0_2px_10px_rgba(251,176,27,0.28)] hover:shadow-[0_4px_16px_rgba(251,176,27,0.38)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]/70"
+                aria-label={`Visit site for ${currentProject.name}`}
+              >
+                <span>Visit site</span>
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              </a>
+            </div>
+          </div>
+
+          {/* Mobile: Heading + project name + visit site */}
+          <div className="md:hidden">
+            <h2 className="font-serif text-3xl text-[#1e2633] font-normal tracking-tight text-center mb-2">
+              Work
+            </h2>
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs text-[#3D5A80] tracking-wide">
+                <span className="font-semibold text-[#1e2633]">{currentProject.name}</span>
+                <span className="text-[#98C1D9] mx-1">(</span>
+                <span className="text-[#FBB01B] font-bold">{currentProject.number}</span>
+                <span className="text-[#98C1D9]">/0{totalProjects})</span>
+              </span>
+              <a
+                href={currentProject.liveUrl || "#contact"}
+                target={isExternalLive ? "_blank" : undefined}
+                rel={isExternalLive ? "noopener noreferrer" : undefined}
+                onClick={(e) => {
+                  if (!isExternalLive) {
+                    e.preventDefault();
+                    setSelectedProjectForModal(currentProject);
+                    setIsModalOpen(true);
+                  }
+                }}
+                className="inline-flex items-center gap-1.5 bg-[#FBB01B] active:scale-95 text-[#1e2633] px-4 py-2 rounded-full text-xs font-semibold tracking-wide shadow-sm cursor-pointer"
+                aria-label={`Visit site for ${currentProject.name}`}
+              >
+                <span>Visit site</span>
+                <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* ========================================================
             2. MAIN PROJECT SHOWCASE + OUTSIDE CAROUSEL ARROWS
            ======================================================== */}
         <div className="relative w-full max-w-[1360px] mx-auto">
-          {/* Previous Arrow — Vertically Centered OUTSIDE Left */}
+          {/* Previous Arrow */}
           <button
             type="button"
             onClick={handlePrevProject}
@@ -130,7 +201,7 @@ export function RecentWork() {
             <ChevronLeft className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:-translate-x-0.5" />
           </button>
 
-          {/* Next Arrow — Vertically Centered OUTSIDE Right */}
+          {/* Next Arrow */}
           <button
             type="button"
             onClick={handleNextProject}
@@ -140,7 +211,7 @@ export function RecentWork() {
             <ChevronRight className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
           </button>
 
-          {/* Centered Rounded Image Preview Container */}
+          {/* Image Preview Container */}
           <div
             className="relative w-full max-w-[1220px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)]"
             onTouchStart={handleTouchStart}
@@ -164,36 +235,13 @@ export function RecentWork() {
                 className="object-cover object-top transition-opacity duration-300 motion-reduce:transition-none"
               />
             </div>
-          </div>
-        </div>
 
-        {/* ========================================================
-            3. PROJECT INFORMATION & ACTIONS (Hierarchical Flow)
-            Left: Project Number, Name, Service Tag
-            Right: Page Navigation Pill + Primary "Visit site" Button
-           ======================================================== */}
-        <div className="w-full max-w-[1220px] mx-auto mt-4 sm:mt-5">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-6 pb-3 sm:pb-4 border-b border-[#98C1D9]/40">
-            {/* Left: Identity */}
-            <div>
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="font-mono text-xs font-semibold text-[#FBB01B] tracking-[0.2em]">
-                  {currentProject.number} / 0{totalProjects}
-                </span>
-                <span className="text-[#98C1D9]/80">·</span>
-                <span className="font-mono text-[10px] sm:text-[11px] text-[#53789E] tracking-[0.2em] uppercase font-medium">
-                  {currentProject.servicesTag}
-                </span>
-              </div>
-              <h3 className="font-serif text-2xl sm:text-3xl lg:text-[34px] text-[#1e2633] font-normal tracking-tight">
-                {currentProject.name}
-              </h3>
-            </div>
-
-            {/* Right: Actions Put Nicely Together */}
-            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-              {/* Screenshot Page Switcher Pill */}
-              <div className="inline-flex items-center gap-2 bg-white border border-[#98C1D9]/60 rounded-full px-3.5 py-2 shadow-xs font-mono text-xs sm:text-[13px]">
+            {/* Page Switcher Pill — Overlaid at bottom center of image */}
+            <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-10">
+              <div
+                className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-[#98C1D9]/50 rounded-full px-3.5 py-1.5 shadow-md font-mono text-xs sm:text-[13px]"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button
                   type="button"
                   onClick={handlePrevPage}
@@ -218,25 +266,6 @@ export function RecentWork() {
                   <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
                 </button>
               </div>
-
-              {/* Primary Action Button: Visit site */}
-              <a
-                href={currentProject.liveUrl || "#contact"}
-                target={isExternalLive ? "_blank" : undefined}
-                rel={isExternalLive ? "noopener noreferrer" : undefined}
-                onClick={(e) => {
-                  if (!isExternalLive) {
-                    e.preventDefault();
-                    setSelectedProjectForModal(currentProject);
-                    setIsModalOpen(true);
-                  }
-                }}
-                className="inline-flex items-center gap-2 bg-[#FBB01B] hover:bg-[#F5A30A] active:scale-95 text-[#1e2633] px-6 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-[0_2px_10px_rgba(251,176,27,0.28)] hover:shadow-[0_4px_16px_rgba(251,176,27,0.38)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]/70"
-                aria-label={`Visit site for ${currentProject.name}`}
-              >
-                <span>Visit site</span>
-                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-              </a>
             </div>
           </div>
         </div>
@@ -244,7 +273,7 @@ export function RecentWork() {
         {/* ========================================================
             4. PROJECT NAVIGATION / PROGRESS LINE (01 ------- 06)
            ======================================================== */}
-        <div className="w-full max-w-[1220px] mx-auto mt-3.5 sm:mt-4">
+        <div className="w-full max-w-[1220px] mx-auto mt-4 sm:mt-5">
           <div className="w-full overflow-x-auto no-scrollbar py-1">
             <div className="min-w-[340px] sm:min-w-0">
               {/* Project Numbers Row */}
@@ -275,7 +304,6 @@ export function RecentWork() {
 
               {/* Progress Line Track */}
               <div className="relative w-full h-[2px] bg-[#98C1D9]/40 rounded-full overflow-hidden">
-                {/* Smooth Animated Yellow Active Line Segment */}
                 <div
                   className="absolute top-0 h-full bg-[#FBB01B] rounded-full transition-all duration-400 ease-out motion-reduce:transition-none"
                   style={{
