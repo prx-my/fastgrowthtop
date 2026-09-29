@@ -6,8 +6,11 @@ import { Reviews } from "@/components/sections/Reviews";
 import { Pricing } from "@/components/sections/Pricing";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
+import { getWorkProjects } from "@/lib/workProjects";
 
 export default function Home() {
+  const workProjects = getWorkProjects();
+
   return (
     <div className="min-h-screen flex flex-col bg-[#E0FBFC]">
       <Header />
@@ -21,7 +24,7 @@ export default function Home() {
         </div>
 
         {/* 04 — Recent Work */}
-        <RecentWork />
+        <RecentWork initialProjects={workProjects} />
 
 
         {/* 06 — Google Reviews */}
