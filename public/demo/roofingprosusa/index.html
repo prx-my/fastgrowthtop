@@ -471,6 +471,38 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       }
 
+      /* About Section Stat Boxes - Perfectly Uniform Alignment & Dimensions */
+      .about-stat-box {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        padding: 16px 8px !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      }
+      .about-stat-box:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+      }
+      .about-stat-value {
+        font-size: 1.65rem !important;
+        font-weight: 800 !important;
+        color: #0f172a !important;
+        line-height: 1.1 !important;
+        margin-bottom: 6px !important;
+      }
+      .about-stat-label {
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 600 !important;
+        line-height: 1.25 !important;
+      }
+
       /* Core Values Cards */
       .value-card {
         background: #ffffff;
@@ -517,6 +549,58 @@
       /* Customer Reviews Carousel */
       .review-sec {
         background: #0a192f;
+      }
+      .review-carousel-outer {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 56px !important;
+        box-sizing: border-box !important;
+      }
+      .review-arrow {
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 20 !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: #14284b !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        color: #ffffff !important;
+        font-size: 1.15rem !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        padding: 0 !important;
+      }
+      .review-arrow:hover,
+      .review-arrow:focus {
+        background: #15803d !important;
+        border-color: #32d74b !important;
+        color: #ffffff !important;
+        transform: translateY(-50%) scale(1.08) !important;
+        box-shadow: 0 6px 20px rgba(22, 163, 74, 0.5) !important;
+      }
+      .review-prev {
+        left: 0px !important;
+      }
+      .review-next {
+        right: 0px !important;
+      }
+      @media (max-width: 767.98px) {
+        .review-carousel-outer {
+          padding: 0 42px !important;
+        }
+        .review-arrow {
+          width: 36px !important;
+          height: 36px !important;
+          font-size: 0.95rem !important;
+        }
       }
       .review-card {
         background: #132442 !important;
@@ -909,29 +993,31 @@
                 </p>
 
                 <!-- Statistics Grid -->
-                <div class="row text-center g-3 mb-4">
+                <div class="row text-center g-3 mb-4 align-items-stretch">
                   <div class="col-6 col-sm-3">
-                    <div class="p-3 bg-white rounded-3 shadow-sm border">
-                      <div class="fs-3 fw-bold text-dark">4k+</div>
-                      <div class="text-muted-dark small">Roofs Replaced</div>
+                    <div class="about-stat-box">
+                      <div class="about-stat-value">4k+</div>
+                      <div class="about-stat-label">Roofs Replaced</div>
                     </div>
                   </div>
                   <div class="col-6 col-sm-3">
-                    <div class="p-3 bg-white rounded-3 shadow-sm border">
-                      <div class="fs-3 fw-bold text-dark">160mph</div>
-                      <div class="text-muted-dark small">Wind Rating</div>
+                    <div class="about-stat-box">
+                      <div class="about-stat-value">160mph</div>
+                      <div class="about-stat-label">Wind Rating</div>
                     </div>
                   </div>
                   <div class="col-6 col-sm-3">
-                    <div class="p-3 bg-white rounded-3 shadow-sm border" style="border-top: 3px solid #15803d !important;">
-                      <div class="fs-3 fw-bold" style="color: #15803d;">50-Yr</div>
-                      <div class="text-muted-dark small">System Warranty</div>
+                    <div class="about-stat-box">
+                      <div class="about-stat-value">50-Yr</div>
+                      <div class="about-stat-label">System Warranty</div>
                     </div>
                   </div>
                   <div class="col-6 col-sm-3">
-                    <div class="p-3 bg-white rounded-3 shadow-sm border">
-                      <div class="fs-3 fw-bold text-dark">5.0★</div>
-                      <div class="text-muted-dark small">Google Rating</div>
+                    <div class="about-stat-box">
+                      <div class="about-stat-value d-flex align-items-center justify-content-center gap-1">
+                        <span>5.0</span><i class="bi bi-star-fill text-warning" style="font-size: 1.2rem;" aria-hidden="true"></i>
+                      </div>
+                      <div class="about-stat-label">Google Rating</div>
                     </div>
                   </div>
                 </div>
@@ -1183,8 +1269,12 @@
 
           <div class="review-carousel-outer position-relative">
             <!-- Navigation Buttons -->
-            <button class="review-arrow review-prev" id="reviewPrev" aria-label="Previous review">&#8249;</button>
-            <button class="review-arrow review-next" id="reviewNext" aria-label="Next review">&#8250;</button>
+            <button class="review-arrow review-prev" id="reviewPrev" aria-label="Previous review">
+              <i class="bi bi-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="review-arrow review-next" id="reviewNext" aria-label="Next review">
+              <i class="bi bi-chevron-right" aria-hidden="true"></i>
+            </button>
 
             <!-- Review Cards Track -->
             <div class="review-track" id="reviewTrack">
@@ -1265,10 +1355,10 @@
               </div>
 
             </div>
-
-            <!-- Accessible Buttons for Review Dots -->
-            <div class="review-dots mt-4" id="reviewDots" aria-label="Review pagination"></div>
           </div>
+
+          <!-- Accessible Buttons for Review Dots (Positioned cleanly below carousel) -->
+          <div class="review-dots mt-4" id="reviewDots" aria-label="Review pagination"></div>
         </div>
       </section>
 
