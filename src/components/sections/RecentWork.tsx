@@ -10,19 +10,43 @@ import {
 import { projectsData, ProjectItem } from "@/data/projects";
 import { ProjectExperienceModal } from "@/components/sections/ProjectExperienceModal";
 
-export function RecentWork() {
+interface RecentWorkProps {
+  initialProjects?: ProjectItem[];
+}
+
+export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) {
+  const [projectsList, setProjectsList] = useState<ProjectItem[]>(initialProjects);
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [activePageIndex, setActivePageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProjectForModal, setSelectedProjectForModal] = useState<ProjectItem | null>(null);
 
-  const totalProjects = projectsData.length;
-  const currentProject = projectsData[activeProjectIndex];
-  const pages = currentProject.pages || [
-    { title: "Home", image: currentProject.desktopImage, label: "Overview" },
-  ];
+  useEffect(() => {
+    if (initialProjects && initialProjects.length > 0) {
+      setProjectsList(initialProjects);
+    }
+  }, [initialProjects]);
+
+  useEffect(() => {
+    fetch("/api/work")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProjectsList(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const totalProjects = projectsList.length || 1;
+  const safeProjectIndex = Math.min(activeProjectIndex, totalProjects - 1);
+  const currentProject = projectsList[safeProjectIndex] || projectsData[0];
+  const pages = currentProject.pages && currentProject.pages.length > 0
+    ? currentProject.pages
+    : [{ title: "Home", image: currentProject.desktopImage, label: "Overview" }];
   const totalPages = pages.length;
-  const currentPage = pages[activePageIndex] || pages[0];
+  const safePageIndex = Math.min(activePageIndex, totalPages - 1);
+  const currentPage = pages[safePageIndex] || pages[0];
 
   // Touch swipe support
   const touchStartXRef = useRef<number | null>(null);
@@ -94,9 +118,9 @@ export function RecentWork() {
 
   const isExternalLive = Boolean(currentProject.liveUrl && currentProject.liveUrl.startsWith("http"));
 
-  // Calculate segment progress for horizontal navigation line (5 intervals between 6 points)
+  // Calculate segment progress for horizontal navigation line (intervals between points)
   const segmentCount = Math.max(1, totalProjects - 1);
-  const activeSegmentIndex = Math.min(activeProjectIndex, segmentCount - 1);
+  const activeSegmentIndex = Math.min(safeProjectIndex, segmentCount - 1);
   const activeLineLeftPercent = (activeSegmentIndex / segmentCount) * 100;
   const activeLineWidthPercent = 100 / segmentCount;
 
@@ -106,23 +130,25 @@ export function RecentWork() {
       className="relative w-full bg-[#E0FBFC] text-[#293241] min-h-screen flex flex-col justify-between py-4 sm:py-5 lg:py-6 select-none overflow-hidden"
       aria-label="Work portfolio showcase"
     >
-      <div className="w-full max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-between min-h-0">
+      <div className="w-full max-w-[1520px] mx-auto px-3 sm:px-6 lg:px-8 flex-1 flex flex-col justify-between min-h-0">
         {/* ========================================================
             1. HEADER ROW: [Project Pill] — Work — [Visit site]
            ======================================================== */}
         <div className="w-full max-w-[1360px] mx-auto mb-2 sm:mb-3 shrink-0">
           {/* Desktop: 3-column grid */}
           <div className="hidden md:grid md:grid-cols-3 items-center">
-            {/* Left: Project Name Pill */}
+            {/* Left: Project Name Pill with refined typography */}
             <div className="flex justify-start">
-              <span className="inline-flex items-center gap-1.5 font-mono text-xs sm:text-[13px] text-[#3D5A80] tracking-wide">
-                <span className="font-semibold text-[#1e2633]">{currentProject.name}</span>
-                <span className="text-[#98C1D9]">(</span>
-                <span className="text-[#FBB01B] font-bold">{currentProject.number}</span>
-                <span className="text-[#98C1D9]">/</span>
-                <span>0{totalProjects}</span>
-                <span className="text-[#98C1D9]">)</span>
-              </span>
+              <div className="inline-flex items-center gap-2 bg-white/80 hover:bg-white border border-[#98C1D9]/40 backdrop-blur-sm px-4 py-2 rounded-full shadow-[0_2px_8px_rgba(41,50,65,0.04)] transition-all">
+                <span className="font-sans text-xs sm:text-[13.5px] font-semibold text-[#1e2633] tracking-tight">
+                  {currentProject.name}
+                </span>
+                <span className="font-sans text-xs sm:text-[13px] font-medium text-[#53789E]/80 tracking-wide">
+                  (<span className="text-[#FBB01B] font-bold">{currentProject.number}</span>
+                  <span className="mx-0.5 text-[#98C1D9]">/</span>
+                  <span>{String(totalProjects).padStart(2, "0")}</span>)
+                </span>
+              </div>
             </div>
 
             {/* Center: "Work" heading */}
@@ -159,13 +185,15 @@ export function RecentWork() {
             <h2 className="font-serif text-3xl text-[#1e2633] font-normal tracking-tight text-center mb-2">
               Work
             </h2>
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-[#3D5A80] tracking-wide">
-                <span className="font-semibold text-[#1e2633]">{currentProject.name}</span>
-                <span className="text-[#98C1D9] mx-1">(</span>
-                <span className="text-[#FBB01B] font-bold">{currentProject.number}</span>
-                <span className="text-[#98C1D9]">/0{totalProjects})</span>
-              </span>
+            <div className="flex items-center justify-between gap-2">
+              <div className="inline-flex items-center gap-1.5 bg-white/80 border border-[#98C1D9]/40 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
+                <span className="font-sans text-xs font-semibold text-[#1e2633] truncate max-w-[170px]">
+                  {currentProject.name}
+                </span>
+                <span className="font-sans text-xs font-medium text-[#53789E]/80">
+                  (<span className="text-[#FBB01B] font-bold">{currentProject.number}</span>/{String(totalProjects).padStart(2, "0")})
+                </span>
+              </div>
               <a
                 href={currentProject.liveUrl || "#contact"}
                 target={isExternalLive ? "_blank" : undefined}
@@ -177,7 +205,7 @@ export function RecentWork() {
                     setIsModalOpen(true);
                   }
                 }}
-                className="inline-flex items-center gap-1.5 bg-[#FBB01B] active:scale-95 text-[#1e2633] px-4 py-2 rounded-full text-xs font-semibold tracking-wide shadow-sm cursor-pointer"
+                className="inline-flex items-center gap-1.5 bg-[#FBB01B] active:scale-95 text-[#1e2633] px-4 py-2 rounded-full text-xs font-semibold tracking-wide shadow-sm cursor-pointer shrink-0"
                 aria-label={`Visit site for ${currentProject.name}`}
               >
                 <span>Visit site</span>
@@ -188,32 +216,22 @@ export function RecentWork() {
         </div>
 
         {/* ========================================================
-            2. MAIN PROJECT SHOWCASE + OUTSIDE CAROUSEL ARROWS
+            2. MAIN PROJECT SHOWCASE + ARROWS (NEVER COLLIDING FLEX)
            ======================================================== */}
-        <div className="relative w-full max-w-[1460px] mx-auto flex-1 min-h-0 flex items-center justify-center my-auto">
+        <div className="w-full max-w-[1520px] mx-auto flex-1 min-h-0 flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 my-auto">
           {/* Previous Arrow */}
           <button
             type="button"
             onClick={handlePrevProject}
-            className="absolute -left-2 sm:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
+            className="shrink-0 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
             aria-label="Previous project"
           >
             <ChevronLeft className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:-translate-x-0.5" />
           </button>
 
-          {/* Next Arrow */}
-          <button
-            type="button"
-            onClick={handleNextProject}
-            className="absolute -right-2 sm:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
-            aria-label="Next project"
-          >
-            <ChevronRight className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
-          </button>
-
           {/* Image Preview Container */}
           <div
-            className="relative w-full max-w-[1360px] mx-auto rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)] flex flex-col"
+            className="relative flex-1 max-w-[1360px] min-w-0 rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)] flex flex-col"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -268,6 +286,16 @@ export function RecentWork() {
               </div>
             </div>
           </div>
+
+          {/* Next Arrow — Flex sibling, never collides */}
+          <button
+            type="button"
+            onClick={handleNextProject}
+            className="shrink-0 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-neutral-50 text-[#1e2633] border border-slate-200/90 shadow-[0_2px_12px_rgba(41,50,65,0.08)] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FBB01B]"
+            aria-label="Next project"
+          >
+            <ChevronRight className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
+          </button>
         </div>
 
         {/* ========================================================
@@ -278,25 +306,25 @@ export function RecentWork() {
             <div className="min-w-[340px] sm:min-w-0">
               {/* Project Numbers Row */}
               <div className="flex items-center justify-between w-full mb-1.5">
-                {projectsData.map((project, idx) => {
-                  const isActive = idx === activeProjectIndex;
+                {projectsList.map((project, idx) => {
+                  const isActive = idx === safeProjectIndex;
                   return (
                     <button
-                      key={project.id}
+                      key={project.id || idx}
                       type="button"
                       onClick={() => {
                         setActiveProjectIndex(idx);
                         setActivePageIndex(0);
                       }}
-                      className={`font-mono text-xs sm:text-sm tracking-wider cursor-pointer transition-colors duration-200 min-w-[32px] sm:min-w-[40px] min-h-[30px] sm:min-h-[36px] flex items-center justify-center focus:outline-none ${
+                      className={`font-sans text-xs sm:text-sm tracking-wider cursor-pointer transition-colors duration-200 min-w-[32px] sm:min-w-[40px] min-h-[30px] sm:min-h-[36px] flex items-center justify-center focus:outline-none ${
                         isActive
                           ? "text-[#1e2633] font-bold"
                           : "text-[#53789E]/70 hover:text-[#1e2633] font-medium"
                       }`}
-                      aria-label={`Jump to project 0${idx + 1}: ${project.name}`}
+                      aria-label={`Jump to project ${project.number || `0${idx + 1}`}: ${project.name}`}
                       aria-current={isActive ? "true" : undefined}
                     >
-                      {project.number}
+                      {project.number || String(idx + 1).padStart(2, "0")}
                     </button>
                   );
                 })}
