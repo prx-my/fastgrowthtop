@@ -252,52 +252,105 @@
         color: var(--color-primary-navy) !important;
       }
 
-      /* HERO SECTION */
+      /* HERO SECTION (ZERO BLACK OVERLAY) */
       .hero-section {
         position: relative;
-        background-color: var(--color-primary-navy);
-        background-image: linear-gradient(90deg, rgba(12, 17, 35, 0.95) 0%, rgba(12, 17, 35, 0.90) 55%, rgba(12, 17, 35, 0.75) 100%), url('/demo/texasroofers/images/hero-bg.webp');
+        background-color: #f8fafc;
+        background-image: url('/demo/texasroofers/images/hero-bg.webp');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        padding: 70px 0 85px;
-        color: #ffffff;
+        padding: 50px 0 60px;
+        color: #0c1123;
+      }
+
+      /* HERO TEXT PANEL (CLEAN WHITE, NO BLACK OVERLAY) */
+      .hero-text-card {
+        background-color: #ffffff !important;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.16);
+        border-radius: 8px;
+        padding: 34px 32px;
+        color: #0c1123;
       }
 
       .hero-title {
-        font-size: clamp(2.3rem, 5vw, 3.8rem);
-        line-height: 1.05;
+        font-size: clamp(2rem, 3.8vw, 3.1rem);
+        line-height: 1.08;
         font-weight: 800;
-        color: #ffffff;
-        margin-bottom: 20px;
+        color: var(--color-primary-navy);
+        margin-bottom: 16px;
+        word-break: normal;
+        overflow-wrap: break-word;
       }
 
       .hero-lead {
-        font-size: clamp(1rem, 2vw, 1.15rem);
+        font-size: clamp(0.95rem, 1.8vw, 1.08rem);
         line-height: 1.6;
-        color: #cbd5e1;
-        max-width: 620px;
-        margin-bottom: 28px;
+        color: #334155;
+        margin-bottom: 20px;
       }
 
       .hero-check-item {
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        margin-bottom: 12px;
-        font-size: 0.96rem;
+        margin-bottom: 10px;
+        font-size: 0.94rem;
         font-weight: 600;
-        color: #f1f5f9;
+        color: #1e293b;
       }
 
       .hero-check-item i {
-        color: var(--color-gold);
+        color: var(--color-crimson);
         font-size: 1.15rem;
         margin-top: 1px;
       }
 
-      /* HERO FORM CARD */
+      /* HERO FORM CARD (CLEAN WHITE, NO BLACK OVERLAY) */
       .hero-form-card {
+        background-color: #ffffff !important;
+        border: 2px solid #e2e8f0;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.16);
+        border-radius: 8px;
+        padding: 28px 24px;
+        color: #0c1123;
+      }
+
+      .hero-form-card h3 {
+        color: var(--color-primary-navy);
+      }
+
+      .hero-form-card .form-control-custom,
+      .hero-form-card .form-select-custom {
+        background-color: #ffffff !important;
+        border: 1.5px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        font-size: 0.9rem !important;
+        padding: 9px 12px !important;
+        border-radius: 4px !important;
+      }
+
+      .hero-form-card .form-control-custom:focus,
+      .hero-form-card .form-select-custom:focus {
+        border-color: var(--color-crimson) !important;
+        box-shadow: 0 0 0 3px rgba(193, 31, 50, 0.2) !important;
+        background-color: #ffffff !important;
+      }
+
+      @media (max-width: 991px) {
+        .hero-section {
+          padding: 50px 0 60px;
+          background-image: linear-gradient(180deg, rgba(12, 17, 35, 0.92) 0%, rgba(12, 17, 35, 0.85) 60%, rgba(12, 17, 35, 0.65) 100%), url('/demo/texasroofers/images/hero-bg.webp');
+        }
+        .hero-title {
+          font-size: 2.15rem;
+          line-height: 1.15;
+        }
+      }
+
+      /* INSPECTION FORM CARD */
+      .inspection-form-card {
         background: rgba(18, 26, 54, 0.96);
         border: 2px solid rgba(255, 255, 255, 0.12);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
@@ -781,96 +834,98 @@
     <!-- HERO SECTION -->
     <section class="hero-section" id="hero">
       <div class="container">
-        <div class="row align-items-center g-5">
+        <div class="row align-items-center g-4 g-lg-5">
           <!-- Left Headline Column -->
           <div class="col-lg-7">
-            <div class="mb-3">
-              <span class="badge-sharp">
-                <i class="bi bi-patch-check-fill text-danger"></i> TEXAS LICENSED &amp; CERTIFIED ROOFING EXPERTS
-              </span>
-            </div>
-            <h1 class="hero-title">
-              Top-Rated Roofing Services Across the Lone Star State
-            </h1>
-            <p class="hero-lead">
-              Trust <strong>Texas Roofers USA</strong> for dependable roof replacement, emergency leak repairs, and storm damage hail restoration. Built tough to withstand intense Texas heat, heavy wind, and seasonal hurricanes.
-            </p>
-
-            <div class="mb-4">
-              <div class="hero-check-item">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>100% Free, Zero-Obligation 21-Point Roof &amp; Attic Inspection</span>
+            <div class="hero-text-card">
+              <div class="mb-3">
+                <span class="badge-sharp" style="background-color: rgba(193, 31, 50, 0.08); border-color: rgba(193, 31, 50, 0.25); color: var(--color-crimson);">
+                  <i class="bi bi-patch-check-fill text-danger"></i> TEXAS LICENSED &amp; CERTIFIED ROOFING CONTRACTOR
+                </span>
               </div>
-              <div class="hero-check-item">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>Direct Insurance Claim Assistance — We Deal with Your Adjuster</span>
-              </div>
-              <div class="hero-check-item">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>Up to 25-Year Workmanship Warranty &amp; Lifetime Material Guarantees</span>
-              </div>
-            </div>
+              <h1 class="hero-title">
+                Top-Rated Roofing Services Across the Lone Star State
+              </h1>
+              <p class="hero-lead">
+                Trust <strong>Texas Roofers USA</strong> for dependable roof replacement, emergency leak repairs, and storm damage hail restoration. Built tough to withstand intense Texas heat, heavy wind, and seasonal hurricanes.
+              </p>
 
-            <div class="d-flex flex-wrap gap-3 align-items-center pt-2">
-              <a href="#inspection-form" class="btn btn-texas-red">
-                <span>Free Roof Inspection</span>
-                <i class="bi bi-arrow-right ms-2"></i>
-              </a>
-              <a href="tel:12147178818" class="btn btn-texas-outline">
-                <i class="bi bi-telephone-fill me-2"></i>
-                <span>(214) 717-8818</span>
-              </a>
-            </div>
-
-            <!-- Social Proof Highlights -->
-            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex flex-wrap align-items-center gap-4">
-              <div class="d-flex align-items-center gap-2">
-                <div class="text-warning fs-5">
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
+              <div class="mb-4">
+                <div class="hero-check-item">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>100% Free, Zero-Obligation 21-Point Roof &amp; Attic Inspection</span>
                 </div>
-                <span class="fw-bold text-white small">4.8 / 5.0 Google Rating</span>
+                <div class="hero-check-item">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Direct Insurance Claim Assistance — We Deal with Your Adjuster</span>
+                </div>
+                <div class="hero-check-item">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Up to 25-Year Workmanship Warranty &amp; Lifetime Material Guarantees</span>
+                </div>
               </div>
-              <div class="text-white-50 small">
-                <i class="bi bi-shield-shaded text-danger me-1"></i> A+ Rated BBB Accredited
+
+              <div class="d-flex flex-wrap gap-3 align-items-center pt-1">
+                <a href="#heroQuoteForm" class="btn btn-texas-red">
+                  <span>Free Roof Inspection</span>
+                  <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+                <a href="tel:12147178818" class="btn btn-outline-dark fw-bold px-3 py-2" style="border-radius: 4px; border-width: 2px;">
+                  <i class="bi bi-telephone-fill text-danger me-2"></i>
+                  <span>(214) 717-8818</span>
+                </a>
               </div>
-              <div class="text-white-50 small">
-                <i class="bi bi-houses-fill text-danger me-1"></i> Over 1,000+ Roofs Completed
+
+              <!-- Social Proof Highlights -->
+              <div class="mt-4 pt-3 border-top border-slate-200 d-flex flex-wrap align-items-center gap-4">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="text-warning fs-6">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                  <span class="fw-bold small" style="color: var(--color-primary-navy);">4.8 / 5.0 Google Rating</span>
+                </div>
+                <div class="text-secondary small">
+                  <i class="bi bi-shield-shaded text-danger me-1"></i> A+ Rated BBB Accredited
+                </div>
+                <div class="text-secondary small">
+                  <i class="bi bi-houses-fill text-danger me-1"></i> 1,000+ Roofs Completed
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Right Column: High-Converting Inspection Form Card -->
-          <div class="col-lg-5" id="inspection-form">
+          <!-- Right Column: High-Converting Inspection Form Card (IN HERO) -->
+          <div class="col-lg-5" id="hero-inspection-form">
             <div class="hero-form-card">
               <div class="text-center mb-3">
-                <h3 class="h4 text-uppercase fw-bold text-white mb-1">Schedule Free Inspection</h3>
-                <p class="text-white-50 small mb-0">No pressure, no obligation. We respond within 15 minutes.</p>
+                <h3 class="h4 text-uppercase fw-bold mb-1">Schedule Free Inspection</h3>
+                <p class="small text-muted mb-0">No pressure, no obligation. We respond within 15 minutes.</p>
               </div>
 
               <form id="heroQuoteForm" onsubmit="handleFormSubmit(event)">
                 <div class="mb-3">
-                  <label for="fullName" class="form-label small fw-semibold text-white mb-1">Your Full Name *</label>
-                  <input type="text" class="form-control form-control-custom" id="fullName" placeholder="e.g. John Miller" required />
+                  <label for="heroFullName" class="form-label small fw-semibold mb-1">Your Full Name *</label>
+                  <input type="text" class="form-control form-control-custom" id="heroFullName" placeholder="e.g. John Miller" required />
                 </div>
 
                 <div class="row g-2 mb-3">
                   <div class="col-sm-6">
-                    <label for="phoneNumber" class="form-label small fw-semibold text-white mb-1">Phone Number *</label>
-                    <input type="tel" class="form-control form-control-custom" id="phoneNumber" placeholder="(512) 000-0000" required />
+                    <label for="heroPhoneNumber" class="form-label small fw-semibold mb-1">Phone Number *</label>
+                    <input type="tel" class="form-control form-control-custom" id="heroPhoneNumber" placeholder="(512) 000-0000" required />
                   </div>
                   <div class="col-sm-6">
-                    <label for="emailAddress" class="form-label small fw-semibold text-white mb-1">Email Address</label>
-                    <input type="email" class="form-control form-control-custom" id="emailAddress" placeholder="john@example.com" />
+                    <label for="heroEmailAddress" class="form-label small fw-semibold mb-1">Email Address</label>
+                    <input type="email" class="form-control form-control-custom" id="heroEmailAddress" placeholder="john@example.com" />
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="serviceType" class="form-label small fw-semibold text-white mb-1">Service Needed *</label>
-                  <select class="form-select form-select-custom" id="serviceType" required>
+                  <label for="heroServiceType" class="form-label small fw-semibold mb-1">Service Needed *</label>
+                  <select class="form-select form-select-custom" id="heroServiceType" required>
                     <option value="" selected disabled>Select Service Needed...</option>
                     <option value="Storm / Hail Damage Inspection">Storm &amp; Hail Damage Inspection</option>
                     <option value="Emergency Roof Leak Repair">Emergency Roof Leak Repair</option>
@@ -882,8 +937,8 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="cityOrZip" class="form-label small fw-semibold text-white mb-1">Texas City or Zip Code *</label>
-                  <input type="text" class="form-control form-control-custom" id="cityOrZip" placeholder="e.g. Austin, Dallas, 78729, 75204" required />
+                  <label for="heroCityOrZip" class="form-label small fw-semibold mb-1">Texas City or Zip Code *</label>
+                  <input type="text" class="form-control form-control-custom" id="heroCityOrZip" placeholder="e.g. Austin, Dallas, 78729, 75204" required />
                 </div>
 
                 <button type="submit" class="btn btn-texas-red w-100 py-3 mt-2">
@@ -892,8 +947,8 @@
                 </button>
 
                 <div class="text-center mt-2">
-                  <small class="text-white-50" style="font-size: 0.75rem;">
-                    <i class="bi bi-lock-fill me-1"></i> Your information is kept 100% private. Never sold.
+                  <small class="text-muted" style="font-size: 0.75rem;">
+                    <i class="bi bi-lock-fill me-1 text-success"></i> Your information is kept 100% private. Never sold.
                   </small>
                 </div>
               </form>
@@ -1526,30 +1581,172 @@
       </div>
     </section>
 
-    <!-- FINAL CALL TO ACTION BANNER -->
-    <section class="py-5" style="background-color: var(--color-primary-navy); color: #ffffff;">
-      <div class="container text-center py-4">
-        <span class="badge-sharp mb-3">
-          <i class="bi bi-shield-fill-exclamation text-danger"></i> PROTECT WHAT MATTERS MOST
-        </span>
-        <h2 class="display-5 fw-bold text-uppercase text-white mb-3">
-          Request A Free Roof Inspection Today!
-        </h2>
-        <p class="text-white-50 max-w-700 mx-auto fs-5 mb-4">
-          Don’t wait until the next thunderstorm or tornado season leaves you with water dripping into your living room. Schedule your free 21-point roof check now.
-        </p>
-        <div class="d-flex flex-wrap justify-content-center gap-3">
-          <a href="#inspection-form" class="btn btn-texas-red px-4 py-3 fs-5">
-            <span>Schedule Free Inspection</span>
-            <i class="bi bi-arrow-right ms-2"></i>
-          </a>
-          <a href="tel:12147178818" class="btn btn-texas-outline px-4 py-3 fs-5">
-            <i class="bi bi-telephone-fill me-2"></i>
-            <span>Call (214) 717-8818</span>
-          </a>
+    <!-- DEDICATED FREE ROOF INSPECTION SECTION -->
+    <section class="py-5" id="inspection-form" style="background: linear-gradient(135deg, #0c1123 0%, #151d38 100%); color: #ffffff;">
+      <div class="container py-4">
+        <div class="row align-items-center g-5">
+          <!-- Left info column -->
+          <div class="col-lg-6">
+            <span class="badge-sharp mb-3">
+              <i class="bi bi-shield-fill-check text-danger"></i> ZERO OBLIGATION • 100% FREE
+            </span>
+            <h2 class="display-5 fw-bold text-uppercase text-white mb-3">
+              Schedule Your Free 21-Point Roof &amp; Attic Inspection
+            </h2>
+            <p class="text-white-50 fs-5 mb-4 leading-relaxed">
+              Don’t wait until the next thunderstorm or tornado season leaves you with water dripping into your home. Our licensed Texas inspectors evaluate every inch of your roof and attic.
+            </p>
+
+            <div class="row g-3 mb-4">
+              <div class="col-sm-6 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                <span class="text-white small fw-semibold">Drone &amp; Manual Flashing Check</span>
+              </div>
+              <div class="col-sm-6 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                <span class="text-white small fw-semibold">Attic Moisture &amp; Decking Review</span>
+              </div>
+              <div class="col-sm-6 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                <span class="text-white small fw-semibold">Insurance Adjuster Assistance</span>
+              </div>
+              <div class="col-sm-6 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                <span class="text-white small fw-semibold">Same-Day Photographic Report</span>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-2 border border-secondary border-opacity-25 bg-dark bg-opacity-25 d-flex align-items-center gap-3">
+              <i class="bi bi-telephone-outbound-fill text-danger fs-2"></i>
+              <div>
+                <div class="small text-white-50 text-uppercase fw-semibold">Need Immediate Storm Leak Help?</div>
+                <a href="tel:12147178818" class="text-white fw-bold fs-5 text-decoration-none">Call (214) 717-8818 (24/7 Response)</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right form column -->
+          <div class="col-lg-6">
+            <div class="inspection-form-card">
+              <div class="mb-3">
+                <h3 class="h4 text-uppercase fw-bold text-white mb-1">Request Inspection</h3>
+                <p class="text-white-50 small mb-0">Fill out the quick form below. We respond within 15 minutes.</p>
+              </div>
+
+              <form id="inspectionQuoteForm" onsubmit="handleFormSubmit(event)">
+                <div class="mb-3">
+                  <label for="fullName" class="form-label small fw-semibold text-white mb-1">Your Full Name *</label>
+                  <input type="text" class="form-control form-control-custom" id="fullName" placeholder="e.g. John Miller" required />
+                </div>
+
+                <div class="row g-2 mb-3">
+                  <div class="col-sm-6">
+                    <label for="phoneNumber" class="form-label small fw-semibold text-white mb-1">Phone Number *</label>
+                    <input type="tel" class="form-control form-control-custom" id="phoneNumber" placeholder="(512) 000-0000" required />
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="emailAddress" class="form-label small fw-semibold text-white mb-1">Email Address</label>
+                    <input type="email" class="form-control form-control-custom" id="emailAddress" placeholder="john@example.com" />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="serviceType" class="form-label small fw-semibold text-white mb-1">Service Needed *</label>
+                  <select class="form-select form-select-custom" id="serviceType" required>
+                    <option value="" selected disabled>Select Service Needed...</option>
+                    <option value="Storm / Hail Damage Inspection">Storm &amp; Hail Damage Inspection</option>
+                    <option value="Emergency Roof Leak Repair">Emergency Roof Leak Repair</option>
+                    <option value="Complete Roof Replacement">Complete Roof Replacement</option>
+                    <option value="Metal Roofing Installation">Standing Seam Metal Roofing</option>
+                    <option value="Commercial Roofing">Commercial Roofing System</option>
+                    <option value="Gutters & Siding">Gutters or Siding Service</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="cityOrZip" class="form-label small fw-semibold text-white mb-1">Texas City or Zip Code *</label>
+                  <input type="text" class="form-control form-control-custom" id="cityOrZip" placeholder="e.g. Austin, Dallas, 78729, 75204" required />
+                </div>
+
+                <button type="submit" class="btn btn-texas-red w-100 py-3 mt-2">
+                  <span class="fw-bold">Get My Free Roof Inspection</span>
+                  <i class="bi bi-arrow-right-short fs-5 ms-1"></i>
+                </button>
+
+                <div class="text-center mt-2">
+                  <small class="text-white-50" style="font-size: 0.75rem;">
+                    <i class="bi bi-lock-fill me-1"></i> Your information is kept 100% private. Never sold.
+                  </small>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- INTERACTIVE INSPECTION MODAL -->
+    <div class="modal fade" id="inspectionModal" tabindex="-1" aria-labelledby="inspectionModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #0c1123; color: #ffffff; border: 2px solid rgba(255,255,255,0.15); border-radius: 8px;">
+          <div class="modal-header border-bottom border-secondary border-opacity-25 pb-3">
+            <div>
+              <h3 class="modal-title h5 text-uppercase fw-bold text-white mb-0" id="inspectionModalLabel">Schedule Free Roof Inspection</h3>
+              <small class="text-white-50">Zero obligation. Fast 15-minute response.</small>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="modalQuoteForm" onsubmit="handleFormSubmit(event)">
+              <div class="mb-3">
+                <label for="modalFullName" class="form-label small fw-semibold text-white mb-1">Your Full Name *</label>
+                <input type="text" class="form-control form-control-custom" id="modalFullName" placeholder="e.g. John Miller" required />
+              </div>
+
+              <div class="row g-2 mb-3">
+                <div class="col-sm-6">
+                  <label for="modalPhoneNumber" class="form-label small fw-semibold text-white mb-1">Phone Number *</label>
+                  <input type="tel" class="form-control form-control-custom" id="modalPhoneNumber" placeholder="(512) 000-0000" required />
+                </div>
+                <div class="col-sm-6">
+                  <label for="modalEmailAddress" class="form-label small fw-semibold text-white mb-1">Email Address</label>
+                  <input type="email" class="form-control form-control-custom" id="modalEmailAddress" placeholder="john@example.com" />
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="modalServiceType" class="form-label small fw-semibold text-white mb-1">Service Needed *</label>
+                <select class="form-select form-select-custom" id="modalServiceType" required>
+                  <option value="" selected disabled>Select Service Needed...</option>
+                  <option value="Storm / Hail Damage Inspection">Storm &amp; Hail Damage Inspection</option>
+                  <option value="Emergency Roof Leak Repair">Emergency Roof Leak Repair</option>
+                  <option value="Complete Roof Replacement">Complete Roof Replacement</option>
+                  <option value="Metal Roofing Installation">Standing Seam Metal Roofing</option>
+                  <option value="Commercial Roofing">Commercial Roofing System</option>
+                  <option value="Gutters & Siding">Gutters or Siding Service</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="modalCityOrZip" class="form-label small fw-semibold text-white mb-1">Texas City or Zip Code *</label>
+                <input type="text" class="form-control form-control-custom" id="modalCityOrZip" placeholder="e.g. Austin, Dallas, 78729, 75204" required />
+              </div>
+
+              <button type="submit" class="btn btn-texas-red w-100 py-3 mt-2">
+                <span class="fw-bold">Get My Free Roof Inspection</span>
+                <i class="bi bi-arrow-right-short fs-5 ms-1"></i>
+              </button>
+
+              <div class="text-center mt-2">
+                <small class="text-white-50" style="font-size: 0.75rem;">
+                  <i class="bi bi-lock-fill me-1"></i> Your information is kept 100% private. Never sold.
+                </small>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="site-footer">
@@ -1675,8 +1872,17 @@
         toast.style.display = 'block';
         toast.style.animation = 'fadeIn 0.3s ease';
         
-        const form = document.getElementById('heroQuoteForm');
-        form.reset();
+        if (e.target && e.target.reset) {
+          e.target.reset();
+        }
+
+        const modalEl = document.getElementById('inspectionModal');
+        if (modalEl && typeof bootstrap !== 'undefined') {
+          const modalInstance = bootstrap.Modal.getInstance(modalEl);
+          if (modalInstance) {
+            modalInstance.hide();
+          }
+        }
 
         setTimeout(() => {
           toast.style.display = 'none';
