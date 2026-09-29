@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Summit Roofing & Restoration | Premium Roofing Services</title>
+
+    <!-- Bootstrap 5.3.2 & Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/roofer/images/fav-icon/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/roofer/images/fav-icon/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/roofer/images/apple-touch-icon.png" />
+
+    <!-- Shared Roofer CSS -->
+    <link rel="stylesheet" href="/roofer/css/style.css" />
+
+    <style>
+      /* ================================================================
+         EASY CLIENT CUSTOMIZATION: Brand Color Variables
+         Swap these hex values to instantly match your prospect's brand!
+         ================================================================ */
+      :root {
+        --color-primary:       #1e3a8a; /* Deep Royal Navy */
+        --color-primary-light: #2563eb;
+        --color-primary-mid:   #1d4ed8;
+        --color-primary-dark:  #172554;
+        --color-primary-form:  rgba(30, 58, 138, 0.94);
+        --color-overlay:       rgba(23, 37, 84, 0.80);
+        --color-text-navy:     #1e3a8a;
+        --color-bg-light-blue: #f0f7ff;
+      }
+
+      /* Preview bar at the very top for agency pitch */
+      .demo-preview-bar {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-size: 13px;
+        padding: 7px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1050;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        letter-spacing: 0.02em;
+      }
+      .demo-preview-bar a.pitch-badge {
+        background: #3b82f6;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 3px 10px;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+      .demo-preview-bar a.pitch-badge:hover {
+        background: #2563eb;
+      }
+
+      .main-nav, .mobile-topbar {
+        background: rgba(30, 58, 138, 0.25) !important;
+      }
+      .stat-box {
+        background: #172554 !important;
+      }
+      .hero-title-text span {
+        color: #60a5fa !important;
+      }
+      .partner-logo {
+        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+        opacity: 0.9;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 150px;
+        height: 80px;
+        padding: 5px;
+      }
+      .partner-logo:hover {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+      .partner-logo img {
+        max-height: 70px;
+        max-width: 100%;
+        width: auto;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Agency Pitch Bar (Unlinked Demo Concept Banner) -->
+    <div class="demo-preview-bar">
+      <div>
+        <i class="bi bi-stars text-warning me-1"></i>
+        <strong>Concept Prototype</strong> drafted for <strong>Summit Roofing & Restoration</strong>
+      </div>
+      <div>
+        <a href="https://schrader.co" target="_blank" class="pitch-badge">
+          Schrader Web Solutions <i class="bi bi-arrow-up-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Topbar -->
+    <div class="mobile-topbar">
+      <a href="tel:8005550199" class="topbar-phone">
+        <i class="bi bi-telephone-fill"></i>
+        (800) 555-0199
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <i id="hamIcon" class="bi bi-list"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="drawer">
+      <div class="drawer-header">
+        <a class="drawer-logo" href="/demo">SUMMIT ROOFING</a>
+        <button class="close-btn" id="closeBtn" aria-label="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <ul class="drawer-nav">
+        <li><button class="m-nav-btn" onclick="window.location='/demo#'">Residential Roofing</button></li>
+        <li><button class="m-nav-btn" onclick="window.location='/demo#'">Roof Repair & Leak Detection</button></li>
+        <li><button class="m-nav-btn" onclick="window.location='/demo#'">Commercial Roofing</button></li>
+        <li><button class="m-nav-btn" onclick="window.location='/demo#'">Storm Damage Restoration</button></li>
+        <li><button class="m-nav-btn" onclick="window.location='/demo#'">About Us</button></li>
+        <li><button class="m-nav-btn" onclick="window.location='/demo#'">Contact Us</button></li>
+      </ul>
+
+      <div class="drawer-phone">
+        <a href="tel:8005550199" class="drawer-phone-link">
+          <i class="bi bi-telephone-fill"></i>
+          (800) 555-0199
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const hamburger = document.getElementById('hamburger');
+      const hamIcon   = document.getElementById('hamIcon');
+      const drawer    = document.getElementById('drawer');
+      const overlay   = document.getElementById('overlay');
+      const closeBtn  = document.getElementById('closeBtn');
+
+      function openDrawer() {
+        drawer.classList.add('open');
+        overlay.classList.add('active');
+        hamIcon.className = 'bi bi-x-lg';
+        document.body.style.overflow = 'hidden';
+      }
+      function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('active');
+        hamIcon.className = 'bi bi-list';
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+      closeBtn.addEventListener('click', closeDrawer);
+      overlay.addEventListener('click', closeDrawer);
+    </script>
+
+    <!-- Desktop Main Navigation -->
+    <nav class="main-nav">
+      <ul>
+        <li class="nav-spacer" aria-hidden="true"></li>
+
+        <li class="nav-links-group">
+          <button class="nav-btn" onclick="window.location='/demo#'">Residential Roofing</button>
+          <button class="nav-btn" onclick="window.location='/demo#'">Roof Repair</button>
+          <button class="nav-btn" onclick="window.location='/demo#'">Commercial Roofing</button>
+          <button class="nav-btn" onclick="window.location='/demo#'">About Us</button>
+          <button class="nav-btn" onclick="window.location='/demo#'">Contact Us</button>
+        </li>
+
+        <li class="nav-phone">
+          <a href="tel:8005550199" class="nav-phone-link">
+            <i class="bi bi-telephone-fill"></i>
+            (800) 555-0199
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="container-fluid hero-inner">
+          <div class="row align-items-start gx-2">
+
+            <!-- Left Content -->
+            <div class="col-md-8 col-12">
+              <div class="right-side-section me-md-5 me-0 ms-md-4 ms-0 px-3 px-md-0">
+
+                <div class="logo-wrapper mt-5">
+                  <a href="/demo" aria-label="Summit Roofing & Restoration Home">
+                    <div class="logo" style="background-image: url('/roofer/images/TXO-assets/fav-icon/logo.png'); background-size: cover;"></div>
+                  </a>
+                </div>
+
+                <h1 class="hero-title mb-3">
+                  <span class="hero-title-text">
+                    Dallas–Fort Worth <span>Residential & Commercial</span> Roofing Specialists
+                  </span>
+                </h1>
+
+                <h3 class="hero-subtitle">
+                  Trusted local roofing contractor delivering elite workmanship, prompt storm response, and guaranteed 50-year warranty protection.
+                </h3>
+
+              </div>
+            </div>
+
+            <!-- Right Booking Form -->
+            <div class="col-md-4 col-12 mt-4 mt-md-0">
+              <div class="form-container mt-5">  
+                <div class="appointment-card p-4">
+                  <h5 class="text-center mb-1">Book Your</h5>
+                  <div class="text-center mb-3">
+                    <span class="appointment-pill d-inline-block">Free Roof Inspection</span>
+                  </div>
+                  <form>
+                    <div class="row g-2">
+                      <div class="col-6">
+                        <input class="form-control rounded-input" placeholder="First Name *" />
+                      </div>
+                      <div class="col-6">
+                        <input class="form-control rounded-input" placeholder="Last Name *" />
+                      </div>
+                    </div>
+                    <div class="row g-2 mt-2">
+                      <div class="col-6">
+                        <input class="form-control rounded-input" placeholder="Phone Number *" />
+                      </div>
+                      <div class="col-6">
+                        <input type="email" class="form-control rounded-input" placeholder="Email Address *" />
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <input class="form-control rounded-input" placeholder="Property Address / Zip Code *" />
+                    </div>
+                    <div class="mt-2">
+                      <select class="form-select rounded-input">
+                        <option value="" selected disabled>Service Needed</option>
+                        <option value="roof-inspection">Free Roof Inspection</option>
+                        <option value="roof-replacement">Full Roof Replacement</option>
+                        <option value="leak-repair">Emergency Leak Repair</option>
+                        <option value="storm-damage">Storm / Hail Damage Assessment</option>
+                        <option value="commercial">Commercial Flat Roofing</option>
+                      </select>
+                    </div>
+                    <div class="mt-2">
+                      <textarea class="form-control rounded-input" rows="3" placeholder="Briefly describe your roof project or issue..."></textarea>
+                    </div>
+                    <div class="mt-2">
+                      <select class="form-select rounded-input">
+                        <option value="" selected disabled>Preferred Contact Time</option>
+                        <option value="morning">Morning (8am - 12pm)</option>
+                        <option value="afternoon">Afternoon (12pm - 5pm)</option>
+                        <option value="asap">Immediate / Emergency</option>
+                      </select>
+                    </div>
+                    <div class="mt-3">
+                      <button type="button" class="btn btn-danger w-100 btn-cta">REQUEST FREE ESTIMATE</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Company / Track Record Section -->
+      <section class="company-section overflow-hidden">
+        <div class="container-fluid p-0">
+          <div class="row g-0" style="position: relative;">
+
+            <!-- Image column -->
+            <div class="col-lg-5 company-img-col"></div>
+
+            <!-- Content column -->
+            <div class="col-lg-7 offset-lg-5 about-content-bg py-5 px-4 px-lg-5 d-flex align-items-center">
+              <div class="about-card py-4">
+                <h2 class="section-title mb-4">
+                  Local Texas Roofer With A <br>
+                  Track Record <span class="trust-pill">You Can TRUST.</span>
+                </h2>
+
+                <div class="content-text opacity-90">
+                  <p>Let's be honest: Finding an honest roofing contractor can feel overwhelming. Everyone has heard stories of storm chasers cutting corners, taking hefty upfront deposits, and disappearing when warranty work is needed.</p>
+                  <p>We built our company to be the <strong>polar opposite</strong>.</p>
+                  <p>We are not a faceless national corporation. We are 100% locally owned, operated, and invested right here in the community. <strong>Family-founded. Quality-driven. Customer-first.</strong></p>
+                  <p>Every roof we install is treated like our own home: meticulous craftsmanship, premium shingle and metal systems, and complete, unconditional transparency throughout the entire process.</p>
+                  <p>Here is why homeowners across the region trust us with their biggest investment:</p>
+                </div>
+
+                <div class="row text-center mt-5 g-4 justify-content-center">
+                  <div class="col-6 col-md-3">
+                    <div class="stat-container">
+                      <div class="stat-circle">18+</div>
+                      <div class="stat-label">Years Of Local <br> Proven Service</div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <div class="stat-container">
+                      <div class="stat-circle">250+</div>
+                      <div class="stat-label">5-Star Verified <br> Reviews</div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <div class="stat-container">
+                      <div class="stat-circle">50</div>
+                      <div class="stat-label">Years Warranty <br> Protection</div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <div class="stat-container">
+                      <div class="stat-circle">4.9</div>
+                      <div class="stat-label">Google Rating <br> Average</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-5 d-flex flex-wrap align-items-center gap-4">
+                  <a href="#" class="btn btn-contact-custom">
+                    CONTACT OUR TEAM <span class="ms-2">❯</span>
+                  </a>
+                  <span class="fs-5 text-navy">or Direct Call <strong class="text-danger">(800) 555-0199</strong></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Customer Reviews Carousel -->
+      <div class="review-sec text-center py-5">
+        <h1 class="text-white mb-2">Verified Customer Reviews</h1>
+        <p class="review-sec-sub">See what real homeowners and property managers are saying</p>
+
+        <div class="review-carousel-outer">
+          <!-- Arrows -->
+          <button class="review-arrow review-prev" id="reviewPrev">&#8249;</button>
+          <button class="review-arrow review-next" id="reviewNext">&#8250;</button>
+
+          <!-- Track -->
+          <div class="review-track" id="reviewTrack">
+            <div class="review-card">
+              <div class="review-header">
+                <div class="avatar" style="background-color:#ea4335;">S</div>
+                <div class="user-info">
+                  <span class="user-name">Sarah Jenkins</span>
+                  <span class="review-date">2 weeks ago</span>
+                </div>
+                <img src="https://img.icons8.com/color/48/google-logo.png" class="google-logo" alt="Google">
+              </div>
+              <div class="stars">★★★★★</div>
+              <p class="review-text">After severe spring hail, I was stressed about leaks. Their team came out within two hours for a drone inspection and had our claim handled seamlessly. Outstanding service!</p>
+            </div>
+
+            <div class="review-card">
+              <div class="review-header">
+                <div class="avatar" style="background-color:#34a853;">M</div>
+                <div class="user-info">
+                  <span class="user-name">Mark Thompson</span>
+                  <span class="review-date">1 month ago</span>
+                </div>
+                <img src="https://img.icons8.com/color/48/google-logo.png" class="google-logo" alt="Google">
+              </div>
+              <div class="stars">★★★★★</div>
+              <p class="review-text">Best roofing crew in the area. They didn't leave a single nail on my driveway. The architectural shingles look fantastic and the team was respectful throughout.</p>
+            </div>
+
+            <div class="review-card">
+              <div class="review-header">
+                <div class="avatar" style="background-color:#4285f4;">E</div>
+                <div class="user-info">
+                  <span class="user-name">Elena Rodriguez</span>
+                  <span class="review-date">3 weeks ago</span>
+                </div>
+                <img src="https://img.icons8.com/color/48/google-logo.png" class="google-logo" alt="Google">
+              </div>
+              <div class="stars">★★★★★</div>
+              <p class="review-text">Extremely transparent quote with zero surprise line items. It is refreshing to deal with a contractor who respects your time and budget. Highly recommended.</p>
+            </div>
+
+            <div class="review-card">
+              <div class="review-header">
+                <div class="avatar" style="background-color:#fbbc05;">D</div>
+                <div class="user-info">
+                  <span class="user-name">David Lawson</span>
+                  <span class="review-date">2 months ago</span>
+                </div>
+                <img src="https://img.icons8.com/color/48/google-logo.png" class="google-logo" alt="Google">
+              </div>
+              <div class="stars">★★★★★</div>
+              <p class="review-text"><b>Local Guide</b> · Had a persistent chimney flashing leak that two other roofers failed to solve. Summit pinpointed it immediately and resolved it on the spot.</p>
+            </div>
+
+            <div class="review-card">
+              <div class="review-header">
+                <div class="avatar" style="background-color:#7c3aed;">R</div>
+                <div class="user-info">
+                  <span class="user-name">Rachel Kim</span>
+                  <span class="review-date">3 months ago</span>
+                </div>
+                <img src="https://img.icons8.com/color/48/google-logo.png" class="google-logo" alt="Google">
+              </div>
+              <div class="stars">★★★★★</div>
+              <p class="review-text">Seamless from start to finish. Fast estimate, polite roofers, and immaculate daily cleanup. Our neighbors keep complimenting our new roof!</p>
+            </div>
+          </div>
+
+          <!-- Dots -->
+          <div class="review-dots" id="reviewDots"></div>
+        </div>
+      </div>
+
+      <script>
+      (function() {
+        const track    = document.getElementById('reviewTrack');
+        const dotsWrap = document.getElementById('reviewDots');
+        const prevBtn  = document.getElementById('reviewPrev');
+        const nextBtn  = document.getElementById('reviewNext');
+        const cards    = track.querySelectorAll('.review-card');
+
+        let current = 0;
+        let autoTimer = null;
+        let visibleCount = getVisible();
+
+        function getVisible() {
+          return window.innerWidth < 576 ? 1 : window.innerWidth < 992 ? 2 : 3;
+        }
+
+        const total = cards.length;
+
+        function buildDots() {
+          visibleCount = getVisible();
+          dotsWrap.innerHTML = '';
+          const pages = total - visibleCount + 1;
+          for (let i = 0; i < pages; i++) {
+            const d = document.createElement('span');
+            d.className = 'review-dot' + (i === current ? ' active' : '');
+            d.addEventListener('click', () => { goTo(i); resetAuto(); });
+            dotsWrap.appendChild(d);
+          }
+        }
+
+        function goTo(index) {
+          visibleCount = getVisible();
+          const pages = total - visibleCount + 1;
+          current = Math.max(0, Math.min(index, pages - 1));
+          const cardW = cards[0].offsetWidth + 20;
+          track.scrollTo({ left: cardW * current, behavior: 'smooth' });
+          dotsWrap.querySelectorAll('.review-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+
+        function next() { goTo(current + 1 < total - visibleCount + 1 ? current + 1 : 0); }
+        function prev() { goTo(current > 0 ? current - 1 : total - visibleCount); }
+
+        function startAuto() {
+          clearInterval(autoTimer);
+          autoTimer = setInterval(next, 3500);
+        }
+
+        function resetAuto() { clearInterval(autoTimer); startAuto(); }
+
+        prevBtn.addEventListener('click', () => { prev(); resetAuto(); });
+        nextBtn.addEventListener('click', () => { next(); resetAuto(); });
+
+        track.addEventListener('scroll', () => {
+          const cardW = cards[0].offsetWidth + 20;
+          current = Math.round(track.scrollLeft / cardW);
+          dotsWrap.querySelectorAll('.review-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        });
+
+        track.addEventListener('touchstart', () => clearInterval(autoTimer));
+        track.addEventListener('touchend', startAuto);
+
+        window.addEventListener('resize', () => { buildDots(); goTo(0); });
+
+        buildDots();
+        startAuto();
+      })();
+      </script>
+
+      <!-- Project Showcase Carousel -->
+      <section class="modern-carousel-section">
+        <div class="mb-2"><h1>Featured Recent Projects</h1></div>
+
+        <div class="carousel-outer">
+          <div class="carousel-wrapper" id="carouselWrapper">
+
+            <div class="project-card">
+              <img src="/roofer/images/TXO-assets/Projects/75.webp" alt="Residential Roofing Project">
+              <div class="card-content">
+                <span class="tag" style="background:#fbbf24;color:#000;">Residential</span>
+                <h3>High-Pitch Shingle Upgrade</h3>
+                <p>Architectural shingle replacement with enhanced wind and hail resistance ventilation.</p>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <img src="/roofer/images/TXO-assets/Projects/City Of Blue Mound .webp" alt="Municipal Facility">
+              <div class="card-content">
+                <span class="tag" style="background:#38bdf8;color:#000;">Commercial</span>
+                <h3>Municipal Facility Membrane</h3>
+                <p>Commercial flat roof installation delivering durable, weather-tight protection.</p>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <img src="/roofer/images/TXO-assets/Projects/Cortland Riverside .webp" alt="Multi-Family Living">
+              <div class="card-content">
+                <span class="tag" style="background:#4ade80;color:#000;">Multi-Family</span>
+                <h3>Multi-Unit Residential Complex</h3>
+                <p>Large-scale roofing installation completed ahead of schedule with zero tenant disruption.</p>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <img src="/roofer/images/TXO-assets/Projects/Preserve At Gateway .webp" alt="Preserve Complex">
+              <div class="card-content">
+                <span class="tag" style="background:#fb923c;color:#fff;">Replacement</span>
+                <h3>Total Storm Restoration</h3>
+                <p>Full roof tear-off and replacement ensuring long-term curb appeal and structural safety.</p>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <img src="/roofer/images/TXO-assets/Projects/HDRCreat.webp" alt="Custom Design">
+              <div class="card-content">
+                <span class="tag" style="background:#a78bfa;color:#fff;">Custom Design</span>
+                <h3>Modern Standing Seam Metal</h3>
+                <p>Custom fabricated metal roofing offering superior longevity and modern aesthetics.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="carousel-arrow arrow-prev" id="arrowPrev" onclick="slideCarousel(-1)">&#8249;</button>
+          <button class="carousel-arrow arrow-next" id="arrowNext" onclick="slideCarousel(1)">&#8250;</button>
+
+          <div class="carousel-dots" id="carouselDots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
+            <span class="dot" onclick="goToSlide(4)"></span>
+          </div>
+        </div>
+      </section>
+
+      <script>
+      (function() {
+        let currentSlide = 0;
+        let autoPlayTimer = null;
+        let isDragging = false;
+        let dragStartX = 0;
+        let scrollStart = 0;
+        let hasDragged = false;
+
+        const wrapper = document.getElementById('carouselWrapper');
+        const dots    = document.querySelectorAll('.dot');
+        const cards   = wrapper.querySelectorAll('.project-card');
+        const total   = cards.length;
+
+        function isMobile() { return window.innerWidth <= 991; }
+
+        function updateDots() {
+          dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+        }
+
+        window.goToSlide = function(index) {
+          currentSlide = ((index % total) + total) % total;
+          const cardWidth = cards[0].offsetWidth + 16;
+          wrapper.scrollTo({ left: cardWidth * currentSlide, behavior: 'smooth' });
+          updateDots();
+        };
+
+        window.slideCarousel = function(dir) {
+          window.goToSlide(currentSlide + dir);
+          resetAutoPlay();
+        };
+
+        wrapper.addEventListener('scroll', () => {
+          const cardWidth = cards[0].offsetWidth + 16;
+          currentSlide = Math.round(wrapper.scrollLeft / cardWidth);
+          updateDots();
+        });
+
+        wrapper.addEventListener('mousedown', (e) => {
+          isDragging  = true;
+          hasDragged  = false;
+          dragStartX  = e.pageX;
+          scrollStart = wrapper.scrollLeft;
+          wrapper.style.cursor = 'grabbing';
+          wrapper.style.userSelect = 'none';
+          clearInterval(autoPlayTimer);
+          e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          const delta = dragStartX - e.pageX;
+          if (Math.abs(delta) > 5) hasDragged = true;
+          wrapper.scrollLeft = scrollStart + delta;
+        });
+
+        window.addEventListener('mouseup', (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          wrapper.style.cursor = '';
+          wrapper.style.userSelect = '';
+          const cardWidth = cards[0].offsetWidth + 16;
+          currentSlide = Math.round(wrapper.scrollLeft / cardWidth);
+          window.goToSlide(currentSlide);
+          startAutoPlay();
+          if (hasDragged) e.stopPropagation();
+        });
+
+        wrapper.addEventListener('touchstart', () => clearInterval(autoPlayTimer), { passive: true });
+        wrapper.addEventListener('touchend',   startAutoPlay, { passive: true });
+
+        function startAutoPlay() {
+          clearInterval(autoPlayTimer);
+          autoPlayTimer = setInterval(() => window.goToSlide(currentSlide + 1), 3000);
+        }
+
+        function resetAutoPlay() { clearInterval(autoPlayTimer); startAutoPlay(); }
+
+        function toggleControls() {
+          document.querySelectorAll('.carousel-arrow, .carousel-dots').forEach(el => {
+            el.style.display = isMobile() ? '' : 'none';
+          });
+        }
+
+        toggleControls();
+        window.addEventListener('resize', toggleControls);
+        startAutoPlay();
+      })();
+      </script>
+
+      <!-- Accreditations & Brand Trust Badges -->
+      <section class="partner-logos-sec py-5 bg-light border-top border-bottom text-center">
+        <div class="container">
+          <h5 class="text-uppercase small fw-bold mb-4" style="color: var(--color-primary); letter-spacing: 0.15em; opacity: 0.85;">Certified Manufacturers & Partner Accreditations</h5>
+          <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
+            <div class="partner-logo" title="Carlisle SynTec">
+              <img src="/roofer/images/TXO-assets/logos/Carlisle_SynTec_logo.png" alt="Carlisle SynTec">
+            </div>
+            <div class="partner-logo" title="Firestone Building Products">
+              <img src="/roofer/images/TXO-assets/logos/Firestone.png" alt="Firestone Building Products">
+            </div>
+            <div class="partner-logo" title="Inland Coatings">
+              <img src="/roofer/images/TXO-assets/logos/Inland_logo.png" alt="Inland Coatings">
+            </div>
+            <div class="partner-logo" title="Locally Owned & Bonded">
+              <img src="/roofer/images/TXO-assets/logos/locally_owned_bonded.png" alt="Locally Owned & Bonded">
+            </div>
+            <div class="partner-logo" title="MBCI">
+              <img src="/roofer/images/TXO-assets/logos/MBCI.png" alt="MBCI">
+            </div>
+            <div class="partner-logo" title="Polyglass">
+              <img src="/roofer/images/TXO-assets/logos/Polyglass_logo.png" alt="Polyglass">
+            </div>
+            <div class="partner-logo" title="TAMKO Mastercraft PRO Certified Contractor">
+              <img src="/roofer/images/TXO-assets/logos/TAMKO_logo.png" alt="TAMKO">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Review Badges -->
+      <section class="review-section py-5 text-center">
+        <div class="container">
+          <h3 class="fw-bold mb-1 text-dark">Check our ratings & reviews on</h3>
+          <h2 class="display-6 fw-bold mb-5">
+            <span class="text-google">Google</span> | <span class="text-facebook">Facebook</span>
+          </h2>
+
+          <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
+            <a href="#" class="review-badge google-ring">
+              <div class="inner-content">
+                <p class="mb-1">Review us<br>on</p>
+                <img src="https://www.gesi.org/wp-content/uploads/2024/08/google-logo-png-open-2000.png" alt="Google" width="50">
+              </div>
+            </a>
+
+            <a href="#" class="review-badge facebook-ring">
+              <div class="inner-content">
+                <p class="mb-1">Review us<br>on</p>
+                <img src="https://images.icon-icons.com/1826/PNG/512/4202107facebookfblogosocialsocialmedia-115710_115591.png" alt="Facebook" width="55">
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Map Embed -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13425.931422144571!2d-97.3824522010463!3d32.72636700012379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e73302c86cff3%3A0x77e48a9f4f0d53b!2sSummit%20Roofing!5e0!3m2!1sen!2sin!4v1783964181408!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+      <!-- Footer -->
+      <footer class="footer-main text-white pt-5">
+        <div class="container pb-4">
+          <div class="row gy-5">
+
+            <!-- Logo & About -->
+            <div class="col-lg-3">
+              <div class="mb-4">
+                <a href="/demo" aria-label="Summit Roofing Home">
+                  <img src="/roofer/images/TXO-assets/fav-icon/logo.png" alt="Summit Roofing Logo" class="img-fluid" style="max-height: 120px;">
+                </a>
+              </div>
+              <p class="small lh-base opacity-75">
+                Summit Roofing & Restoration delivers premier residential and commercial exterior solutions with uncompromising honesty, craftsmanship, and local reliability.
+              </p>
+              <div class="mt-4">
+                <h5 class="footer-heading">Follow Us</h5>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
+                  <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-5 px-lg-5">
+              <h5 class="footer-heading">Quick Links</h5>
+              <div class="row mt-4">
+                <div class="col-6">
+                  <ul class="list-unstyled footer-list">
+                    <li><a href="/demo#">Residential Roofing</a></li>
+                    <li><a href="/demo#">Emergency Roof Repair</a></li>
+                    <li><a href="/demo#">Commercial Roofing</a></li>
+                    <li><a href="/demo#">About Our Team</a></li>
+                    <li><a href="/demo#">Contact Us</a></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul class="list-unstyled footer-list">
+                    <li><a href="/demo#">Free Roof Inspection</a></li>
+                    <li><a href="/demo#">Hail & Wind Damage</a></li>
+                    <li><a href="/demo#">Warranty Coverage</a></li>
+                    <li><a href="/demo#">Recent Project Gallery</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <a href="tel:8005550199" class="footer-phone-cta mt-4 d-inline-flex align-items-center gap-2">
+                <i class="bi bi-telephone-fill"></i>
+                (800) 555-0199
+              </a>
+            </div>
+
+            <!-- Hours & Location -->
+            <div class="col-lg-4">
+              <div class="mb-5">
+                <h5 class="footer-heading">Office Location</h5>
+                <p class="small mt-4 opacity-75">
+                  1200 Commercial Blvd, Suite 400<br>
+                  Dallas–Fort Worth, TX
+                </p>
+              </div>
+              <div>
+                <h5 class="footer-heading">Hours of Operation</h5>
+                <ul class="list-unstyled small mt-4 business-hours">
+                  <li><span>Mon–Fri:</span> <span>8:00 AM – 6:00 PM</span></li>
+                  <li><span>Saturday:</span> <span>9:00 AM – 3:00 PM</span></li>
+                  <li><span>Sunday:</span> <span>Emergency Response Only</span></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="copyright-bar py-3 mt-4">
+          <div class="container">
+            <div class="row align-items-center text-center text-md-start">
+              <div class="col-md-8">
+                <p class="mb-0 small">Copyright &copy; 2026 Summit Roofing & Restoration | Concept crafted & powered by <b><a class="text-decoration-none text-warning" href="https://schrader.co/" target="_blank">Schrader Web Solutions</a></b></p>
+              </div>
+              <div class="col-md-4 text-md-end mt-2 mt-md-0">
+                <p class="mb-0 small"><a href="#" class="text-decoration-none text-white">Privacy Policy</a> | <a href="#" class="text-decoration-none text-white">Terms of Service</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/roofer/js/main.js"></script>
+  </body>
+</html>

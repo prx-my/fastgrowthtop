@@ -39,7 +39,7 @@ export function About() {
           <div className="lg:col-span-6 xl:col-span-5 reveal reveal-delay-2">
             <div className="relative w-full aspect-[4/5] rounded-[var(--radius-lg)] overflow-hidden">
               <Image
-                src="/images/about_portrait.jpg"
+                src="/images/about_portrait.webp"
                 alt="Traverse City, Michigan"
                 fill
                 className="object-cover"
