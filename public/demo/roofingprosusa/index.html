@@ -389,6 +389,47 @@
         box-shadow: 0 8px 24px rgba(0, 51, 160, 0.45) !important;
       }
 
+      /* Service Roofing Cards - Identical Image Dimensions & Aligned Structure */
+      .service-roof-card {
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        background: #ffffff !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      }
+      .service-roof-card:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+      }
+      .service-card-img {
+        width: 100% !important;
+        height: 240px !important;
+        aspect-ratio: 16 / 10 !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+      }
+      .service-roof-card .card-body {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 auto !important;
+        padding: 1.5rem !important;
+      }
+      .service-roof-card .service-features {
+        margin-top: auto !important;
+        padding-top: 1rem !important;
+        border-top: 1px solid #f1f5f9 !important;
+      }
+      @media (max-width: 575.98px) {
+        .service-card-img {
+          height: 210px !important;
+        }
+      }
+
       /* About Section */
       .about-modern-section {
         background: #f8fafc;
@@ -971,25 +1012,25 @@
 
             <!-- Metal Roofing Card -->
             <div class="col-lg-4 col-md-6">
-              <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+              <div class="service-roof-card">
                 <img 
                   src="/demo/roofingprosusa/images/metal-roof.webp" 
                   alt="Standing Seam Metal Roofing installed in Florida" 
+                  class="service-card-img"
                   width="500" 
-                  height="334" 
+                  height="300" 
                   loading="lazy" 
                   decoding="async" 
-                  style="aspect-ratio: 500/334; object-fit: cover;" 
                 />
-                <div class="card-body p-4">
-                  <span class="badge bg-primary mb-2">Category 5 Wind Rated</span>
+                <div class="card-body">
+                  <span class="badge bg-primary mb-2 align-self-start">Category 5 Wind Rated</span>
                   <h3 class="h4 fw-bold mb-2 text-dark">Standing Seam Metal</h3>
                   <p class="text-muted-dark small mb-3">
                     Sleek, modern, and practically indestructible. Reflects solar heat to lower cooling bills by up to 25%, with interlocking panels engineered for 160+ MPH wind loads.
                   </p>
-                  <ul class="list-unstyled small text-muted-dark mb-0">
-                    <li><i class="bi bi-check2 text-success me-1"></i> 50+ Year Expected Lifespan</li>
-                    <li><i class="bi bi-check2 text-success me-1"></i> Maximum Solar Heat Reflection</li>
+                  <ul class="list-unstyled small text-muted-dark mb-0 service-features">
+                    <li class="mb-1"><i class="bi bi-check2 text-success me-1"></i> 50+ Year Expected Lifespan</li>
+                    <li class="mb-1"><i class="bi bi-check2 text-success me-1"></i> Maximum Solar Heat Reflection</li>
                     <li><i class="bi bi-check2 text-success me-1"></i> Fireproof &amp; Mildew Resistant</li>
                   </ul>
                 </div>
@@ -998,25 +1039,25 @@
 
             <!-- Tile Roofing Card -->
             <div class="col-lg-4 col-md-6">
-              <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+              <div class="service-roof-card">
                 <img 
                   src="/demo/roofingprosusa/images/tile-roof.webp" 
                   alt="Spanish barrel tile roof on a Florida luxury estate" 
+                  class="service-card-img"
                   width="500" 
-                  height="375" 
+                  height="300" 
                   loading="lazy" 
                   decoding="async" 
-                  style="aspect-ratio: 500/375; object-fit: cover;" 
                 />
-                <div class="card-body p-4">
-                  <span class="badge bg-dark mb-2">Florida Classic Elegance</span>
+                <div class="card-body">
+                  <span class="badge bg-dark mb-2 align-self-start">Florida Classic Elegance</span>
                   <h3 class="h4 fw-bold mb-2 text-dark">Spanish &amp; Concrete Tile</h3>
                   <p class="text-muted-dark small mb-3">
                     The signature Florida architectural aesthetic. Concrete and clay barrel tiles provide superior thermal insulation, total rot immunity, and lasting coastal elegance.
                   </p>
-                  <ul class="list-unstyled small text-muted-dark mb-0">
-                    <li><i class="bi bi-check2 text-success me-1"></i> Authentic Mediterranean Curb Appeal</li>
-                    <li><i class="bi bi-check2 text-success me-1"></i> Heavy-Duty Salt Air &amp; UV Defense</li>
+                  <ul class="list-unstyled small text-muted-dark mb-0 service-features">
+                    <li class="mb-1"><i class="bi bi-check2 text-success me-1"></i> Authentic Mediterranean Curb Appeal</li>
+                    <li class="mb-1"><i class="bi bi-check2 text-success me-1"></i> Heavy-Duty Salt Air &amp; UV Defense</li>
                     <li><i class="bi bi-check2 text-success me-1"></i> Class A Fire Rating</li>
                   </ul>
                 </div>
@@ -1025,25 +1066,25 @@
 
             <!-- Architectural Shingles Card -->
             <div class="col-lg-4 col-md-6">
-              <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+              <div class="service-roof-card">
                 <img 
                   src="/demo/roofingprosusa/images/shingle-roof.webp" 
                   alt="Architectural asphalt shingle roof installation" 
+                  class="service-card-img"
                   width="500" 
-                  height="366" 
+                  height="300" 
                   loading="lazy" 
                   decoding="async" 
-                  style="aspect-ratio: 500/366; object-fit: cover;" 
                 />
-                <div class="card-body p-4">
-                  <span class="badge bg-success mb-2">Most Popular Choice</span>
+                <div class="card-body">
+                  <span class="badge bg-success mb-2 align-self-start">Most Popular Choice</span>
                   <h3 class="h4 fw-bold mb-2 text-dark">Architectural Shingles</h3>
                   <p class="text-muted-dark small mb-3">
                     High-definition dimensional shingles offering rich color blends, 130 MPH wind resistance, and algae-resistant granules engineered specifically for humid Florida weather.
                   </p>
-                  <ul class="list-unstyled small text-muted-dark mb-0">
-                    <li><i class="bi bi-check2 text-success me-1"></i> StreakGuard™ Algae Resistance</li>
-                    <li><i class="bi bi-check2 text-success me-1"></i> 130 MPH Wind Limited Warranty</li>
+                  <ul class="list-unstyled small text-muted-dark mb-0 service-features">
+                    <li class="mb-1"><i class="bi bi-check2 text-success me-1"></i> StreakGuard™ Algae Resistance</li>
+                    <li class="mb-1"><i class="bi bi-check2 text-success me-1"></i> 130 MPH Wind Limited Warranty</li>
                     <li><i class="bi bi-check2 text-success me-1"></i> 50-Year Non-Prorated Coverage</li>
                   </ul>
                 </div>
