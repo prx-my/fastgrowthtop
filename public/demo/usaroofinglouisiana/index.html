@@ -156,7 +156,7 @@
 <div class="mobile-drawer" id="drawer">
   <div class="drawer-header">
     <a class="drawer-logo" href="/demo/usaroofinglouisiana/">
-      <img src="/demo/usaroofinglouisiana/images/logo.png" alt="USA Roofing" style="max-height: 40px; width: auto;">
+      <img src="/demo/usaroofinglouisiana/images/logo.png" alt="USA Roofing" width="120" height="40" style="max-height: 40px; width: auto;">
     </a>
     <button class="close-btn" id="closeBtn" aria-label="Close">
       <i class="bi bi-x-lg" aria-hidden="true"></i>
@@ -267,16 +267,16 @@
               </div>
               <div class="mt-2"><label for="zip-code" class="visually-hidden">Zip Code</label><input id="zip-code" name="zip_code" class="form-control rounded-input" placeholder="Zip Code *" /></div>
               <div class="mt-2">
-                <select class="form-select rounded-input">
+                <label for="hear-about-us" class="visually-hidden">Select an option</label><select id="hear-about-us" class="form-select rounded-input" aria-label="How Did You Hear About Us?">
                   <option value="" selected disabled>How Did You Hear About Us?</option>
                   <option value="facebook">Facebook</option><option value="radio">Radio</option><option value="tv">TV</option>
                   <option value="google-search">Google Search</option><option value="google-ad">Google Ad</option>
                   <option value="direct-mail">Direct Mail</option><option value="referral">Referral</option><option value="other">Other</option>
                 </select>
               </div>
-              <div class="mt-2"><textarea class="form-control rounded-input" rows="4" placeholder="How Can We Help You?"></textarea></div>
+              <div class="mt-2"><label for="help-text" class="visually-hidden">How Can We Help You?</label><textarea id="help-text" class="form-control rounded-input" rows="4" placeholder="How Can We Help You?" aria-label="How Can We Help You?"></textarea></div>
               <div class="mt-2">
-                <select class="form-select rounded-input">
+                <label for="book-appointment" class="visually-hidden">Select an option</label><select id="book-appointment" class="form-select rounded-input" aria-label="Book An Appointment?">
                   <option value="" selected disabled>Book An Appointment?</option>
                   <option value="yes">Yes</option><option value="no">No (Reach Out To Schedule)</option>
                 </select>
@@ -416,8 +416,8 @@
   <p class="review-sec-sub">What our Baton Rouge customers are saying</p>
 
   <div class="review-carousel-outer">
-    <button class="review-arrow review-prev" id="reviewPrev">&#8249;</button>
-    <button class="review-arrow review-next" id="reviewNext">&#8250;</button>
+    <button class="review-arrow review-prev" id="reviewPrev" aria-label="Previous Review">&#8249;</button>
+    <button class="review-arrow review-next" id="reviewNext" aria-label="Next Review">&#8250;</button>
 
     <div class="review-track" id="reviewTrack">
 
@@ -654,10 +654,10 @@
       <span class="text-google">Google</span> | <span class="text-facebook">Facebook</span>
     </h2>
     <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
-      <a href="#" class="review-badge google-ring" target="_blank">
+      <a href="#" class="review-badge google-ring" target="_blank" rel="noopener noreferrer">
         <div class="inner-content"><p class="mb-1">Review us<br>on</p><img src="https://www.gesi.org/wp-content/uploads/2024/08/google-logo-png-open-2000.png" alt="Google" width="50" loading="lazy"></div>
       </a>
-      <a href="#" class="review-badge facebook-ring" target="_blank">
+      <a href="#" class="review-badge facebook-ring" target="_blank" rel="noopener noreferrer">
         <div class="inner-content"><p class="mb-1">Review us<br>on</p><img src="https://images.icon-icons.com/1826/PNG/512/4202107facebookfblogosocialsocialmedia-115710_115591.png" alt="Facebook" width="55" loading="lazy"></div>
       </a>
     </div>
@@ -674,7 +674,7 @@
       <div class="col-lg-3">
         <div class="mb-4">
           <a href="/demo/usaroofinglouisiana/" aria-label="USA Roofing Home">
-            <img src="/demo/usaroofinglouisiana/images/logo.png" alt="USA Roofing Logo" class="img-fluid" style="max-height: 150px;" loading="lazy">
+            <img src="/demo/usaroofinglouisiana/images/logo.png" alt="USA Roofing Logo" class="img-fluid" width="450" height="150" style="max-height: 150px; width: auto;" loading="lazy">
           </a>
         </div>
         <p class="small lh-base opacity-75">USA Roofing is your trusted roofing contractor in Baton Rouge, LA. Certified, licensed, and delivering hurricane-resistant roofing solutions you can count on.</p>
