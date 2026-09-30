@@ -51,26 +51,6 @@ export function Contact() {
               </p>
             </div>
 
-            {/* Direct Contact Cards / Pills */}
-            <div className="reveal reveal-delay-3 flex flex-wrap gap-3 pt-2">
-              <a
-                href="mailto:hello@schrader.co"
-                className="inline-flex items-center px-4 py-2.5 rounded-[var(--radius-md)] bg-white border border-[#98C1D9] text-[#293241] text-[14px] font-medium hover:border-[#293241] hover:shadow-sm transition-all"
-              >
-                hello@schrader.co
-              </a>
-
-              <a
-                href="tel:+12315555555"
-                className="inline-flex items-center px-4 py-2.5 rounded-[var(--radius-md)] bg-white border border-[#98C1D9] text-[#293241] text-[14px] font-medium hover:border-[#293241] hover:shadow-sm transition-all"
-              >
-                (231) 555-5555
-              </a>
-
-              <div className="inline-flex items-center px-4 py-2.5 rounded-[var(--radius-md)] bg-[#98C1D9]/20 border border-[#98C1D9]/70 text-[#3D5A80] text-[14px]">
-                Traverse City, MI
-              </div>
-            </div>
           </div>
 
           {/* Right Column (Form Card) */}

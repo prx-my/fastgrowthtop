@@ -17,7 +17,6 @@ interface RecentWorkProps {
 export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) {
   const [projectsList, setProjectsList] = useState<ProjectItem[]>(initialProjects);
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const [activePageIndex, setActivePageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProjectForModal, setSelectedProjectForModal] = useState<ProjectItem | null>(null);
 
@@ -41,12 +40,9 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
   const totalProjects = projectsList.length || 1;
   const safeProjectIndex = Math.min(activeProjectIndex, totalProjects - 1);
   const currentProject = projectsList[safeProjectIndex] || projectsData[0];
-  const pages = currentProject.pages && currentProject.pages.length > 0
-    ? currentProject.pages
-    : [{ title: "Home", image: currentProject.desktopImage, label: "Overview" }];
-  const totalPages = pages.length;
-  const safePageIndex = Math.min(activePageIndex, totalPages - 1);
-  const currentPage = pages[safePageIndex] || pages[0];
+  const currentPage = currentProject.pages && currentProject.pages.length > 0
+    ? currentProject.pages[0]
+    : { title: "Home", image: currentProject.desktopImage, label: "Overview" };
 
   // Touch swipe support
   const touchStartXRef = useRef<number | null>(null);
@@ -55,22 +51,11 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
   // Navigate Projects
   const handlePrevProject = useCallback(() => {
     setActiveProjectIndex((prev) => (prev === 0 ? totalProjects - 1 : prev - 1));
-    setActivePageIndex(0);
   }, [totalProjects]);
 
   const handleNextProject = useCallback(() => {
     setActiveProjectIndex((prev) => (prev === totalProjects - 1 ? 0 : prev + 1));
-    setActivePageIndex(0);
   }, [totalProjects]);
-
-  // Navigate Pages within current project
-  const handlePrevPage = useCallback(() => {
-    setActivePageIndex((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
-  }, [totalPages]);
-
-  const handleNextPage = useCallback(() => {
-    setActivePageIndex((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
-  }, [totalPages]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -151,10 +136,9 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
               </div>
             </div>
 
-            {/* Center: "Work" heading */}
             <div className="text-center">
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] text-[#1e2633] font-normal tracking-tight">
-                Work
+                Recent Projects
               </h2>
             </div>
 
@@ -183,7 +167,7 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
           {/* Mobile: Heading + project name + visit site */}
           <div className="md:hidden">
             <h2 className="font-serif text-3xl text-[#1e2633] font-normal tracking-tight text-center mb-2">
-              Work
+              Recent Projects
             </h2>
             <div className="flex items-center justify-between gap-2">
               <div className="inline-flex items-center gap-1.5 bg-white/80 border border-[#98C1D9]/40 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
@@ -254,37 +238,7 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
               />
             </div>
 
-            {/* Page Switcher Pill — Overlaid at bottom center of image */}
-            <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-10">
-              <div
-                className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-[#98C1D9]/50 rounded-full px-3.5 py-1.5 shadow-md font-mono text-xs sm:text-[13px]"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  type="button"
-                  onClick={handlePrevPage}
-                  className="text-[#3D5A80] hover:text-[#1e2633] p-0.5 rounded-full transition-colors cursor-pointer focus:outline-none"
-                  aria-label="Previous screenshot page"
-                >
-                  <ChevronLeft className="w-3.5 h-3.5 stroke-[2.5]" />
-                </button>
 
-                <span className="text-[#3D5A80] tracking-wide select-none font-medium">
-                  <span className="text-[#FBB01B] font-bold">0{activePageIndex + 1}</span>
-                  <span className="mx-1 text-[#3D5A80]/50">/</span>
-                  <span>0{totalPages} Pages</span>
-                </span>
-
-                <button
-                  type="button"
-                  onClick={handleNextPage}
-                  className="text-[#3D5A80] hover:text-[#1e2633] p-0.5 rounded-full transition-colors cursor-pointer focus:outline-none"
-                  aria-label="Next screenshot page"
-                >
-                  <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                </button>
-              </div>
-            </div>
           </div>
 
           {/* Next Arrow — Flex sibling, never collides */}
@@ -314,7 +268,6 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
                       type="button"
                       onClick={() => {
                         setActiveProjectIndex(idx);
-                        setActivePageIndex(0);
                       }}
                       className={`font-sans text-xs sm:text-sm tracking-wider cursor-pointer transition-colors duration-200 min-w-[32px] sm:min-w-[40px] min-h-[30px] sm:min-h-[36px] flex items-center justify-center focus:outline-none ${
                         isActive
