@@ -134,7 +134,7 @@
 
 <div class="mobile-topbar">
   <a href="tel:8889650305" class="topbar-phone">
-    <i class="bi bi-telephone-fill"></i>
+    <i class="bi bi-telephone-fill" aria-hidden="true"></i>
     (888) 965-0305
   </a>
   <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -150,7 +150,7 @@
       <img src="/demo/joinusroofing/images/usroofing-logo-white.webp" alt="US Roofing" style="max-height: 40px; width: auto;">
     </a>
     <button class="close-btn" id="closeBtn" aria-label="Close">
-      <i class="bi bi-x-lg"></i>
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
     </button>
   </div>
   <ul class="drawer-nav">
@@ -162,7 +162,7 @@
   </ul>
   <div class="drawer-phone">
     <a href="tel:8889650305" class="drawer-phone-link">
-      <i class="bi bi-telephone-fill"></i>
+      <i class="bi bi-telephone-fill" aria-hidden="true"></i>
       (888) 965-0305
     </a>
   </div>
@@ -204,7 +204,7 @@
     </li>
     <li class="nav-phone">
       <a href="tel:8889650305" class="nav-phone-link">
-        <i class="bi bi-telephone-fill"></i>
+        <i class="bi bi-telephone-fill" aria-hidden="true"></i>
         (888) 965-0305
       </a>
     </li>
@@ -249,14 +249,14 @@
             </div>
             <form>
               <div class="row g-2">
-                <div class="col-6"><input class="form-control rounded-input" placeholder="First Name *" /></div>
-                <div class="col-6"><input class="form-control rounded-input" placeholder="Last Name *" /></div>
+                <div class="col-6"><label for="first-name" class="visually-hidden">First Name</label><input id="first-name" name="first_name" class="form-control rounded-input" placeholder="First Name *" /></div>
+                <div class="col-6"><label for="last-name" class="visually-hidden">Last Name</label><input id="last-name" name="last_name" class="form-control rounded-input" placeholder="Last Name *" /></div>
               </div>
               <div class="row g-2 mt-2">
-                <div class="col-6"><input class="form-control rounded-input" placeholder="Phone Number *" /></div>
-                <div class="col-6"><input type="email" class="form-control rounded-input" placeholder="Email Address *" /></div>
+                <div class="col-6"><label for="phone-number" class="visually-hidden">Phone Number</label><input id="phone-number" name="phone_number" class="form-control rounded-input" placeholder="Phone Number *" /></div>
+                <div class="col-6"><label for="email-address" class="visually-hidden">Email Address</label><input id="email-address" type="email" name="email_address" class="form-control rounded-input" placeholder="Email Address *" /></div>
               </div>
-              <div class="mt-2"><input class="form-control rounded-input" placeholder="Zip Code *" /></div>
+              <div class="mt-2"><label for="zip-code" class="visually-hidden">Zip Code</label><input id="zip-code" name="zip_code" class="form-control rounded-input" placeholder="Zip Code *" /></div>
               <div class="mt-2">
                 <select class="form-select rounded-input">
                   <option value="" selected disabled>How Did You Hear About Us?</option>
@@ -690,9 +690,9 @@
         <div class="mt-4">
           <h5 class="footer-heading">Follow Us</h5>
           <div class="d-flex gap-2 mt-3">
-            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
@@ -719,7 +719,7 @@
           </div>
         </div>
         <a href="tel:8889650305" class="footer-phone-cta mt-4 d-inline-flex align-items-center gap-2">
-          <i class="bi bi-telephone-fill"></i> (888) 965-0305
+          <i class="bi bi-telephone-fill" aria-hidden="true"></i> (888) 965-0305
         </a>
       </div>
       <div class="col-lg-4">
