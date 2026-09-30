@@ -66,7 +66,14 @@
       .trust-pill { background-color: #e63946 !important; }
       .btn-contact-custom { border-color: #e63946 !important; color: #e63946 !important; }
       .btn-contact-custom:hover { background: #e63946 !important; color: #fff !important; }
-      .review-sec, .footer-main { background-color: #0b2545 !important; }
+      .review-sec { background-color: var(--color-bg-light-blue) !important; }
+      .footer-main { background-color: #0b2545 !important; }
+      .review-sec h1 { color: #0b2545 !important; }
+      .review-sec p.review-sec-sub { color: #333 !important; }
+      .review-dot { background: rgba(0, 0, 0, 0.2) !important; }
+      .review-dot.active { background: #0b2545 !important; }
+      .review-arrow { background: rgba(0, 0, 0, 0.6) !important; border-color: rgba(0, 0, 0, 0.8) !important; color: #fff !important; }
+      .review-arrow:hover { background: rgba(0, 0, 0, 0.8) !important; }
       .footer-heading::after { background-color: #e63946 !important; }
       .modern-carousel-section h1 { color: #0b2545 !important; }
       .dot.active { background: #0b2545 !important; }
@@ -212,7 +219,7 @@
 
 <!-- Reviews -->
 <div class="review-sec text-center py-5">
-  <h1 class="text-white mb-2">Our Recent Reviews</h1>
+  <h1 class="mb-2">Our Recent Reviews</h1>
   <p class="review-sec-sub">What our Columbia customers are saying</p>
   <div class="review-carousel-outer">
     <button class="review-arrow review-prev" id="reviewPrev">&#8249;</button>
