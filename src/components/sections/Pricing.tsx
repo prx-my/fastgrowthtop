@@ -337,29 +337,6 @@ export function Pricing() {
           </button>
         </div>
 
-        {/* Guarantees / Reassurance Row */}
-        <div className="reveal bg-white/75 backdrop-blur-sm border border-[#98C1D9] rounded-[var(--radius-lg)] p-8 lg:p-10 mb-8 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {guarantees.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[#E0FBFC] border border-[#98C1D9] flex items-center justify-center flex-shrink-0 text-[#293241]">
-                    <Icon className="w-5 h-5 text-[#F7931E]" />
-                  </div>
-                  <div>
-                    <h4 className="text-[15px] font-semibold text-[#293241] mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-[13.5px] text-[#3D5A80] leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
 
         {/* Custom Scope Footer Note */}
         <div className="reveal text-center">

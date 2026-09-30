@@ -18,17 +18,17 @@ export default function Home() {
         {/* 01 — Hero */}
         <Hero />
 
-        {/* 02 — Audit */}
-        <div id="audit">
-          <SiteAudit />
-        </div>
-
         {/* 04 — Recent Work */}
         <RecentWork initialProjects={workProjects} />
 
 
         {/* 06 — Google Reviews */}
         <Reviews />
+
+        {/* 02 — Audit */}
+        <div id="audit">
+          <SiteAudit />
+        </div>
 
         {/* 07 — Pricing */}
         <Pricing />
