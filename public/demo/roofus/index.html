@@ -97,26 +97,27 @@
   </head>
   <body>
 
+<header>
 <div class="mobile-topbar">
-  <a href="tel:5734463233" class="topbar-phone"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a>
+  <a id="link-573-446-3233" href="tel:5734463233" class="topbar-phone"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a>
   <button class="hamburger" id="hamburger" aria-label="Open menu"><i id="hamIcon" class="bi bi-list"></i></button>
 </div>
 <div class="overlay" id="overlay"></div>
 <div class="mobile-drawer" id="drawer">
   <div class="drawer-header">
-    <a class="drawer-logo" href="/demo/roofus/">
-      <img src="/demo/roofus/images/logo-white.webp" alt="Roof U.S.A" style="max-height: 40px; width: auto;">
+    <a id="link-mobile-home" class="drawer-logo" href="/demo/roofus/">
+      <img src="/demo/roofus/images/logo-white.webp" alt="Roof U.S.A" style="max-height: 40px; width: auto;" width="120" height="40">
     </a>
     <button class="close-btn" id="closeBtn" aria-label="Close"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
   </div>
   <ul class="drawer-nav">
-    <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Residential Roofing</button></li>
-    <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Roof Repair</button></li>
-    <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Commercial Roofing</button></li>
-    <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">About Us</button></li>
-    <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Contact Us</button></li>
+    <li><button id="btn-residential-roofing" class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Residential Roofing</button></li>
+    <li><button id="btn-roof-repair" class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Roof Repair</button></li>
+    <li><button id="btn-commercial-roofing" class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Commercial Roofing</button></li>
+    <li><button id="btn-about-us" class="m-nav-btn" onclick="window.location='/demo/roofus/#'">About Us</button></li>
+    <li><button id="btn-contact-us" class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Contact Us</button></li>
   </ul>
-  <div class="drawer-phone"><a href="tel:5734463233" class="drawer-phone-link"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a></div>
+  <div class="drawer-phone"><a id="link-573-446-3233" href="tel:5734463233" class="drawer-phone-link"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a></div>
 </div>
 <script>
   const hamburger=document.getElementById('hamburger'),hamIcon=document.getElementById('hamIcon'),drawer=document.getElementById('drawer'),overlay=document.getElementById('overlay'),closeBtn=document.getElementById('closeBtn');
@@ -129,15 +130,16 @@
   <ul>
     <li class="nav-spacer" aria-hidden="true"></li>
     <li class="nav-links-group">
-      <button class="nav-btn" onclick="window.location='/demo/roofus/#'">Residential Roofing</button>
-      <button class="nav-btn" onclick="window.location='/demo/roofus/#'">Roof Repair</button>
-      <button class="nav-btn" onclick="window.location='/demo/roofus/#'">Commercial Roofing</button>
-      <button class="nav-btn" onclick="window.location='/demo/roofus/#'">About Us</button>
-      <button class="nav-btn" onclick="window.location='/demo/roofus/#'">Contact Us</button>
+      <button id="btn-residential-roofing" class="nav-btn" onclick="window.location='/demo/roofus/#'">Residential Roofing</button>
+      <button id="btn-roof-repair" class="nav-btn" onclick="window.location='/demo/roofus/#'">Roof Repair</button>
+      <button id="btn-commercial-roofing" class="nav-btn" onclick="window.location='/demo/roofus/#'">Commercial Roofing</button>
+      <button id="btn-about-us" class="nav-btn" onclick="window.location='/demo/roofus/#'">About Us</button>
+      <button id="btn-contact-us" class="nav-btn" onclick="window.location='/demo/roofus/#'">Contact Us</button>
     </li>
-    <li class="nav-phone"><a href="tel:5734463233" class="nav-phone-link"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a></li>
+    <li class="nav-phone"><a id="link-573-446-3233" href="tel:5734463233" class="nav-phone-link"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a></li>
   </ul>
 </nav>
+</header>
 
 <main>
 
@@ -148,7 +150,7 @@
       <div class="col-md-8 col-12">
         <div class="right-side-section me-md-5 me-0 ms-md-4 ms-0 px-3 px-md-0">
           <div class="logo-wrapper mt-5">
-            <a href="/demo/roofus/" aria-label="Roof U.S.A Home">
+            <a id="link-1" href="/demo/roofus/" aria-label="Roof U.S.A Home">
               <div class="logo" style="background-image: url('/demo/roofus/images/logo-color.webp'); background-size: 80%; background-repeat: no-repeat; background-position: center; background-color: rgba(255,255,255,0.9);"></div>
             </a>
           </div>
@@ -165,10 +167,10 @@
               <div class="row g-2"><div class="col-6"><input class="form-control rounded-input" placeholder="First Name *"/></div><div class="col-6"><input class="form-control rounded-input" placeholder="Last Name *"/></div></div>
               <div class="row g-2 mt-2"><div class="col-6"><input class="form-control rounded-input" placeholder="Phone Number *"/></div><div class="col-6"><input type="email" class="form-control rounded-input" placeholder="Email Address *"/></div></div>
               <div class="mt-2"><input class="form-control rounded-input" placeholder="Zip Code *"/></div>
-              <div class="mt-2"><select class="form-select rounded-input"><option value="" selected disabled>How Did You Hear About Us?</option><option>Facebook</option><option>Radio</option><option>TV</option><option>Google Search</option><option>Google Ad</option><option>Direct Mail</option><option>Referral</option><option>Other</option></select></div>
-              <div class="mt-2"><textarea class="form-control rounded-input" rows="4" placeholder="How Can We Help You?"></textarea></div>
-              <div class="mt-2"><select class="form-select rounded-input"><option value="" selected disabled>Book An Appointment?</option><option>Yes</option><option>No (Reach Out To Schedule)</option></select></div>
-              <div class="mt-3"><button type="button" class="btn btn-danger w-100 btn-cta">START BOOKING NOW</button></div>
+              <div class="mt-2"><label for="hear-about-us" class="visually-hidden">Select an option</label><select id="hear-about-us" class="form-select rounded-input" aria-label="How Did You Hear About Us?"><option value="" selected disabled>How Did You Hear About Us?</option><option>Facebook</option><option>Radio</option><option>TV</option><option>Google Search</option><option>Google Ad</option><option>Direct Mail</option><option>Referral</option><option>Other</option></select></div>
+              <div class="mt-2"><label for="help-text" class="visually-hidden">How Can We Help You?</label><textarea id="help-text" class="form-control rounded-input" rows="4" placeholder="How Can We Help You?" aria-label="How Can We Help You?"></textarea></div>
+              <div class="mt-2"><label for="book-appointment" class="visually-hidden">Select an option</label><select id="book-appointment" class="form-select rounded-input" aria-label="Book An Appointment?"><option value="" selected disabled>Book An Appointment?</option><option>Yes</option><option>No (Reach Out To Schedule)</option></select></div>
+              <div class="mt-3"><button id="btn-start-booking-now" type="button" class="btn btn-danger w-100 btn-cta">START BOOKING NOW</button></div>
             </form>
           </div>
         </div>
@@ -198,7 +200,7 @@
             <div class="col-6 col-md-3"><div class="stat-container"><div class="stat-circle">4.9</div><div class="stat-label">Google <br> Rating</div></div></div>
           </div>
           <div class="mt-5 d-flex flex-wrap align-items-center gap-4">
-            <a href="#" class="btn btn-contact-custom">CONTACT US <span class="ms-2">❯</span></a>
+            <a id="link-contact-us" href="#" class="btn btn-contact-custom">CONTACT US <span class="ms-2">❯</span></a>
             <span class="fs-5 text-navy">or Call <strong class="text-danger">(573) 446-3233</strong></span>
           </div>
         </div>
@@ -228,8 +230,8 @@
   <h1 class="mb-2">Our Recent Reviews</h1>
   <p class="review-sec-sub">What our Columbia customers are saying</p>
   <div class="review-carousel-outer">
-    <button class="review-arrow review-prev" id="reviewPrev">&#8249;</button>
-    <button class="review-arrow review-next" id="reviewNext">&#8250;</button>
+    <button class="review-arrow review-prev" id="reviewPrev" aria-label="Previous Review">&#8249;</button>
+    <button class="review-arrow review-next" id="reviewNext" aria-label="Next Review">&#8250;</button>
     <div class="review-track" id="reviewTrack">
       <div class="review-card"><div class="review-header"><div class="avatar" style="background-color:#ea4335;">J</div><div class="user-info"><span class="user-name">Jennifer Walsh</span><span class="review-date">2 weeks ago</span></div><img src="https://img.icons8.com/color/48/google-logo.png" class="google-logo" alt="Google" loading="lazy" width="24" height="24"></div><div class="stars">★★★★★</div><p class="review-text">After last spring's tornado season damaged our shingles, Roof U.S.A was out the next morning. New roof was on by Friday. Incredibly fast and professional!</p></div>
       <div class="review-card"><div class="review-header"><div class="avatar" style="background-color:#34a853;">C</div><div class="user-info"><span class="user-name">Chris Brennan</span><span class="review-date">1 month ago</span></div><img src="https://img.icons8.com/color/48/google-logo.png" class="google-logo" alt="Google" loading="lazy" width="24" height="24"></div><div class="stars">★★★★★</div><p class="review-text">Best roofing crew in Boone County. They installed a new architectural shingle roof that looks incredible. Not a single nail on the driveway.</p></div>
@@ -288,8 +290,8 @@
     <h3 class="fw-bold mb-1 text-dark">Please leave a review for us on</h3>
     <h2 class="display-6 fw-bold mb-5"><span class="text-google">Google</span> | <span class="text-facebook">Facebook</span></h2>
     <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
-      <a href="#" class="review-badge google-ring" target="_blank"><div class="inner-content"><p class="mb-1">Review us<br>on</p><img src="https://www.gesi.org/wp-content/uploads/2024/08/google-logo-png-open-2000.png" alt="Google" width="50" loading="lazy"></div></a>
-      <a href="#" class="review-badge facebook-ring" target="_blank"><div class="inner-content"><p class="mb-1">Review us<br>on</p><img src="https://images.icon-icons.com/1826/PNG/512/4202107facebookfblogosocialsocialmedia-115710_115591.png" alt="Facebook" width="55" loading="lazy"></div></a>
+      <a id="link-review-uson" href="#" class="review-badge google-ring" target="_blank" rel="noopener noreferrer"><div class="inner-content"><p class="mb-1">Review us<br>on</p><img src="https://www.gesi.org/wp-content/uploads/2024/08/google-logo-png-open-2000.png" alt="Google" width="50" loading="lazy"></div></a>
+      <a id="link-review-uson" href="#" class="review-badge facebook-ring" target="_blank" rel="noopener noreferrer"><div class="inner-content"><p class="mb-1">Review us<br>on</p><img src="https://images.icon-icons.com/1826/PNG/512/4202107facebookfblogosocialsocialmedia-115710_115591.png" alt="Facebook" width="55" loading="lazy"></div></a>
     </div>
   </div>
 </section>
@@ -300,22 +302,22 @@
   <div class="container pb-4">
     <div class="row gy-5">
       <div class="col-lg-3">
-        <div class="mb-4"><a href="/demo/roofus/" aria-label="Roof U.S.A Home"><img src="/demo/roofus/images/logo-white.webp" alt="Roof U.S.A Logo" class="img-fluid" style="max-height:150px;" loading="lazy"></a></div>
+        <div class="mb-4"><a id="link-2" href="/demo/roofus/" aria-label="Roof U.S.A Home"><img src="/demo/roofus/images/logo-white.webp" alt="Roof U.S.A Logo" class="img-fluid" style="max-height:150px;" loading="lazy"></a></div>
         <p class="small lh-base opacity-75">Roof U.S.A is your trusted roofing contractor in Columbia, MO. Quality workmanship, CertainTeed certified, and results Mid-Missouri homeowners can count on.</p>
-        <div class="mt-4"><h5 class="footer-heading">Follow Us</h5><div class="d-flex gap-2 mt-3"><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook" aria-hidden="true"></i></a><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin" aria-hidden="true"></i></a><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x" aria-hidden="true"></i></a></div></div>
+        <div class="mt-4"><h5 class="footer-heading">Follow Us</h5><div class="d-flex gap-2 mt-3"><a id="link-facebook-review" href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook" aria-hidden="true"></i></a><a id="link-facebook-review" href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin" aria-hidden="true"></i></a><a id="link-facebook-review" href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x" aria-hidden="true"></i></a></div></div>
       </div>
       <div class="col-lg-5 px-lg-5">
         <h5 class="footer-heading">Quick Links</h5>
-        <div class="row mt-4"><div class="col-6"><ul class="list-unstyled footer-list"><li><a href="/demo/roofus/#">Residential Roofing</a></li><li><a href="/demo/roofus/#">Roof Repair</a></li><li><a href="/demo/roofus/#">Commercial Roofing</a></li><li><a href="/demo/roofus/#">About Us</a></li><li><a href="/demo/roofus/#">Contact Us</a></li></ul></div><div class="col-6"><ul class="list-unstyled footer-list"><li><a href="/demo/roofus/#">Free Roof Inspection</a></li><li><a href="/demo/roofus/#">Free Roof Estimate</a></li><li><a href="/demo/roofus/#">Storm Damage Repair</a></li><li><a href="/demo/roofus/#">Hail Damage Repair</a></li><li><a href="/demo/roofus/#">Gallery</a></li></ul></div></div>
-        <a href="tel:5734463233" class="footer-phone-cta mt-4 d-inline-flex align-items-center gap-2"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a>
+        <div class="row mt-4"><div class="col-6"><ul class="list-unstyled footer-list"><li><a id="link-residential-roofing" href="/demo/roofus/#">Residential Roofing</a></li><li><a id="link-roof-repair" href="/demo/roofus/#">Roof Repair</a></li><li><a id="link-commercial-roofing" href="/demo/roofus/#">Commercial Roofing</a></li><li><a id="link-about-us" href="/demo/roofus/#">About Us</a></li><li><a id="link-contact-us" href="/demo/roofus/#">Contact Us</a></li></ul></div><div class="col-6"><ul class="list-unstyled footer-list"><li><a id="link-free-roof-inspection" href="/demo/roofus/#">Free Roof Inspection</a></li><li><a id="link-free-roof-estimate" href="/demo/roofus/#">Free Roof Estimate</a></li><li><a id="link-storm-damage-repair" href="/demo/roofus/#">Storm Damage Repair</a></li><li><a id="link-hail-damage-repair" href="/demo/roofus/#">Hail Damage Repair</a></li><li><a id="link-gallery" href="/demo/roofus/#">Gallery</a></li></ul></div></div>
+        <a id="link-573-446-3233" href="tel:5734463233" class="footer-phone-cta mt-4 d-inline-flex align-items-center gap-2"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a>
       </div>
       <div class="col-lg-4">
-        <div class="mb-5"><h5 class="footer-heading">Company Info</h5><p class="small mt-4 opacity-75">4501 Interstate 70 Dr E<br>Columbia, MO 65201</p><p class="small opacity-75"><a href="mailto:info@roofusamissouri.com" style="color:var(--color-text-light);">info@roofusamissouri.com</a></p></div>
+        <div class="mb-5"><h5 class="footer-heading">Company Info</h5><p class="small mt-4 opacity-75">4501 Interstate 70 Dr E<br>Columbia, MO 65201</p><p class="small opacity-75"><a id="link-info-roofusamissouri-com" href="mailto:info@roofusamissouri.com" style="color:var(--color-text-light);">info@roofusamissouri.com</a></p></div>
         <div><h5 class="footer-heading">Business Hours</h5><ul class="list-unstyled small mt-4 business-hours"><li><span>Mon:</span><span>8:00 AM – 5:00 PM</span></li><li><span>Tue:</span><span>8:00 AM – 5:00 PM</span></li><li><span>Wed:</span><span>8:00 AM – 5:00 PM</span></li><li><span>Thu:</span><span>8:00 AM – 5:00 PM</span></li><li><span>Fri:</span><span>8:00 AM – 5:00 PM</span></li><li><span>Sat:</span><span>Closed</span></li><li><span>Sun:</span><span>Closed</span></li></ul></div>
       </div>
     </div>
   </div>
-  <div class="copyright-bar py-3 mt-4"><div class="container"><div class="row align-items-center text-center text-md-start"><div class="col-md-8"><p class="mb-0 small">Copyright &copy; 2026 Roof U.S.A | Website developed &amp; hosted by <b><a class="text-decoration-none text-warning" href="https://schrader.co/">Schrader Web Solutions</a></b></p></div><div class="col-md-4 text-md-end mt-2 mt-md-0"><p class="mb-0 small"><a href="#" class="text-decoration-none text-white">Privacy Policy</a> | <a href="#" class="text-decoration-none text-white">Terms &amp; Conditions</a></p></div></div></div></div>
+  <div class="copyright-bar py-3 mt-4"><div class="container"><div class="row align-items-center text-center text-md-start"><div class="col-md-8"><p class="mb-0 small">Copyright &copy; 2026 Roof U.S.A | Website developed &amp; hosted by <b><a id="link-schrader-web-solutions" class="text-decoration-none text-warning" href="https://schrader.co/">Schrader Web Solutions</a></b></p></div><div class="col-md-4 text-md-end mt-2 mt-md-0"><p class="mb-0 small"><a id="link-privacy-policy" href="#" class="text-decoration-none text-white">Privacy Policy</a> | <a id="link-terms-amp-conditions" href="#" class="text-decoration-none text-white">Terms &amp; Conditions</a></p></div></div></div></div>
 </footer>
 
 </main>
