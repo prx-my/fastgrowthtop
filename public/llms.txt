@@ -1,9 +1,13 @@
 # Fast Growth Top
 
-This site hosts multiple regional roofing companies including:
-- US Roofing (Tampa)
-- Roofing Pros USA (Daytona Beach)
-- Roof U.S.A (Columbia)
-- Texas Roofers USA (DFW & Central Texas)
+> Premium roofing services across multiple regions.
 
-We provide top-quality residential and commercial roofing solutions, roof repair, and storm damage restoration.
+## Companies
+- [US Roofing](/demo/joinusroofing)
+- [Roofing Pros USA](/demo/roofingprosusa)
+- [Roof U.S.A](/demo/roofus)
+- [Texas Roofers USA](/demo/texasroofers)
+- [USA Roofing Louisiana](/demo/usaroofinglouisiana)
+
+## Services
+We specialize in [residential roofing](/), [commercial roofing](/), and [storm damage repair](/).
