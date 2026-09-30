@@ -485,3 +485,15 @@ a { text-decoration: none; }
   .footer-heading    { font-size: 1rem; }
   .business-hours li { flex-direction: column; gap: 2px; }
 }
+
+/* Accessibility enhancements for carousel dots */
+.dot, .review-dot {
+  border: none;
+  padding: 0;
+  outline: none;
+}
+
+.dot:focus-visible, .review-dot:focus-visible, .review-arrow:focus-visible, .carousel-arrow:focus-visible {
+  outline: 2px solid var(--color-primary, #cc2936);
+  outline-offset: 2px;
+}

@@ -103,7 +103,10 @@
       .trust-pill { background-color: #c0392b !important; }
       .btn-contact-custom { border-color: #c0392b !important; color: #c0392b !important; }
       .btn-contact-custom:hover { background: #c0392b !important; color: #fff !important; }
-      .review-sec { background-color: var(--color-bg-light-blue) !important; }
+      .company-section, .modern-carousel-section { background-color: #f4f7fa !important; }
+      .partner-logos-sec.bg-light { background-color: #1a3a5c !important; border: none !important; }
+      .partner-logos-sec.bg-light h5 { color: #fff !important; opacity: 1 !important; }
+      .review-sec { background-color: #f5f2ef !important; }
       .footer-main { background-color: #0d1b2a !important; }
       .review-sec h1 { color: #0d1b2a !important; }
       .review-sec p.review-sec-sub { color: #333 !important; }
@@ -118,9 +121,9 @@
       .services-section { background: #0d1b2a; padding: 70px 0; }
       .services-section h2 { color: #fff; font-weight: 800; font-size: 2.2rem; margin-bottom: 12px; }
       .services-section .section-sub { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 40px; }
-      .service-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0; overflow: hidden; transition: transform .3s, box-shadow .3s; height: 100%; }
+      .service-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0 !important; overflow: hidden; transition: transform .3s, box-shadow .3s; height: 100%; }
       .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
-      .service-card img { width: 100%; height: 200px; object-fit: cover; }
+      .service-card img { width: 100% !important; height: 200px !important; object-fit: cover !important; margin: 0 !important; display: block !important; border-radius: 0 !important; }
       .service-card-body { padding: 22px; }
       .service-card h4 { color: #fff; font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
       .service-card p { color: rgba(255,255,255,0.7); font-size: .92rem; line-height: 1.6; margin: 0; }
@@ -134,7 +137,7 @@
 
 <div class="mobile-topbar">
   <a href="tel:8889650305" class="topbar-phone">
-    <i class="bi bi-telephone-fill"></i>
+    <i class="bi bi-telephone-fill" aria-hidden="true"></i>
     (888) 965-0305
   </a>
   <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -150,7 +153,7 @@
       <img src="/demo/joinusroofing/images/usroofing-logo-white.webp" alt="US Roofing" style="max-height: 40px; width: auto;">
     </a>
     <button class="close-btn" id="closeBtn" aria-label="Close">
-      <i class="bi bi-x-lg"></i>
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
     </button>
   </div>
   <ul class="drawer-nav">
@@ -162,7 +165,7 @@
   </ul>
   <div class="drawer-phone">
     <a href="tel:8889650305" class="drawer-phone-link">
-      <i class="bi bi-telephone-fill"></i>
+      <i class="bi bi-telephone-fill" aria-hidden="true"></i>
       (888) 965-0305
     </a>
   </div>
@@ -204,7 +207,7 @@
     </li>
     <li class="nav-phone">
       <a href="tel:8889650305" class="nav-phone-link">
-        <i class="bi bi-telephone-fill"></i>
+        <i class="bi bi-telephone-fill" aria-hidden="true"></i>
         (888) 965-0305
       </a>
     </li>
@@ -249,14 +252,14 @@
             </div>
             <form>
               <div class="row g-2">
-                <div class="col-6"><input class="form-control rounded-input" placeholder="First Name *" /></div>
-                <div class="col-6"><input class="form-control rounded-input" placeholder="Last Name *" /></div>
+                <div class="col-6"><label for="first-name" class="visually-hidden">First Name</label><input id="first-name" name="first_name" class="form-control rounded-input" placeholder="First Name *" /></div>
+                <div class="col-6"><label for="last-name" class="visually-hidden">Last Name</label><input id="last-name" name="last_name" class="form-control rounded-input" placeholder="Last Name *" /></div>
               </div>
               <div class="row g-2 mt-2">
-                <div class="col-6"><input class="form-control rounded-input" placeholder="Phone Number *" /></div>
-                <div class="col-6"><input type="email" class="form-control rounded-input" placeholder="Email Address *" /></div>
+                <div class="col-6"><label for="phone-number" class="visually-hidden">Phone Number</label><input id="phone-number" name="phone_number" class="form-control rounded-input" placeholder="Phone Number *" /></div>
+                <div class="col-6"><label for="email-address" class="visually-hidden">Email Address</label><input id="email-address" type="email" name="email_address" class="form-control rounded-input" placeholder="Email Address *" /></div>
               </div>
-              <div class="mt-2"><input class="form-control rounded-input" placeholder="Zip Code *" /></div>
+              <div class="mt-2"><label for="zip-code" class="visually-hidden">Zip Code</label><input id="zip-code" name="zip_code" class="form-control rounded-input" placeholder="Zip Code *" /></div>
               <div class="mt-2">
                 <select class="form-select rounded-input">
                   <option value="" selected disabled>How Did You Hear About Us?</option>
@@ -690,9 +693,9 @@
         <div class="mt-4">
           <h5 class="footer-heading">Follow Us</h5>
           <div class="d-flex gap-2 mt-3">
-            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+            <a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
@@ -719,7 +722,7 @@
           </div>
         </div>
         <a href="tel:8889650305" class="footer-phone-cta mt-4 d-inline-flex align-items-center gap-2">
-          <i class="bi bi-telephone-fill"></i> (888) 965-0305
+          <i class="bi bi-telephone-fill" aria-hidden="true"></i> (888) 965-0305
         </a>
       </div>
       <div class="col-lg-4">

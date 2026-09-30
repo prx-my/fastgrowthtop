@@ -67,7 +67,10 @@
       .trust-pill { background-color: #e63946 !important; }
       .btn-contact-custom { border-color: #e63946 !important; color: #e63946 !important; }
       .btn-contact-custom:hover { background: #e63946 !important; color: #fff !important; }
-      .review-sec { background-color: var(--color-bg-light-blue) !important; }
+      .company-section, .modern-carousel-section { background-color: #f2f5f9 !important; }
+      .partner-logos-sec.bg-light { background-color: #0b2545 !important; border: none !important; }
+      .partner-logos-sec.bg-light h5 { color: #fff !important; opacity: 1 !important; }
+      .review-sec { background-color: #f5f2ef !important; }
       .footer-main { background-color: #0b2545 !important; }
       .review-sec h1 { color: #0b2545 !important; }
       .review-sec p.review-sec-sub { color: #333 !important; }
@@ -81,9 +84,9 @@
       .services-section { background: #0b2545; padding: 70px 0; }
       .services-section h2 { color: #fff; font-weight: 800; font-size: 2.2rem; margin-bottom: 12px; }
       .services-section .section-sub { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 40px; }
-      .service-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; transition: transform .3s, box-shadow .3s; height: 100%; }
+      .service-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0 !important; overflow: hidden; transition: transform .3s, box-shadow .3s; height: 100%; }
       .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
-      .service-card img { width: 100%; height: 200px; object-fit: cover; }
+      .service-card img { width: 100% !important; height: 200px !important; object-fit: cover !important; margin: 0 !important; display: block !important; border-radius: 0 !important; }
       .service-card-body { padding: 22px; }
       .service-card h4 { color: #fff; font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
       .service-card p { color: rgba(255,255,255,0.7); font-size: .92rem; line-height: 1.6; margin: 0; }
@@ -95,7 +98,7 @@
   <body>
 
 <div class="mobile-topbar">
-  <a href="tel:5734463233" class="topbar-phone"><i class="bi bi-telephone-fill"></i> (573) 446-3233</a>
+  <a href="tel:5734463233" class="topbar-phone"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a>
   <button class="hamburger" id="hamburger" aria-label="Open menu"><i id="hamIcon" class="bi bi-list"></i></button>
 </div>
 <div class="overlay" id="overlay"></div>
@@ -104,7 +107,7 @@
     <a class="drawer-logo" href="/demo/roofus/">
       <img src="/demo/roofus/images/logo-white.webp" alt="Roof U.S.A" style="max-height: 40px; width: auto;">
     </a>
-    <button class="close-btn" id="closeBtn" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    <button class="close-btn" id="closeBtn" aria-label="Close"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
   </div>
   <ul class="drawer-nav">
     <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Residential Roofing</button></li>
@@ -113,7 +116,7 @@
     <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">About Us</button></li>
     <li><button class="m-nav-btn" onclick="window.location='/demo/roofus/#'">Contact Us</button></li>
   </ul>
-  <div class="drawer-phone"><a href="tel:5734463233" class="drawer-phone-link"><i class="bi bi-telephone-fill"></i> (573) 446-3233</a></div>
+  <div class="drawer-phone"><a href="tel:5734463233" class="drawer-phone-link"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a></div>
 </div>
 <script>
   const hamburger=document.getElementById('hamburger'),hamIcon=document.getElementById('hamIcon'),drawer=document.getElementById('drawer'),overlay=document.getElementById('overlay'),closeBtn=document.getElementById('closeBtn');
@@ -132,7 +135,7 @@
       <button class="nav-btn" onclick="window.location='/demo/roofus/#'">About Us</button>
       <button class="nav-btn" onclick="window.location='/demo/roofus/#'">Contact Us</button>
     </li>
-    <li class="nav-phone"><a href="tel:5734463233" class="nav-phone-link"><i class="bi bi-telephone-fill"></i> (573) 446-3233</a></li>
+    <li class="nav-phone"><a href="tel:5734463233" class="nav-phone-link"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a></li>
   </ul>
 </nav>
 
@@ -299,12 +302,12 @@
       <div class="col-lg-3">
         <div class="mb-4"><a href="/demo/roofus/" aria-label="Roof U.S.A Home"><img src="/demo/roofus/images/logo-white.webp" alt="Roof U.S.A Logo" class="img-fluid" style="max-height:150px;" loading="lazy"></a></div>
         <p class="small lh-base opacity-75">Roof U.S.A is your trusted roofing contractor in Columbia, MO. Quality workmanship, CertainTeed certified, and results Mid-Missouri homeowners can count on.</p>
-        <div class="mt-4"><h5 class="footer-heading">Follow Us</h5><div class="d-flex gap-2 mt-3"><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x"></i></a></div></div>
+        <div class="mt-4"><h5 class="footer-heading">Follow Us</h5><div class="d-flex gap-2 mt-3"><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-facebook" aria-hidden="true"></i></a><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-linkedin" aria-hidden="true"></i></a><a href="#" class="btn btn-facebook d-inline-flex align-items-center justify-content-center"><i class="bi bi-twitter-x" aria-hidden="true"></i></a></div></div>
       </div>
       <div class="col-lg-5 px-lg-5">
         <h5 class="footer-heading">Quick Links</h5>
         <div class="row mt-4"><div class="col-6"><ul class="list-unstyled footer-list"><li><a href="/demo/roofus/#">Residential Roofing</a></li><li><a href="/demo/roofus/#">Roof Repair</a></li><li><a href="/demo/roofus/#">Commercial Roofing</a></li><li><a href="/demo/roofus/#">About Us</a></li><li><a href="/demo/roofus/#">Contact Us</a></li></ul></div><div class="col-6"><ul class="list-unstyled footer-list"><li><a href="/demo/roofus/#">Free Roof Inspection</a></li><li><a href="/demo/roofus/#">Free Roof Estimate</a></li><li><a href="/demo/roofus/#">Storm Damage Repair</a></li><li><a href="/demo/roofus/#">Hail Damage Repair</a></li><li><a href="/demo/roofus/#">Gallery</a></li></ul></div></div>
-        <a href="tel:5734463233" class="footer-phone-cta mt-4 d-inline-flex align-items-center gap-2"><i class="bi bi-telephone-fill"></i> (573) 446-3233</a>
+        <a href="tel:5734463233" class="footer-phone-cta mt-4 d-inline-flex align-items-center gap-2"><i class="bi bi-telephone-fill" aria-hidden="true"></i> (573) 446-3233</a>
       </div>
       <div class="col-lg-4">
         <div class="mb-5"><h5 class="footer-heading">Company Info</h5><p class="small mt-4 opacity-75">4501 Interstate 70 Dr E<br>Columbia, MO 65201</p><p class="small opacity-75"><a href="mailto:info@roofusamissouri.com" style="color:var(--color-text-light);">info@roofusamissouri.com</a></p></div>
