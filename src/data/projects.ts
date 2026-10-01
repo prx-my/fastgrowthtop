@@ -2,6 +2,8 @@ export interface ProjectPage {
   title: string;
   image: string;
   label?: string;
+  width?: number;
+  height?: number;
 }
 
 export interface ProjectItem {
@@ -19,6 +21,8 @@ export interface ProjectItem {
   desktopImage: string;
   mobileImage: string;
   thumbnailImage: string;
+  imageWidth?: number;
+  imageHeight?: number;
   fullPageImage?: string;
   videoUrl?: string;
   liveUrl?: string;

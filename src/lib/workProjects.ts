@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { projectsData, ProjectItem, ProjectPage } from "@/data/projects";
+import { getImageSize } from "@/lib/imageSize";
 
 // Supported image extensions
 const IMAGE_EXTENSIONS = new Set([
@@ -97,18 +98,24 @@ export function getWorkProjects(): ProjectItem[] {
         p.name.toLowerCase() === cleanName.toLowerCase()
     );
 
-    // Build pages from images
+    // Build pages from images with intrinsic dimensions
     const pages: ProjectPage[] = imageFiles.map((file, pageIdx) => {
       const pageTitle = toCleanTitle(path.parse(file).name) || `Page ${pageIdx + 1}`;
       const imagePath = `/work/${encodeURIComponent(folderName)}/${file}`;
+      const filePath = path.join(folderPath, file);
+      const dimensions = getImageSize(filePath);
       return {
         title: pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1),
         image: imagePath,
         label: `${cleanName} — Screen ${pageIdx + 1}`,
+        width: dimensions?.width,
+        height: dimensions?.height,
       };
     });
 
     const firstImage = pages[0].image;
+    const firstWidth = pages[0].width;
+    const firstHeight = pages[0].height;
     const projectNumber = String(scannedProjects.length + 1).padStart(2, "0");
 
     if (existing) {
@@ -118,6 +125,8 @@ export function getWorkProjects(): ProjectItem[] {
         heroImage: firstImage,
         desktopImage: firstImage,
         thumbnailImage: firstImage,
+        imageWidth: firstWidth,
+        imageHeight: firstHeight,
         pages,
       });
     } else {
@@ -137,6 +146,8 @@ export function getWorkProjects(): ProjectItem[] {
         desktopImage: firstImage,
         mobileImage: firstImage,
         thumbnailImage: firstImage,
+        imageWidth: firstWidth,
+        imageHeight: firstHeight,
         websiteDomain: `${slug}.com`,
         liveUrl: "#contact",
         previewHeading: cleanName,

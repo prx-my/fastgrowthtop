@@ -42,7 +42,16 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
   const currentProject = projectsList[safeProjectIndex] || projectsData[0];
   const currentPage = currentProject.pages && currentProject.pages.length > 0
     ? currentProject.pages[0]
-    : { title: "Home", image: currentProject.desktopImage, label: "Overview" };
+    : {
+        title: "Home",
+        image: currentProject.desktopImage,
+        label: "Overview",
+        width: currentProject.imageWidth,
+        height: currentProject.imageHeight,
+      };
+
+  const imgWidth = currentPage.width || currentProject.imageWidth || 1920;
+  const imgHeight = currentPage.height || currentProject.imageHeight || 1080;
 
   // Touch swipe support
   const touchStartXRef = useRef<number | null>(null);
@@ -215,12 +224,12 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
 
           {/* Image Preview Container */}
           <div
-            className="relative flex-1 max-w-[1360px] min-w-0 rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)] flex flex-col"
+            className="relative flex-1 max-w-[1360px] min-w-0 flex items-center justify-center my-auto w-full"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             <div
-              className="relative w-full aspect-[16/9.5] sm:aspect-[16/9] lg:aspect-[16/8.6] max-h-[66vh] sm:max-h-[70vh] lg:max-h-[72vh] min-h-[280px] overflow-hidden cursor-pointer bg-neutral-100"
+              className="relative max-w-full rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)] border border-slate-200/80 cursor-pointer flex items-center justify-center transition-all duration-300"
               onClick={() => {
                 setSelectedProjectForModal(currentProject);
                 setIsModalOpen(true);
@@ -231,14 +240,13 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
                 key={`${currentProject.id}-${currentPage.image}`}
                 src={currentPage.image}
                 alt={`${currentProject.name} — ${currentPage.title}`}
-                fill
+                width={imgWidth}
+                height={imgHeight}
                 priority
                 sizes="(max-width: 768px) 96vw, (max-width: 1400px) 92vw, 1360px"
-                className="object-cover object-top transition-opacity duration-300 motion-reduce:transition-none"
+                className="w-auto h-auto max-w-full max-h-[60vh] sm:max-h-[66vh] lg:max-h-[70vh] object-contain block transition-opacity duration-300 motion-reduce:transition-none"
               />
             </div>
-
-
           </div>
 
           {/* Next Arrow — Flex sibling, never collides */}
