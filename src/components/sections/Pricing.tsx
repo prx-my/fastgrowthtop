@@ -338,18 +338,7 @@ export function Pricing() {
         </div>
 
 
-        {/* Custom Scope Footer Note */}
-        <div className="reveal text-center">
-          <p className="text-[14px] text-[#3D5A80]">
-            Have questions about what your business needs?{" "}
-            <a
-              href="#contact"
-              className="text-[#293241] font-semibold underline underline-offset-4 hover:text-[#F7931E] transition-colors"
-            >
-              Send a quick message →
-            </a>
-          </p>
-        </div>
+
       </div>
     </section>
   );
