@@ -124,11 +124,11 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
       className="relative w-full bg-[#E0FBFC] text-[#293241] min-h-screen flex flex-col justify-between py-4 sm:py-5 lg:py-6 select-none overflow-hidden"
       aria-label="Work portfolio showcase"
     >
-      <div className="w-full max-w-[1520px] mx-auto px-3 sm:px-6 lg:px-8 flex-1 flex flex-col justify-between min-h-0">
+      <div className="w-full max-w-[1760px] mx-auto px-3 sm:px-6 lg:px-8 flex-1 flex flex-col justify-between min-h-0">
         {/* ========================================================
             1. HEADER ROW: [Project Pill] — Work — [Visit site]
            ======================================================== */}
-        <div className="w-full max-w-[1360px] mx-auto mb-2 sm:mb-3 shrink-0">
+        <div className="w-full max-w-[1564px] mx-auto mb-2 sm:mb-3 shrink-0">
           {/* Desktop: 3-column grid */}
           <div className="hidden md:grid md:grid-cols-3 items-center">
             {/* Left: Project Name Pill with refined typography */}
@@ -211,7 +211,7 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
         {/* ========================================================
             2. MAIN PROJECT SHOWCASE + ARROWS (NEVER COLLIDING FLEX)
            ======================================================== */}
-        <div className="w-full max-w-[1520px] mx-auto flex-1 min-h-0 flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 my-auto">
+        <div className="w-full max-w-[1760px] mx-auto flex-1 min-h-0 flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 my-auto">
           {/* Previous Arrow */}
           <button
             type="button"
@@ -222,14 +222,14 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
             <ChevronLeft className="w-5 h-5 text-slate-700 stroke-[2] transition-transform duration-200 group-hover:-translate-x-0.5" />
           </button>
 
-          {/* Image Preview Container */}
+          {/* Image Preview Container (Same size div across all projects, width +15%, height +8%, zero white space) */}
           <div
-            className="relative flex-1 max-w-[1360px] min-w-0 flex items-center justify-center my-auto w-full"
+            className="relative flex-1 max-w-[1564px] min-w-0 rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-slate-900 shadow-[0_12px_45px_rgba(41,50,65,0.08)] border border-slate-200/80 flex flex-col"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             <div
-              className="relative max-w-full rounded-2xl sm:rounded-[26px] lg:rounded-[28px] overflow-hidden bg-white shadow-[0_12px_45px_rgba(41,50,65,0.08)] border border-slate-200/80 cursor-pointer flex items-center justify-center transition-all duration-300"
+              className="relative w-full aspect-[16/8.8] max-h-[71vh] sm:max-h-[76vh] lg:max-h-[78vh] min-h-[302px] overflow-hidden cursor-pointer flex items-center justify-center p-0"
               onClick={() => {
                 setSelectedProjectForModal(currentProject);
                 setIsModalOpen(true);
@@ -240,11 +240,10 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
                 key={`${currentProject.id}-${currentPage.image}`}
                 src={currentPage.image}
                 alt={`${currentProject.name} — ${currentPage.title}`}
-                width={imgWidth}
-                height={imgHeight}
+                fill
                 priority
-                sizes="(max-width: 768px) 96vw, (max-width: 1400px) 92vw, 1360px"
-                className="w-auto h-auto max-w-full max-h-[60vh] sm:max-h-[66vh] lg:max-h-[70vh] object-contain block transition-opacity duration-300 motion-reduce:transition-none"
+                sizes="(max-width: 768px) 96vw, (max-width: 1600px) 94vw, 1564px"
+                className="object-cover object-top transition-opacity duration-300 motion-reduce:transition-none"
               />
             </div>
           </div>
@@ -263,7 +262,7 @@ export function RecentWork({ initialProjects = projectsData }: RecentWorkProps) 
         {/* ========================================================
             4. PROJECT NAVIGATION / PROGRESS LINE (01 ------- 06)
            ======================================================== */}
-        <div className="w-full max-w-[1360px] mx-auto mt-auto pt-2 pb-1 sm:pb-2 shrink-0">
+        <div className="w-full max-w-[1564px] mx-auto mt-auto pt-2 pb-1 sm:pb-2 shrink-0">
           <div className="w-full overflow-x-auto no-scrollbar py-1">
             <div className="min-w-[340px] sm:min-w-0">
               {/* Project Numbers Row */}
