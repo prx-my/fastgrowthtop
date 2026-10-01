@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export function Hero() {
@@ -26,16 +26,7 @@ export function Hero() {
             If it isn't, I can help. I build websites, improve your visibility, generate more leads, and automate the busywork so you can focus on running your business.
           </p>
 
-          {/* CTAs */}
-          <div className="reveal reveal-delay-2 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-            <a href="#contact" className="btn-primary">
-              <span>Tell Me About Your Business</span>
-              <ArrowRight className="w-4 h-4 arrow-icon" />
-            </a>
-            <a href="#work" className="btn-secondary">
-              <span>See My Work</span>
-            </a>
-          </div>
+
         </div>
       </div>
     </section>
