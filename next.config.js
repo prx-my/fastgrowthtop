@@ -10,12 +10,31 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/roofers",
+        destination: "/roofers/index.html",
+      },
+      {
+        source: "/roofers/:slug",
+        destination: "/roofers/:slug/index.html",
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
         source: "/demo",
-        destination: "/demo/index.html",
+        destination: "/roofers",
+        permanent: true,
       },
       {
         source: "/demo/:slug",
-        destination: "/demo/:slug/index.html",
+        destination: "/roofers/:slug",
+        permanent: true,
+      },
+      {
+        source: "/demo/:slug/:path*",
+        destination: "/roofers/:slug/:path*",
+        permanent: true,
       },
     ];
   },

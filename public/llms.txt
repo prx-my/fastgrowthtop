@@ -3,11 +3,11 @@
 > Premium roofing services across multiple regions.
 
 ## Companies
-- [US Roofing](/demo/joinusroofing)
-- [Roofing Pros USA](/demo/roofingprosusa)
-- [Roof U.S.A](/demo/roofus)
-- [Texas Roofers USA](/demo/texasroofers)
-- [USA Roofing Louisiana](/demo/usaroofinglouisiana)
+- [US Roofing](/roofers/joinusroofing)
+- [Roofing Pros USA](/roofers/roofingprosusa)
+- [Roof U.S.A](/roofers/roofus)
+- [Texas Roofers USA](/roofers/texasroofers)
+- [USA Roofing Louisiana](/roofers/usaroofinglouisiana)
 
 ## Services
 We specialize in [residential roofing](/), [commercial roofing](/), and [storm damage repair](/).
