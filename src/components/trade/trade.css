@@ -22,6 +22,7 @@ ul,ol{padding:0;list-style:none}
 p{max-width:68ch}
 a{color:var(--ink);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);text-underline-offset:3px;transition:color 120ms,background-color 120ms,border-color 120ms,text-decoration-color 120ms}
 a:hover{text-decoration-color:currentColor}
+a[href^="tel:"]{white-space:nowrap}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .dark a:focus-visible{outline-color:var(--white)}
 [id]{scroll-margin-top:88px}
@@ -80,6 +81,7 @@ h3,.h3{font-size:19px;font-weight:600;line-height:1.3}
 .site-header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid var(--line)}
 .site-header::after{content:"";position:absolute;inset:0;z-index:-1;box-shadow:0 8px 24px -14px rgba(11,31,58,.3);opacity:0;pointer-events:none}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);height:68px}
+.site-header .wrap>:first-child{flex:none}
 .logo{height:46px;width:auto}
 .nav,.header-phone,.btn-callnow{display:none}
 .btn-header{min-height:44px;padding:0 18px;font-size:15px}
@@ -107,7 +109,6 @@ h3,.h3{font-size:19px;font-weight:600;line-height:1.3}
 .form h2{font-size:26px;margin-bottom:var(--s-1)}
 .form-sub{margin-bottom:var(--s-5)}
 .field{margin-bottom:var(--s-3)}
-.field-row{display:grid;grid-template-columns:1.5fr 1fr;gap:var(--s-3)}
 .field label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
 input,select,textarea{width:100%;min-height:50px;padding:10px 14px;border:1px solid var(--field);border-radius:4px;font:400 17px/1.4 var(--font);color:var(--ink);background:var(--white)}
 input:hover,select:hover,textarea:hover{border-color:var(--ink)}
@@ -216,15 +217,16 @@ address{font-style:normal}
   h2{font-size:42px;margin-bottom:var(--s-6)}
   .lead{font-size:19px}
 
-  .site-header .wrap{height:84px;gap:var(--s-6)}
+  /* tighter spacing until 1280px so nav, phone and button fit on one line at 1024px */
+  .site-header .wrap{height:84px;gap:var(--s-5)}
   .logo{height:56px}
-  .nav{display:flex;gap:var(--s-6);margin-right:auto;margin-left:var(--s-5)}
-  .nav a{text-decoration:none;font-weight:600;font-size:15px;padding:10px 0;min-height:44px;display:inline-flex;align-items:center}
+  .nav{display:flex;gap:20px;margin-right:auto;margin-left:var(--s-2)}
+  .nav a{text-decoration:none;font-weight:600;font-size:15px;padding:10px 0;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
   .nav a:hover{text-decoration:underline}
   .header-phone{display:block;text-align:right;line-height:1.2}
   .header-phone .small{display:block;color:var(--muted)}
   .header-phone a{font:700 20px/1.2 var(--font);text-decoration:none}
-  .btn-callnow{display:inline-flex}
+  .btn-callnow{display:inline-flex;white-space:nowrap}
   .btn-header{display:none}
 
   .hero{padding-top:var(--s-8)}
@@ -239,6 +241,10 @@ address{font-style:normal}
   .creds{grid-template-columns:repeat(3,1fr);gap:var(--s-5) var(--s-7)}
   .cta h2{font-size:52px}
   .foot-grid{grid-template-columns:1.3fr 1.2fr 1fr 1fr}
+}
+@media (min-width:1280px){
+  .site-header .wrap{gap:var(--s-6)}
+  .nav{gap:var(--s-6);margin-left:var(--s-5)}
 }
 /* interactions: CSS only, no JS */
 html{scroll-behavior:smooth}

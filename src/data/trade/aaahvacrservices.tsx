@@ -143,10 +143,10 @@ export const aaaHvac: TradeSite = {
     { q: "Are you a home warranty contractor?", a: <p>We are a certified First American Home Warranty contractor.</p> },
   ],
   hours,
-  dispatchNote: `Call or text the dispatcher at ${phone.display} for immediate assistance.`,
+  dispatchNote: <>Call or text the dispatcher at <a href={`tel:${phone.tel}`}>{phone.display}</a> for immediate assistance.</>,
   cta: {
     title: "AC or heat not working? Call now.",
-    body: `Call or text the dispatcher at ${phone.display} for immediate assistance. Emergency service 10pm–8am, every day.`,
+    body: <>Call or text the dispatcher at <a href={`tel:${phone.tel}`}>{phone.display}</a> for immediate assistance. Emergency service 10pm–8am, every day.</>,
   },
   footer: {
     services: [

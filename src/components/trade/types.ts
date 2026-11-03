@@ -34,7 +34,7 @@ export type TradeSite = {
   area: { title: string; intro: string; towns: string[]; note?: string; map: { src: string; title: string } };
   faqs: { q: string; a: ReactNode }[];
   hours: string[];
-  dispatchNote: string;
-  cta: { title: string; body: string };
+  dispatchNote: ReactNode;
+  cta: { title: string; body: ReactNode };
   footer: { services: NavLink[]; company: NavLink[]; extra?: string; bottom: string };
 };
