@@ -26,9 +26,9 @@ export function TradeSitePage({ site }: { site: TradeSite }) {
       <main id="main">
         <Section className="hero" tone="navy" waveTo="linen" labelledBy="hero-title"><Hero site={site} /></Section>
         <Section id="how" tone="linen" waveTo="white" flip labelledBy="how-title"><HowItWorks site={site} /></Section>
-        <Section id="services" waveTo="tint" labelledBy="services-title"><Services site={site} /></Section>
-        <Section id="reviews" tone="tint" waveTo="white" flip labelledBy="reviews-title"><Proof site={site} /></Section>
-        <Section id="area" waveTo="navy" labelledBy="area-title">
+        <Section id="services" waveTo="linen" labelledBy="services-title"><Services site={site} /></Section>
+        <Section id="reviews" tone="linen" waveTo="tint" flip labelledBy="reviews-title"><Proof site={site} /></Section>
+        <Section id="area" tone="tint" waveTo="navy" labelledBy="area-title">
           <ServiceArea site={site} />
           <Faq site={site} />
         </Section>

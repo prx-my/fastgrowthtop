@@ -20,8 +20,12 @@ export function Proof({ site }: { site: TradeSite }) {
       <div className="review-cards">
         {proof.reviews.map((r) => (
           <figure className="review-card" key={r.author}>
+            <Stars />
             <blockquote><p>“{r.quote}”</p></blockquote>
-            <figcaption className="small muted">{r.author} · {r.date} · <a href={rating.url}>Google review</a></figcaption>
+            <figcaption className="small muted">
+              <span className="avatar" aria-hidden="true">{r.author[0]}</span>
+              <span><strong>{r.author}</strong>{r.date} · <a href={rating.url}>Google review</a></span>
+            </figcaption>
           </figure>
         ))}
       </div>
