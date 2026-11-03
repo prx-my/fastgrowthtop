@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, DM_Serif_Display } from "next/font/google";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import "lenis/dist/lenis.css";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],

@@ -17,10 +17,6 @@ const nextConfig = {
         source: "/roofers/:slug",
         destination: "/roofers/:slug/index.html",
       },
-      {
-        source: "/hvac/:slug",
-        destination: "/hvac/:slug/index.html",
-      },
     ];
   },
   async redirects() {
