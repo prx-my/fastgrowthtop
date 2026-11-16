@@ -9,17 +9,14 @@ export function Proof({ site }: { site: TradeSite }) {
     <div className="wrap">
       <div className="proof-head">
         <h2 id="reviews-title">{proof.title}</h2>
-        {rating && (
-          <div className="proof-rating">
-            <span className="big-num">{rating.score}</span>
-            <div>
-              <Stars />
-              <p className="small muted">From {rating.count} reviews on <a href={rating.url}>Google</a></p>
-            </div>
+        <div className="proof-rating">
+          <span className="big-num">{rating.score}</span>
+          <div>
+            <Stars />
+            <p className="small muted">From {rating.count} reviews on <a href={rating.url}>Google</a></p>
           </div>
-        )}
+        </div>
       </div>
-      {rating && proof.reviews.length > 0 && <>
       <div className="review-cards">
         {proof.reviews.map((r) => (
           <figure className="review-card" key={r.author}>
@@ -33,7 +30,6 @@ export function Proof({ site }: { site: TradeSite }) {
         ))}
       </div>
       <p className="reviews-all"><a href={rating.url}>Read all {rating.count} reviews on Google</a></p>
-      </>}
       <ul className="creds">
         {proof.creds.map((c) => <li key={c}>{c}</li>)}
       </ul>

@@ -16,7 +16,6 @@ export function TradeSitePage({ site }: { site: TradeSite }) {
     "--red": site.theme?.accent,
     "--red-dark": site.theme?.accentDark,
     "--navy": site.theme?.navy,
-    "--hero-bg": site.theme?.heroBg,
   } as CSSProperties;
 
   return (
