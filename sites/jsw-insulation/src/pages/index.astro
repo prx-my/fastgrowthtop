@@ -356,17 +356,13 @@ const jsonLd = {
 
       <!-- Where we work -->
       <section class="area" id="area" aria-labelledby="area-title">
-        <div class="container area-grid">
-          <div>
-            <h2 id="area-title" class="section-title">Where we work</h2>
-            <p>Our shop is in LeRoy, Michigan. Call or text <a class="accent-link" href={`tel:${phone.tel}`}>{phone.display}</a> and we will tell you whether we can reach your job.</p>
-            <p class="confirm">Service towns go here once Joshua confirms them.</p>
-          </div>
-          <div class="map-facade" data-src="https://maps.google.com/maps?q=LeRoy,+MI+49655&z=10&output=embed">
-            <button class="btn btn-red" type="button">Show map</button>
-            <a href="https://www.google.com/maps/search/?api=1&query=LeRoy%2C+MI+49655">Open LeRoy, MI in Google Maps</a>
-          </div>
+        <div class="container">
+          <h2 id="area-title" class="section-title">Where we work</h2>
+          <p>Our shop is in LeRoy, Michigan. Call or text <a class="accent-link" href={`tel:${phone.tel}`}>{phone.display}</a> and we will tell you whether we can reach your job.</p>
+          <p class="confirm">Service towns go here once Joshua confirms them.</p>
         </div>
+        <!-- generic Michigan map until service towns are confirmed; native lazy load keeps it out of the first load -->
+        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5790067.917122241!2d-91.5526887702885!3d44.87895317425721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4d4caa3dc7ca0411%3A0x97dd48597a62c9b3!2sMichigan%2C%20USA!5e0!3m2!1sen!2sin!4v1794793040437!5m2!1sen!2sin" title="Map of Michigan" width="600" height="450" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </section>
 
       <!-- Leave a review -->
@@ -433,12 +429,6 @@ const jsonLd = {
         const track = document.querySelector(".carousel-track");
         document.querySelectorAll(".carousel-arrow").forEach((b) =>
           b.addEventListener("click", () => track.scrollBy({ left: b.dataset.dir * track.clientWidth * 0.8, behavior: "smooth" })));
-
-        // map loads only on request: keeps Google's iframe and cookies out of the first load
-        const map = document.querySelector(".map-facade");
-        map.querySelector("button").addEventListener("click", () => {
-          map.innerHTML = `<iframe src="${map.dataset.src}" title="Map of LeRoy, Michigan" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
-        });
       })();
     </script>
     <script>
@@ -614,13 +604,9 @@ const jsonLd = {
       .trust-band strong { display: block; font-size: 1.25rem; font-weight: 800; color: var(--foam); }
 
       /* where we work */
-      .area { padding: 72px 0; }
-      .area-grid { display: grid; gap: 32px; align-items: center; }
+      .area { padding: 72px 0 0; }
       .area p { color: #3a3631; }
-      .map-facade { min-height: 320px; border-radius: 12px; overflow: hidden; display: grid; place-content: center; justify-items: center; gap: 12px; background: linear-gradient(135deg, #e9e4da, #d5dee6); text-align: center; padding: 24px; }
-      .map-facade a { font-size: .95rem; }
-      .map-facade iframe { width: 100%; height: 360px; border: 0; }
-      .map-facade:has(iframe) { display: block; padding: 0; }
+      .area .map { display: block; width: 100%; height: 420px; border: 0; margin-top: 40px; background: #d5dee6; }
 
       /* leave a review */
       .review-cta { padding: 64px 0; text-align: center; background: var(--snow); }
@@ -689,8 +675,7 @@ const jsonLd = {
         .about-img img { max-height: none; }
         .about-copy { padding: 72px 56px; }
         .service-grid { grid-template-columns: repeat(3, 1fr); }
-        .area-grid { grid-template-columns: 1fr 1fr; gap: 56px; }
-        .map-facade { min-height: 360px; }
+        .area .map { height: 520px; }
         .foot-grid { grid-template-columns: 1.1fr 1fr 1fr; gap: 56px; }
         .carousel-arrow { display: grid; place-items: center; position: absolute; top: 45%; z-index: 2; width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(0, 0, 0, .7); color: var(--white); font-size: 28px; line-height: 1; cursor: pointer; }
         .carousel-arrow:hover { background: var(--red); }
