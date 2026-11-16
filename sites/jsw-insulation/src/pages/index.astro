@@ -12,7 +12,7 @@ import shopInterior from "../assets/shop-interior.jpg";
 import spraying from "../assets/spraying.jpg";
 
 // Facts follow the JSW concepts doc (16 Nov 2026): BBB profile + Michigan entity record.
-// Held back until Joshua confirms: street address, service towns, years in business, hours, reviews, savings claims.
+// Held back until Joshua confirms: street address, years in business, hours, reviews, savings claims.
 const name = "JSW Construction & Foam Insulation Inc.";
 const phone = { display: "(231) 920-5777", tel: "+12319205777" };
 const email = "jswfoam@gmail.com";
@@ -25,19 +25,14 @@ const description =
   "Spray foam and blown-in insulation, pole barns, garages, concrete flatwork and remodeling from JSW Construction and Foam Insulation in LeRoy, Michigan. Call (231) 920-5777.";
 
 const nav = [
-  { label: "Insulation", href: "#story" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#estimate" },
 ];
 
-const chapters = [
-  { scene: "wall", step: "Wall", title: "Foam that fills every gap.", body: "Cold air finds the gaps around studs and plates. Spray foam expands into the cavity, fills the corners and seals them. Less draft, more comfort, and a house that holds its heat." },
-  { scene: "attic", step: "Attic", title: "Attics filled to depth.", body: "Spray foam is not the only tool. Blown-in cellulose fills the attic over the joists, with vents and baffles kept clear. It is the quiet work that shows up in warmer rooms upstairs." },
-  { scene: "barn", step: "Pole barn", title: "A barn you can use in January.", body: "JSW builds too. Posts go in, trusses land, steel skins the walls and roof, then foam goes on the inside of the shell so the building works all winter, not just in July." },
-  { scene: "slab", step: "Concrete", title: "Concrete finished the right way.", body: "Driveways, aprons and shop floors. Formed, poured, screeded and troweled with the same care as the foam and the frame." },
-];
+// BBB-listed service area (70-mile radius from LeRoy); confirm with Joshua before launch
+const towns = ["LeRoy", "Reed City", "Evart", "Marion", "Tustin", "Hersey", "Sears"];
 
 const stats = [
   { value: "A+", label: "BBB rating" },
@@ -132,7 +127,7 @@ const jsonLd = {
             </span>
             <h1 id="hero-title">Built for <span>Michigan winters.</span></h1>
             <p class="hero-sub">JSW Construction and Foam Insulation. Spray foam, blown-in insulation, pole barns, garages, concrete, and remodeling.</p>
-            <a class="hero-scroll" href="#story">See what goes inside the walls <span aria-hidden="true">↓</span></a>
+            <a class="hero-scroll" href="#services">See our services <span aria-hidden="true">↓</span></a>
           </div>
 
           <form class="estimate-card" id="estimate" aria-labelledby="estimate-title">
@@ -156,125 +151,6 @@ const jsonLd = {
             <button class="btn btn-red btn-block" type="button">Send my request</button>
             <p class="form-note">Mockup: this form does not send. Or call <a href={`tel:${phone.tel}`}>{phone.display}</a>.</p>
           </form>
-        </div>
-      </section>
-
-      <!-- 2-5. The scroll story: one winter property, wall to slab -->
-      <section class="story" id="story" aria-labelledby="story-title">
-        <div class="container story-intro">
-          <h2 id="story-title">What is inside the walls matters.</h2>
-          <p>Foam is not a mystery product. It seals the gaps that make a Michigan house hard to heat. Scroll through one job, from the wall to the slab.</p>
-        </div>
-        <div class="story-pin">
-          <ol class="story-steps container" aria-hidden="true">
-            {chapters.map((c, i) => <li class={i === 0 ? "active" : ""}><span>{String(i + 1).padStart(2, "0")}</span>{c.step}</li>)}
-          </ol>
-          <div class="chapters container">
-            {chapters.map((c, i) => (
-              <article class="chapter" data-scene={c.scene} aria-labelledby={`ch-${c.scene}`}>
-                <div class="ch-text">
-                  <p class="ch-num">{String(i + 1).padStart(2, "0")} / {c.step}</p>
-                  <h3 id={`ch-${c.scene}`}>{c.title}</h3>
-                  <p>{c.body}</p>
-                  <div class="ch-cta">
-                    <a class="btn btn-red" href="#estimate">Get a free estimate</a>
-                    <a class="accent-link" href={`tel:${phone.tel}`}>{phone.display}</a>
-                  </div>
-                </div>
-                <div class="ch-art">
-                  {c.scene === "wall" && (
-                    <svg viewBox="0 0 600 440" aria-hidden="true">
-                      <defs><pattern id="snow-a" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="10" cy="12" r="2.2" fill="#fff" /><circle cx="42" cy="30" r="1.6" fill="#fff" /><circle cx="24" cy="50" r="1.3" fill="#fff" /></pattern></defs>
-                      <rect width="600" height="440" fill="#EDE6DA" />
-                      <rect class="warm" x="350" width="250" height="440" fill="#F2C892" opacity=".55" />
-                      <rect width="216" height="440" fill="#D5DEE6" /><rect width="216" height="440" fill="url(#snow-a)" />
-                      <rect x="200" y="24" width="16" height="392" fill="#5C6570" /><path d="M208 24v392" stroke="#7A838D" stroke-width="2" />
-                      <rect x="216" y="24" width="10" height="392" fill="#B08D63" />
-                      <rect x="226" y="42" width="114" height="356" fill="#3B342D" />
-                      <g class="foam">
-                        <path d="M226 398V56q9.5-12 19-4t19 0t19 0t19 0t19 0t19-2V398Z" fill="#E8DCC8" />
-                        <g fill="#D7C8AE"><circle cx="250" cy="120" r="5" /><circle cx="300" cy="170" r="4" /><circle cx="270" cy="240" r="6" /><circle cx="318" cy="300" r="4" /><circle cx="246" cy="340" r="4" /><circle cx="296" cy="88" r="3" /></g>
-                      </g>
-                      <rect x="226" y="24" width="114" height="18" fill="#6B4F3A" /><rect x="226" y="398" width="114" height="18" fill="#6B4F3A" />
-                      <rect x="340" y="24" width="12" height="392" fill="#F4F1EA" stroke="#CFC6B6" />
-                      <g class="drafts" fill="#8FA6B8">
-                        {[46, 120, 190, 260, 330, 392, 80, 300].map((y, k) => <circle cx="12" cy={y} r="4" style={`--i:${k}`} />)}
-                      </g>
-                      <g transform="translate(470 110)">
-                        <rect width="24" height="200" rx="12" fill="#fff" stroke="#1C1916" stroke-width="3" />
-                        <rect class="mercury" x="7" y="24" width="10" height="170" rx="5" fill="#B5452E" />
-                        <circle class="bulb" cx="12" cy="208" r="19" fill="#B5452E" stroke="#1C1916" stroke-width="3" />
-                      </g>
-                      <text class="lbl" x="24" y="56">Outside</text><text class="lbl" x="374" y="56">Inside</text>
-                      <text class="foam-label lbl" x="283" y="230" text-anchor="middle" transform="rotate(-90 283 230)">Spray foam</text>
-                    </svg>
-                  )}
-                  {c.scene === "attic" && (
-                    <svg viewBox="0 0 600 440" aria-hidden="true">
-                      <defs>
-                        <pattern id="snow-b" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="10" cy="12" r="2.2" fill="#fff" /><circle cx="42" cy="30" r="1.6" fill="#fff" /><circle cx="24" cy="50" r="1.3" fill="#fff" /></pattern>
-                        <pattern id="fleck" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="1.4" fill="#B49F7E" /><circle cx="10" cy="10" r="1.1" fill="#E1D4BC" /></pattern>
-                        <clipPath id="attic-clip"><polygon points="62,300 300,92 538,300" /></clipPath>
-                      </defs>
-                      <rect width="600" height="440" fill="#D5DEE6" /><rect width="600" height="300" fill="url(#snow-b)" />
-                      <rect x="62" y="300" width="476" height="140" fill="#EDE6DA" />
-                      <rect class="warm" x="62" y="300" width="476" height="140" fill="#F2C892" opacity=".5" />
-                      <polygon points="62,300 300,92 538,300" fill="#3B342D" />
-                      <g fill="#6B4F3A">{[84, 132, 180, 228, 276, 324, 372, 420, 468, 504].map((x) => <rect x={x} y="282" width="12" height="18" />)}</g>
-                      <g clip-path="url(#attic-clip)"><g class="fill"><rect x="62" y="236" width="476" height="64" fill="#CDBB9C" /><rect x="62" y="236" width="476" height="64" fill="url(#fleck)" /></g></g>
-                      <path d="M92 284l38-34M508 284l-38-34" stroke="#E8DCC8" stroke-width="8" stroke-linecap="round" />
-                      <g class="flakes" fill="#E1D4BC">{[[250, 120], [290, 140], [330, 118], [270, 160], [310, 172], [350, 150], [230, 150]].map(([x, y], k) => <rect x={x} y={y} width="6" height="6" style={`--i:${k}`} />)}</g>
-                      <g class="depth"><path d="M84 236H516" stroke="#E8DCC8" stroke-width="3" stroke-dasharray="10 8" /><text class="lbl light" x="300" y="226" text-anchor="middle">Filled to depth</text></g>
-                      <rect x="62" y="300" width="476" height="8" fill="#F4F1EA" />
-                      <polyline points="34,318 300,74 566,318" fill="none" stroke="#5C6570" stroke-width="16" stroke-linejoin="round" />
-                      <text class="lbl" x="300" y="384" text-anchor="middle">Upstairs room</text>
-                    </svg>
-                  )}
-                  {c.scene === "barn" && (
-                    <svg viewBox="0 0 600 440" aria-hidden="true">
-                      <defs><pattern id="snow-c" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="10" cy="12" r="2.2" fill="#fff" /><circle cx="42" cy="30" r="1.6" fill="#fff" /><circle cx="24" cy="50" r="1.3" fill="#fff" /></pattern></defs>
-                      <rect width="600" height="440" fill="#D5DEE6" /><rect width="600" height="380" fill="url(#snow-c)" />
-                      <path d="M40 380l26-80 26 80zM508 380l26-90 26 90z" fill="#2F3D2C" />
-                      <rect y="380" width="600" height="60" fill="#F4F1EA" />
-                      <polygon class="warm" points="150,380 150,234 300,146 450,234 450,380" fill="#F2C892" opacity=".5" />
-                      <rect x="262" y="300" width="76" height="80" fill="#2F3D2C" opacity=".8" />
-                      <rect class="post" x="150" y="226" width="16" height="156" fill="#6B4F3A" />
-                      <rect class="post" x="434" y="226" width="16" height="156" fill="#6B4F3A" />
-                      <g class="truss" fill="none" stroke="#6B4F3A" stroke-linejoin="round"><path d="M150 234L300 146L450 234Z" stroke-width="8" /><path d="M300 146V234M222 234L300 190L378 234" stroke-width="5" /></g>
-                      <path class="steel" d="M126 386V222L300 116L474 222V386" fill="none" stroke="#5C6570" stroke-width="10" stroke-linejoin="round" />
-                      <path class="foam-line" d="M140 380V228L300 133L460 228V380" fill="none" stroke="#A88F68" stroke-width="17" stroke-linejoin="round" />
-                      <path class="foam-line" d="M140 380V228L300 133L460 228V380" fill="none" stroke="#F4ECDD" stroke-width="12" stroke-linejoin="round" />
-                      <g class="barn-label"><text class="lbl" x="482" y="300">Steel</text><text class="lbl" x="300" y="420" text-anchor="middle">Foam on the inside of the shell</text></g>
-                    </svg>
-                  )}
-                  {c.scene === "slab" && (
-                    <svg viewBox="0 0 600 440" aria-hidden="true">
-                      <rect width="600" height="210" fill="#D5DEE6" /><rect y="210" width="600" height="230" fill="#CBBFAC" />
-                      <polygon points="134,96 300,30 466,96" fill="#5C6570" />
-                      <rect x="150" y="92" width="300" height="130" fill="#EDE6DA" />
-                      <rect x="214" y="138" width="172" height="84" fill="#9AA1A8" /><path d="M214 159h172M214 180h172M214 201h172" stroke="#868D95" stroke-width="2" />
-                      <clipPath id="pour-clip"><rect class="pour-mask" x="0" y="222" width="600" height="182" /></clipPath>
-                      <polygon class="pour" clip-path="url(#pour-clip)" points="150,222 450,222 560,402 40,402" fill="#C9CCCF" />
-                      <g class="marks" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3"><path d="M160 330q80-30 160 0M300 290q70-24 140 0M120 370q90-28 180 0" /></g>
-                      <polygon class="forms" points="150,222 450,222 560,402 40,402" fill="none" stroke="#6B4F3A" stroke-width="8" stroke-linejoin="round" />
-                      <rect class="screed" x="70" y="226" width="460" height="8" rx="3" fill="#B08D63" opacity="0" />
-                      <g class="trowel" transform="translate(280 320)" opacity="0"><path d="M0 0h52l-12 12H0z" fill="#5C6570" /><rect x="20" y="-18" width="6" height="18" fill="#6B4F3A" /></g>
-                      <text class="slab-label lbl" x="300" y="430" text-anchor="middle">Formed, poured, screeded, troweled</text>
-                    </svg>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- 7. The ask -->
-      <section class="ask" aria-labelledby="ask-title">
-        <div class="container">
-          <h2 id="ask-title">You have seen the work.</h2>
-          <p>Ask for a free estimate, or call Joshua at <a href={`tel:${phone.tel}`}>{phone.display}</a>.</p>
-          <div class="btns"><a class="btn btn-red" href="#estimate">Get a free estimate</a><a class="btn btn-ghost" href={`tel:${phone.tel}`}>Call {phone.display}</a></div>
         </div>
       </section>
 
@@ -357,11 +233,11 @@ const jsonLd = {
       <!-- Where we work -->
       <section class="area" id="area" aria-labelledby="area-title">
         <div class="container">
-          <h2 id="area-title" class="section-title">Where we work</h2>
-          <p>Our shop is in LeRoy, Michigan. Call or text <a class="accent-link" href={`tel:${phone.tel}`}>{phone.display}</a> and we will tell you whether we can reach your job.</p>
-          <p class="confirm">Service towns go here once Joshua confirms them.</p>
+          <h2 id="area-title">Proudly serving all the areas listed below</h2>
+          <p class="towns"><strong>Osceola County:</strong> {towns.join(" - ")} <span aria-hidden="true">|</span> <strong>And beyond:</strong> communities within about 70 miles of our LeRoy shop</p>
+          <p class="area-call">Not sure we reach you? Call or text <a class="accent-link" href={`tel:${phone.tel}`}>{phone.display}</a>.</p>
         </div>
-        <!-- generic Michigan map until service towns are confirmed; native lazy load keeps it out of the first load -->
+        <!-- generic Michigan map; native lazy load keeps it out of the first load -->
         <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5790067.917122241!2d-91.5526887702885!3d44.87895317425721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4d4caa3dc7ca0411%3A0x97dd48597a62c9b3!2sMichigan%2C%20USA!5e0!3m2!1sen!2sin!4v1794793040437!5m2!1sen!2sin" title="Map of Michigan" width="600" height="450" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </section>
 
@@ -431,16 +307,6 @@ const jsonLd = {
           b.addEventListener("click", () => track.scrollBy({ left: b.dataset.dir * track.clientWidth * 0.8, behavior: "smooth" })));
       })();
     </script>
-    <script>
-      // GSAP loads only as the story nears the viewport and never under reduced motion, so first paint stays light
-      const story = document.getElementById("story");
-      if (story && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        const io = new IntersectionObserver((entries) => {
-          if (entries.some((e) => e.isIntersecting)) { io.disconnect(); import("../scripts/story"); }
-        }, { rootMargin: "600px 0px" });
-        io.observe(story);
-      }
-    </script>
 
     <style is:global>
       :root {
@@ -466,7 +332,6 @@ const jsonLd = {
       .skip:focus { top: 8px; }
       .accent-link { color: var(--red); font-weight: 700; text-decoration: none; white-space: nowrap; }
       .accent-link:hover { text-decoration: underline; }
-      .confirm { margin-top: 14px; display: inline-block; padding: 6px 12px; border: 1.5px dashed var(--red); border-radius: 6px; font-size: .9rem; color: var(--red); }
 
       .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 6px; border: 2px solid transparent; font: 700 15px/1.2 var(--font); text-decoration: none; cursor: pointer; transition: background-color .2s, color .2s; }
       .btn-sm { min-height: 42px; padding: 0 18px; font-size: 14px; }
@@ -496,7 +361,7 @@ const jsonLd = {
       .site-nav.open { display: block; }
       .site-nav a { display: block; padding: 12px 4px; color: var(--white); text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(255, 255, 255, .1); }
 
-      /* mobile sticky bar: call and estimate stay visible through the story */
+      /* mobile sticky bar: call and estimate always visible */
       .mobile-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: 1fr 1fr; background: var(--ink); box-shadow: 0 -4px 16px rgba(0, 0, 0, .25); }
       .mobile-bar a { display: grid; place-items: center; min-height: 60px; color: var(--white); font-weight: 700; text-decoration: none; }
       .mobile-bar a + a { background: var(--red); }
@@ -529,35 +394,6 @@ const jsonLd = {
       .form-note { font-size: 13px; color: #d6d0c6; text-align: center; }
       .form-note a { color: var(--white); white-space: nowrap; }
 
-      /* 2-5. story */
-      .story { background: var(--snow); padding: 64px 0 24px; }
-      .story-intro { text-align: center; margin-bottom: 24px; }
-      .story-intro h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
-      .story-intro p { max-width: 620px; margin: 0 auto; color: var(--muted); }
-      .story-steps { display: none; }
-      .chapter { display: grid; gap: 20px; padding: 32px 20px; }
-      .chapters { padding: 0; }
-      .ch-num { font-size: .85rem; font-weight: 700; color: var(--red); letter-spacing: .04em; margin-bottom: 6px; }
-      .ch-text h3 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
-      .ch-text p:not(.ch-num) { color: #3a3631; max-width: 46ch; }
-      .ch-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 20px; }
-      .ch-art svg { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 14px 34px rgba(28, 25, 22, .16); background: #edE6da; }
-      .lbl { font: 700 15px var(--font); fill: var(--ink); }
-      .lbl.light { fill: var(--foam); }
-      .lbl.small { font-size: 12px; }
-      .drafts, .flakes { opacity: 0; }
-      .drafts circle { animation: draft 2.4s linear infinite; animation-delay: calc(var(--i) * -.3s); }
-      .flakes rect { animation: fall 1.6s linear infinite; animation-delay: calc(var(--i) * -.23s); }
-      @keyframes draft { from { transform: translateX(0); opacity: 0; } 15%, 85% { opacity: 1; } to { transform: translateX(450px); opacity: 0; } }
-      @keyframes fall { from { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } to { transform: translateY(110px); opacity: 0; } }
-
-      /* 7. the ask */
-      .ask { background: linear-gradient(180deg, var(--pine), #3a3328); color: var(--white); padding: 64px 0; text-align: center; }
-      .ask h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 10px; }
-      .ask p { color: var(--foam); font-size: 1.1rem; margin-bottom: 24px; }
-      .ask p a { color: var(--white); font-weight: 700; white-space: nowrap; }
-      .ask .btns { justify-content: center; }
-
       /* services */
       .services { background: var(--ink); color: var(--white); padding: 72px 0; text-align: center; }
       .services h2, .projects h2 { font-size: clamp(1.7rem, 3.6vw, 2.2rem); font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
@@ -589,7 +425,7 @@ const jsonLd = {
       /* about */
       .about { display: grid; background: var(--white); }
       .about-img img { width: 100%; height: 100%; min-height: 280px; max-height: 440px; object-fit: cover; }
-      .about-copy { padding: 48px 20px; max-width: 760px; }
+      .about-copy { padding: 48px 20px; }
       .about-copy p { margin-bottom: 14px; color: #3a3631; }
       .section-title { font-size: clamp(1.6rem, 3.6vw, 2.2rem); font-weight: 800; line-height: 1.3; color: var(--ink); margin-bottom: 24px; }
       .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 16px; margin: 40px 0 36px; text-align: center; }
@@ -604,8 +440,11 @@ const jsonLd = {
       .trust-band strong { display: block; font-size: 1.25rem; font-weight: 800; color: var(--foam); }
 
       /* where we work */
-      .area { padding: 72px 0 0; }
-      .area p { color: #3a3631; }
+      .area { padding-top: 64px; background: var(--foam); text-align: center; }
+      .area h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 800; line-height: 1.25; margin-bottom: 20px; }
+      .area .towns { max-width: 1000px; margin: 0 auto; color: #3a3631; line-height: 1.9; }
+      .area .towns strong { color: var(--ink); }
+      .area-call { margin-top: 14px; color: #3a3631; }
       .area .map { display: block; width: 100%; height: 420px; border: 0; margin-top: 40px; background: #d5dee6; }
 
       /* leave a review */
@@ -659,21 +498,9 @@ const jsonLd = {
         .logo-badge { margin: 0 0 28px; width: 150px; height: 150px; }
         .logo-badge img { width: 118px; }
 
-        .chapter { grid-template-columns: 5fr 7fr; gap: 56px; align-items: center; padding: 48px 20px; }
-        .story.is-pinned { padding-bottom: 0; }
-        .story.is-pinned .story-pin { height: 100vh; padding-top: calc(var(--header-h) + 16px); display: flex; flex-direction: column; }
-        .story.is-pinned .story-steps { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; }
-        .story-steps li { display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; font-size: .85rem; font-weight: 700; color: var(--muted); transition: background-color .3s, color .3s; }
-        .story-steps li span { color: var(--red); }
-        .story-steps li.active { background: var(--ink); color: var(--white); }
-        .story-steps li.active span { color: var(--foam); }
-        .story.is-pinned .chapters { position: relative; flex: 1; }
-        .story.is-pinned .chapter { position: absolute; inset: 0; padding: 0 20px 24px; }
-        .story.is-pinned .ch-art svg { max-height: calc(100vh - var(--header-h) - 140px); width: auto; max-width: 100%; margin-left: auto; }
-
-        .about { grid-template-columns: 5fr 7fr; }
+        .about { grid-template-columns: 2fr 3fr; }
         .about-img img { max-height: none; }
-        .about-copy { padding: 72px 56px; }
+        .about-copy { align-self: center; padding: 80px clamp(40px, 5vw, 96px); }
         .service-grid { grid-template-columns: repeat(3, 1fr); }
         .area .map { height: 520px; }
         .foot-grid { grid-template-columns: 1.1fr 1fr 1fr; gap: 56px; }
