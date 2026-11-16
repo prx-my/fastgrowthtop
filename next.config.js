@@ -17,6 +17,11 @@ const nextConfig = {
         source: "/roofers/:slug",
         destination: "/roofers/:slug/index.html",
       },
+      // static Astro build from sites/jsw-insulation
+      {
+        source: "/insulation/jsw-insulation",
+        destination: "/insulation/jsw-insulation/index.html",
+      },
     ];
   },
   async redirects() {

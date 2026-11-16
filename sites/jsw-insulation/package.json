@@ -1,0 +1,14 @@
+{
+  "name": "jsw-insulation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "rm -rf ../../public/insulation/jsw-insulation && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/open-sans": "5.3.0",
+    "astro": "7.4.12"
+  }
+}
