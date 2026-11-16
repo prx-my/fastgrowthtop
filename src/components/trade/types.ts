@@ -13,8 +13,9 @@ export type TradeSite = {
   address: string[];
   bookingUrl?: string;
   /** Brand colours; anything left out keeps the stylesheet default. */
-  theme?: { accent?: string; accentDark?: string; navy?: string };
-  rating: { score: string; count: number; url: string };
+  theme?: { accent?: string; accentDark?: string; navy?: string; heroBg?: string };
+  /** Leave out until the business has Google reviews; the rating line and review cards then hide. */
+  rating?: { score: string; count: number; url: string };
   nav: NavLink[];
   hero: { title: ReactNode; lead: string; note: string };
   form: { title: string; sub: string; services: string[] };

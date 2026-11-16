@@ -16,10 +16,12 @@ export function Hero({ site }: { site: TradeSite }) {
           <a className="btn btn-ghost" href={`tel:${site.phone.tel}`} aria-label={`Call now: ${site.phone.display}, ${site.name}`}>Call {site.phone.display}</a>
           <span className="note-line small">{site.hero.note}</span>
         </div>
-        <p className="rating small">
-          <Stars />
-          <a href={site.rating.url}>{site.rating.score} out of 5 on Google · {site.rating.count} reviews</a>
-        </p>
+        {site.rating && (
+          <p className="rating small">
+            <Stars />
+            <a href={site.rating.url}>{site.rating.score} out of 5 on Google · {site.rating.count} reviews</a>
+          </p>
+        )}
       </div>
     </div>
   );
