@@ -159,7 +159,7 @@ const jsonLd = {
       <section class="services" id="services" aria-labelledby="services-title">
         <div class="container">
           <h2 id="services-title">Insulation, barns, concrete and remodeling</h2>
-          <p class="section-sub">Residential and commercial work, built for Michigan winters</p>
+          <p class="section-sub dark">Residential and commercial work, built for Michigan winters</p>
           <ul class="service-grid">
             {services.map((s) => (
               <li class="service-card">
@@ -396,19 +396,19 @@ const jsonLd = {
       .form-note a { color: var(--white); white-space: nowrap; }
 
       /* services */
-      .services { background: var(--ink); color: var(--white); padding: 72px 0; text-align: center; }
+      .services { background: #fafaf9; color: var(--ink); padding: 72px 0; text-align: center; } /* near-white like the Grace Electric demo */
       .services h2, .projects h2 { font-size: clamp(1.7rem, 3.6vw, 2.2rem); font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
       .section-sub { color: rgba(255, 255, 255, .74); margin: 0 auto 40px; max-width: 640px; }
       .section-sub.dark { color: var(--muted); }
       .service-grid { display: grid; gap: 24px; text-align: left; }
-      .service-card { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); border-radius: 12px; overflow: hidden; transition: transform .3s, box-shadow .3s; }
-      .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0, 0, 0, .35); }
+      .service-card { background: var(--white); border: 1px solid #e7e2da; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(28, 25, 22, .06); transition: transform .3s, box-shadow .3s; }
+      .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(28, 25, 22, .12); }
       .service-card img, .service-art { width: 100%; height: 200px; object-fit: cover; }
-      .service-art { display: grid; place-items: center; background: linear-gradient(135deg, #3d3128, var(--ink-2)); color: var(--foam); }
+      .service-art { display: grid; place-items: center; background: linear-gradient(135deg, #f1ebe1, var(--foam)); color: var(--timber); }
       .service-art svg { width: 55%; }
       .service-body { padding: 22px; }
       .service-body h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
-      .service-body p { color: rgba(255, 255, 255, .8); font-size: .95rem; line-height: 1.6; }
+      .service-body p { color: var(--muted); font-size: .95rem; line-height: 1.6; }
 
       /* projects */
       .projects { background: var(--snow); padding: 72px 0; text-align: center; }
